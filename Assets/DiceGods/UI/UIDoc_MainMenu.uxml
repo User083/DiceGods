@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/DiceGods/UI/USS_Default.uss?fileID=7433441132597879392&amp;guid=6cacdf1acc1283944b1c319cd9117d08&amp;type=3#USS_Default" />
+    <ui:VisualElement name="screen-c" class="screen" style="background-image: url(&apos;project://database/Assets/DiceGods/UI/Graphics/Backdrop.jpg?fileID=2800000&amp;guid=182462af5b3825f4ab97388f559cd6b1&amp;type=3#Backdrop&apos;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.4); background-color: rgb(87, 76, 57);">
+        <ui:GroupBox name="GroupBox" style="align-items: center; align-self: center; justify-content: center; width: 50%; height: 100%;">
+            <ui:DropdownField label="System" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="menu-system-select" class="text-default" style="background-color: rgb(255, 255, 255); border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px;" />
+            <ui:Button text="Enter" display-tooltip-when-elided="true" name="menu-button-enter" class="button-default text-default" />
+            <ui:Button text="Quit" display-tooltip-when-elided="true" name="menu-button-quit" class="button-default text-default" />
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

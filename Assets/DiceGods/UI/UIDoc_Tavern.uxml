@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/DiceGods/UI/USS_Default.uss?fileID=7433441132597879392&amp;guid=6cacdf1acc1283944b1c319cd9117d08&amp;type=3#USS_Default" />
+    <ui:VisualElement name="screen-tavern" class="screen" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/DiceGods/UI/Graphics/TavernBackdrop.jpg?fileID=2800000&amp;guid=288c9a671ac12c342b39e736e8cc7929&amp;type=3#TavernBackdrop&apos;);">
+        <ui:Button text="Library" display-tooltip-when-elided="true" name="tavern-button-library" class="button-default" style="align-self: center;" />
+        <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="tavern-button-return" class="button-default" style="justify-content: center; align-self: center; flex-direction: column;" />
+    </ui:VisualElement>
+</ui:UXML>
