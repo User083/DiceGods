@@ -74,8 +74,16 @@ public class scr_UIManager : MonoBehaviour
     {
         LibraryScreen.sortingOrder = 1;
         var root = LibraryScreen.rootVisualElement;
+        //library buttons
         var returnButton = root.Q<Button>("library-button-return");
+        var systemButton = root.Q<Button>("library-button-system");
+        var characterButton = root.Q<Button>("library-button-characters");
+        var itemButton = root.Q<Button>("library-button-items");
 
+        //test label
+        var testLabel = root.Q<Label>("library-tab-text-test");
+
+        //return to tavern
         if (returnButton != null)
         {
             returnButton.clickable.clicked += () =>
@@ -84,6 +92,38 @@ public class scr_UIManager : MonoBehaviour
                 Tavern();
             };
         }
+
+        //switch to system
+
+        if (systemButton != null)
+        {
+            systemButton.clickable.clicked += () =>
+            {
+                testLabel.text = "System";
+            };
+        }
+
+        //switch to characters
+
+        if (characterButton != null)
+        {
+            characterButton.clickable.clicked += () =>
+            {
+                testLabel.text = "Characters";
+            };
+        }
+
+        //switch to items
+
+        if (itemButton != null)
+        {
+            itemButton.clickable.clicked += () =>
+            {
+                testLabel.text = "Items";
+            };
+        }
+
+
     }
 
 }
