@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New System", menuName = "Systems/NewSystem", order = 1)]
+[CreateAssetMenu(fileName = "New System", menuName = "DiceGods/System", order = 1)]
 [System.Serializable]
 public class SO_Systems : ScriptableObject
 {
@@ -16,6 +16,7 @@ public class SO_Systems : ScriptableObject
     public bool usesClasses;
     public bool usesLevels;
     public bool usesRaces;
+    public bool usesDamageTypes;
 
     [Header("Core Character Stats")]
     public bool health;
@@ -25,9 +26,19 @@ public class SO_Systems : ScriptableObject
     public bool defence;
 
 
+    [Header("Attributes")]
+    public List<Attribute> Attributes = new List<Attribute>();
+
+    [Header("Races")]
+    public List<DamageType> DamageTypes = new List<DamageType>();
+
+  
+
     private void Awake()
     {
         self = this;
+
+
     }
 
 }

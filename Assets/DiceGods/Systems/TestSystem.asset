@@ -13,3 +13,20 @@ MonoBehaviour:
   m_Name: TestSystem
   m_EditorClassIdentifier: 
   systemName: Test System
+  usesAttributes: 0
+  usesClasses: 0
+  usesLevels: 0
+  usesRaces: 0
+  usesDamageTypes: 0
+  health: 0
+  mana: 0
+  stamina: 0
+  armour: 0
+  defence: 0
+  Attributes:
+  - {fileID: 11400000, guid: de5a16d63d50dcd48b4dae28c6931bdc, type: 2}
+  - {fileID: 11400000, guid: de5a16d63d50dcd48b4dae28c6931bdc, type: 2}
+  - {fileID: 11400000, guid: de5a16d63d50dcd48b4dae28c6931bdc, type: 2}
+  - {fileID: 11400000, guid: de5a16d63d50dcd48b4dae28c6931bdc, type: 2}
+  - {fileID: 11400000, guid: de5a16d63d50dcd48b4dae28c6931bdc, type: 2}
+  DamageTypes: []
