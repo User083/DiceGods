@@ -38,3 +38,21 @@
     -unity-font-style: bold;
     color: rgb(70, 60, 43);
 }
+
+.unity-popup-field__input
+{
+    height: 100%;
+    width: 100%;
+    background-color: #BCA477;
+
+}
+
+/*Doesn't seem to work for some reason */
+.unity-base-popup-field_text
+{
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    background-color: #BCA477;
+
+}

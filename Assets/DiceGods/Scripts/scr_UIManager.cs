@@ -8,12 +8,21 @@ public class scr_UIManager : MonoBehaviour
     public UIDocument MainMenuScreen;
     public UIDocument TavernScreen;
     public UIDocument LibraryScreen;
+    public GameObject Managers;
+    private scr_SystemManager SystemManager;
 
-    private void OnEnable()
+    private void Awake()
     {
+      SystemManager = Managers.GetComponent<scr_SystemManager>();  
+    }
+
+    private void Start()
+    {
+        
         MainMenu();
         TavernScreen.sortingOrder = 0;
         LibraryScreen.sortingOrder = 0;
+        
     
     }
     //activate MainMenu UI
@@ -23,6 +32,9 @@ public class scr_UIManager : MonoBehaviour
         var root = MainMenuScreen.rootVisualElement;
         var enterButton = root.Q<Button>("menu-button-enter");
         var quitButton = root.Q<Button>("menu-button-quit");
+        var systemSelector = root.Q<DropdownField>("menu-system-select");
+
+        systemSelector.choices = SystemManager.systemNames;
 
         if (enterButton !=null)
         {
