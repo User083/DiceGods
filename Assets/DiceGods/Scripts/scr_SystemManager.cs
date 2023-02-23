@@ -10,10 +10,14 @@ public class scr_SystemManager : MonoBehaviour
     private void Awake()
     {
         systemNames = new List<string>();
+       
+       
         foreach(var system in systems)
         {
             systemNames.Add(system.systemName);
         }
     }
+
+
 
 }

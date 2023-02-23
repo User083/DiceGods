@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class scr_UIManager : MonoBehaviour
+public class scr_UIManager : MonoBehaviour, IDataPersistance
 {
     public UIDocument MainMenuScreen;
     public UIDocument TavernScreen;
@@ -11,9 +15,28 @@ public class scr_UIManager : MonoBehaviour
     public GameObject Managers;
     private scr_SystemManager SystemManager;
 
+    private Array allSystems;
+    public List<SO_Systems> systems;
+    public List<string> systemNames;
+
     private void Awake()
     {
-      SystemManager = Managers.GetComponent<scr_SystemManager>();  
+      SystemManager = Managers.GetComponent<scr_SystemManager>();
+      systems = Resources.FindObjectsOfTypeAll<SO_Systems>().ToList<SO_Systems>();
+       
+    }
+    private void OnEnable()
+    {
+        // DataPersistenceManager.instance.LoadSystem();
+        systemNames = new List<string>();
+
+
+        foreach (var system in systems)
+        {
+            systemNames.Add(system.systemName);
+        }
+
+
     }
 
     private void Start()
@@ -22,9 +45,10 @@ public class scr_UIManager : MonoBehaviour
         MainMenu();
         TavernScreen.sortingOrder = 0;
         LibraryScreen.sortingOrder = 0;
-        
-    
+
+        Debug.Log(systems.Count);
     }
+
     //activate MainMenu UI
     private void MainMenu()
     {
@@ -34,7 +58,7 @@ public class scr_UIManager : MonoBehaviour
         var quitButton = root.Q<Button>("menu-button-quit");
         var systemSelector = root.Q<DropdownField>("menu-system-select");
 
-        systemSelector.choices = SystemManager.systemNames;
+        systemSelector.choices = systemNames;
 
         if (enterButton !=null)
         {
@@ -138,4 +162,19 @@ public class scr_UIManager : MonoBehaviour
 
     }
 
+    public void LoadData(SaveData data)
+    {
+        systems = data.savedSystems;
+        systemNames = data.systemNames;
+    }
+
+    public void SaveData(ref SaveData data)
+    {
+        data.savedSystems = systems;
+    }
+
+    private void OnApplicationQuit()
+    {
+       // DataPersistenceManager.instance.SaveSystem();
+    }
 }
