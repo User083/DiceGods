@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class scr_SystemManager : MonoBehaviour
 {
-    public List<SO_Systems> systems = new List<SO_Systems>();
+    public List<DG_NewSystemData> systems = new List<DG_NewSystemData>();
     public List<string> systemNames;
 
     private void Awake()

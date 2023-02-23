@@ -6,12 +6,12 @@ using UnityEngine.Rendering.VirtualTexturing;
 [System.Serializable]
 public class SaveData 
 {
-    public List<SO_Systems> savedSystems;
+    public List<DG_NewSystemData> savedSystems;
     public List<string> systemNames;
 
     public SaveData()
     {
-        this.savedSystems = new List<SO_Systems>();
+        this.savedSystems = new List<DG_NewSystemData>();
         this.systemNames = new List<string>();
 
         if(savedSystems != null)

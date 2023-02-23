@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,13 +15,13 @@ public class scr_UIManager : MonoBehaviour, IDataPersistance
     private scr_SystemManager SystemManager;
 
     private Array allSystems;
-    public List<SO_Systems> systems;
+    public List<DG_NewSystemData> systems;
     public List<string> systemNames;
 
     private void Awake()
     {
       SystemManager = Managers.GetComponent<scr_SystemManager>();
-      systems = Resources.FindObjectsOfTypeAll<SO_Systems>().ToList<SO_Systems>();
+      systems = Resources.FindObjectsOfTypeAll<DG_NewSystemData>().ToList<DG_NewSystemData>();
        
     }
     private void OnEnable()

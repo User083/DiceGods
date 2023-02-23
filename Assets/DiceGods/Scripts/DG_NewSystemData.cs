@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New System", menuName = "DiceGods/System", order = 1)]
+
 [System.Serializable]
-public class SO_Systems : ScriptableObject
+public class DG_NewSystemData : ScriptableObject
 {
-    private ScriptableObject self;
 
     [Header("Basic")]
     public string systemName;
@@ -27,18 +26,15 @@ public class SO_Systems : ScriptableObject
 
 
     [Header("Attributes")]
-    public List<Attribute> Attributes = new List<Attribute>();
+    public List<Attribute> Attributes;
 
     [Header("Races")]
-    public List<DamageType> DamageTypes = new List<DamageType>();
+    public List<DamageType> DamageTypes;
 
-  
-
-    private void Awake()
+  public DG_NewSystemData() 
     {
-        self = this;
-
-
+        Attributes = new List<Attribute>();
+        DamageTypes= new List<DamageType>();
     }
 
 }
