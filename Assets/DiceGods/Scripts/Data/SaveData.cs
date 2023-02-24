@@ -18,7 +18,7 @@ public class SaveData
         {
              foreach (var system in savedSystems)
             {
-                systemNames.Add(system.systemName);
+                systemNames.Add(system.SystemName);
             }
         }
       

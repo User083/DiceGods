@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d8dff93cb1df8f4593c5d2b4b9a6378, type: 3}
   m_Name: TestSystem
   m_EditorClassIdentifier: 
-  systemName: Not test system
+  SystemName: System
   usesAttributes: 0
   usesClasses: 0
   usesLevels: 0
@@ -24,9 +24,6 @@ MonoBehaviour:
   armour: 0
   defence: 0
   Attributes:
-  - {fileID: 11400000, guid: de5a16d63d50dcd48b4dae28c6931bdc, type: 2}
-  - {fileID: 11400000, guid: de5a16d63d50dcd48b4dae28c6931bdc, type: 2}
-  - {fileID: 11400000, guid: de5a16d63d50dcd48b4dae28c6931bdc, type: 2}
-  - {fileID: 11400000, guid: de5a16d63d50dcd48b4dae28c6931bdc, type: 2}
-  - {fileID: 11400000, guid: de5a16d63d50dcd48b4dae28c6931bdc, type: 2}
-  DamageTypes: []
+  - {fileID: 0}
+  DamageTypes:
+  - {fileID: 0}

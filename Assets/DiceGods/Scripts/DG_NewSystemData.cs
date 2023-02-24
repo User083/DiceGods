@@ -3,38 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[System.Serializable]
+//[System.Serializable]
+
+
 public class DG_NewSystemData : ScriptableObject
 {
-
+        
     [Header("Basic")]
-    public string systemName;
+    public string SystemName;
 
     [Header("System Settings")]
-    public bool usesAttributes;
-    public bool usesClasses;
-    public bool usesLevels;
-    public bool usesRaces;
-    public bool usesDamageTypes;
+    [SerializeField] public bool usesAttributes;
+    [SerializeField] public bool usesClasses;
+    [SerializeField] public bool usesLevels;
+    [SerializeField] public bool usesRaces;
+    [SerializeField] public bool usesDamageTypes;
 
     [Header("Core Character Stats")]
-    public bool health;
-    public bool mana;
-    public bool stamina;
-    public bool armour;
-    public bool defence;
+    [SerializeField] public bool health;
+    [SerializeField] public bool mana;
+    [SerializeField] public bool stamina;
+    [SerializeField] public bool armour;
+    [SerializeField] public bool defence;
 
 
-    [Header("Attributes")]
+    //[Header("Attributes")]
     public List<Attribute> Attributes;
 
-    [Header("Races")]
-    public List<DamageType> DamageTypes;
+    //[Header("Damage Types")]
+    [SerializeField] private List<DamageType> DamageTypes;
 
   public DG_NewSystemData() 
     {
-        Attributes = new List<Attribute>();
-        DamageTypes= new List<DamageType>();
+        //SystemName = "New System";
+        //Attributes = new List<Attribute>();
+        //DamageTypes= new List<DamageType>();
     }
 
+   private void enableSection(bool option)
+    {
+
+    }
 }

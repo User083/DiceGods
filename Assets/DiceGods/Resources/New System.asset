@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d8dff93cb1df8f4593c5d2b4b9a6378, type: 3}
-  m_Name: asf
+  m_Name: New System
   m_EditorClassIdentifier: 
-  systemName: asfa
+  SystemName: 
   usesAttributes: 0
   usesClasses: 0
   usesLevels: 0

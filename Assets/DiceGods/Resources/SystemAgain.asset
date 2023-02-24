@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d8dff93cb1df8f4593c5d2b4b9a6378, type: 3}
   m_Name: SystemAgain
   m_EditorClassIdentifier: 
-  systemName: Not a test
+  SystemName: Test system
+  usesAttributes: 1
+  usesClasses: 0
+  usesLevels: 0
+  usesRaces: 0
+  usesDamageTypes: 0
+  health: 0
+  mana: 0
+  stamina: 0
+  armour: 0
+  defence: 0
+  Attributes: []
+  DamageTypes: []

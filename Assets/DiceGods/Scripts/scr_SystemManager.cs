@@ -14,10 +14,7 @@ public class scr_SystemManager : MonoBehaviour
        
         foreach(var system in systems)
         {
-            systemNames.Add(system.systemName);
+            systemNames.Add(system.SystemName);
         }
     }
-
-
-
 }

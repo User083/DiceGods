@@ -32,7 +32,7 @@ public class scr_UIManager : MonoBehaviour, IDataPersistance
 
         foreach (var system in systems)
         {
-            systemNames.Add(system.systemName);
+            systemNames.Add(system.SystemName);
         }
 
 
