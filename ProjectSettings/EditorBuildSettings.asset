@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/DiceGods/Scenes/DG_MainMenu.unity
+    guid: 8598fe61968ed3b42b2775872091b6f4
+  - enabled: 1
+    path: Assets/DiceGods/Scenes/DG_SystemCreator.unity
+    guid: a7c3d3e386824c44fb55b68d8bde0d7d
+  - enabled: 1
+    path: Assets/DiceGods/Scenes/DG_Tavern.unity
+    guid: 8224ab9f4baee8341b1159bc1f11571c
+  - enabled: 1
+    path: Assets/DiceGods/Scenes/DG_Library.unity
+    guid: f26e82fe2b226234897236ca16fbbb75
   m_configObjects: {}
