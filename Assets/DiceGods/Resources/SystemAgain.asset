@@ -24,4 +24,5 @@ MonoBehaviour:
   armour: 0
   defence: 0
   Attributes: []
-  DamageTypes: []
+  DamageTypes:
+  - {fileID: 0}
