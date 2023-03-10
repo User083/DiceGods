@@ -2,6 +2,8 @@
     align-items: stretch;
     width: 100%;
     height: 100%;
+    -unity-background-scale-mode: scale-and-crop;
+    flex-grow: 1;
 }
 
 .button-default {
@@ -39,20 +41,15 @@
     color: rgb(70, 60, 43);
 }
 
-.unity-popup-field__input
-{
+.unity-popup-field__input {
     height: 100%;
     width: 100%;
-    background-color: #BCA477;
-
+    background-color: rgb(188, 164, 119);
 }
 
-/*Doesn't seem to work for some reason */
-.unity-base-popup-field_text
-{
+.unity-base-popup-field_text {
     height: 100%;
     width: 100%;
     overflow: scroll;
-    background-color: #BCA477;
-
+    background-color: rgb(188, 164, 119);
 }

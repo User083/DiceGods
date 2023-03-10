@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class NewSystem_Manager : MonoBehaviour
 {
 
     [SerializeField] private UIDocument newSystemUI;
-    private Button initSystem;
-    private Button resetSystem;
+    private Button createButton;
+    private Button resetButton;
     private Button mainMenu;
+    private TextField systemNameField;
 
     private void OnEnable()
     {
@@ -19,18 +21,30 @@ public class NewSystem_Manager : MonoBehaviour
             Debug.Log("No root element found");
         }
 
-        initSystem = root.Q<Button>("ns-button-init");
-        resetSystem = root.Q<Button>("ns-button-reset");
-        mainMenu = root.Q<Button>("ns-button-return");
-
+        createButton = root.Q<Button>("ns-button-create");
+        resetButton = root.Q<Button>("ns-button-reset");
+        mainMenu = root.Q<Button>("ns-button-mm");
+        systemNameField = root.Q<TextField>("ns-textfield-systemname");
+        mainMenu.clickable.clicked += () => OnMMClicked();
+        resetButton.clickable.clicked += () => resetSystemFields();
+        createButton.clickable.clicked += () => CreateNewSystem();
 
     }
 
-    private void Start()
+    public void OnMMClicked()
+    {     
+        SceneManager.LoadSceneAsync("DG_MainMenu");
+    }
+
+    public void CreateNewSystem()
     {
-     
+
     }
 
-    
- 
+    private void resetSystemFields()
+    {
+
+    }
+
+
 }

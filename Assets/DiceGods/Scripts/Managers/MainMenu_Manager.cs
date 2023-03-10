@@ -89,6 +89,6 @@ public class MainMenu_Manager : MonoBehaviour
     public void disableMainMenu()
     {
         mainMenu.sortingOrder = 0;
-        loadMenu.sortingOrder = 1;
+        loadMenu.sortingOrder = 2;
     }
 }

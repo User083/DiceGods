@@ -1,7 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/DiceGods/UI/USS_Default.uss?fileID=7433441132597879392&amp;guid=6cacdf1acc1283944b1c319cd9117d08&amp;type=3#USS_Default" />
-    <ui:VisualElement name="screen-tavern" class="screen" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/DiceGods/UI/Graphics/TavernBackdrop.jpg?fileID=2800000&amp;guid=288c9a671ac12c342b39e736e8cc7929&amp;type=3#TavernBackdrop&apos;);">
-        <ui:Button text="Library" display-tooltip-when-elided="true" name="tavern-button-library" class="button-default" style="align-self: center;" />
-        <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="tavern-button-return" class="button-default" style="justify-content: center; align-self: center; flex-direction: column;" />
+    <ui:VisualElement name="screen-tavern" class="screen" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/DiceGods/UI/Graphics/TavernBackdrop.jpg?fileID=2800000&amp;guid=288c9a671ac12c342b39e736e8cc7929&amp;type=3#TavernBackdrop&apos;); flex-direction: row;">
+        <ui:VisualElement name="t-panel-left" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: center; align-self: flex-start; flex-direction: column; height: 100%; width: 30%;">
+            <ui:VisualElement name="t-panel-left-top" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 10%; justify-content: center; align-self: center;">
+                <ui:Label tabindex="-1" text="Tavern" display-tooltip-when-elided="true" name="t-label-title" class="text-default" style="font-size: 40px; color: rgb(188, 164, 119);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="t-panel-left-bottom" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 90%; justify-content: center;">
+                <ui:Button text="Library" display-tooltip-when-elided="true" name="t-button-library" tooltip="View all your custom content." class="button-default" style="align-self: center;" />
+                <ui:Button text="Creator" display-tooltip-when-elided="true" name="t-button-creator" tooltip="Create custom content for your system." class="button-default" style="align-self: center;" />
+                <ui:Button text="Encounter" display-tooltip-when-elided="true" name="t-button-encounter" tooltip="Test out an encounter." class="button-default" style="align-self: center;" />
+                <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="t-button-return" tooltip="Return to main menu." class="button-default" style="justify-content: center; align-self: center; flex-direction: column;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="t-panel-right" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 100%; width: 100%;" />
     </ui:VisualElement>
 </ui:UXML>
