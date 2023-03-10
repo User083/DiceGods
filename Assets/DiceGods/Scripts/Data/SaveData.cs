@@ -8,7 +8,11 @@ public class SaveData
 
     [Header("System Info")]
 
+    
+
     public int testNo;
+
+    public long lastUpdated;
 
     
     //Init default values for new save

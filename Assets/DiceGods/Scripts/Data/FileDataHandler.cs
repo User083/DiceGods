@@ -19,9 +19,14 @@ public class FileDataHandler
         
     }
 
-    public SaveData Load()
+    public SaveData Load(string saveID)
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+       if(saveID == null)
+        {
+            return null;
+        }
+        
+        string fullPath = Path.Combine(dataDirPath, saveID, dataFileName);
         SaveData loadedData = null;
         
         if(File.Exists(fullPath))
@@ -58,10 +63,14 @@ public class FileDataHandler
         return loadedData;
     }
 
-    public void Save(SaveData data)
+    public void Save(SaveData data, string saveID)
     {
-        
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+
+        if (saveID == null)
+        {
+            return;
+        }
+        string fullPath = Path.Combine(dataDirPath, saveID, dataFileName);
         try
         {
             //Create directory if it doesn't exist
@@ -97,6 +106,39 @@ public class FileDataHandler
         }
     }
 
+    public Dictionary<string, SaveData> LoadAllSaves()
+    {
+        Dictionary<string, SaveData> savesDictionary = new Dictionary<string, SaveData>();
+
+        //loop over all saves in path
+        IEnumerable<DirectoryInfo> dirInfos = new DirectoryInfo(dataDirPath).EnumerateDirectories();
+        foreach(DirectoryInfo dirInfo in dirInfos)
+        {
+            string saveID = dirInfo.Name;
+
+            //safety check
+            string fullPath = Path.Combine(dataDirPath, saveID, dataFileName);
+            if(!File.Exists(fullPath))
+            {
+                Debug.LogWarning("Skipping directory" + saveID + ": does not contain save data");
+                continue;
+            }
+
+            SaveData saveData = Load(saveID);
+
+            if(saveData!= null)
+            {
+                savesDictionary.Add(saveID, saveData);
+            }
+            else
+            {
+                Debug.LogError("Error occurred loading: " + saveID);
+            }
+        }
+
+        return savesDictionary;
+    }
+
     private string EncryptDecrypt(string data)
     {
         string modifiedData = "";
@@ -105,5 +147,40 @@ public class FileDataHandler
             modifiedData += (char)(data[i] ^ encryptionCodeWord[i % encryptionCodeWord.Length]);
         }
         return modifiedData;
+    }
+
+    //get the most recent save
+    public string GetMostRecentSave()
+    {
+        string mostRecentSave = null;
+
+        Dictionary<string, SaveData> savesData = LoadAllSaves();
+        foreach(KeyValuePair<string, SaveData> kvp in savesData)
+        {
+            string saveID = kvp.Key;
+            SaveData saveData = kvp.Value;
+
+            if(saveData == null)
+            {
+                continue;
+            }
+
+            if(mostRecentSave == null)
+            {
+                mostRecentSave = saveID;
+            }
+            else
+            {
+                DateTime mostRecent = DateTime.FromBinary(savesData[mostRecentSave].lastUpdated);
+                DateTime newDateTime = DateTime.FromBinary(saveData.lastUpdated);
+
+                if(newDateTime > mostRecent)
+                {
+                    mostRecentSave = saveID;
+                }
+            }
+
+        }
+        return mostRecentSave;
     }
 }

@@ -43,7 +43,7 @@ public class NewSystem_Manager : MonoBehaviour
 
     private void resetSystemFields()
     {
-
+        
     }
 
 

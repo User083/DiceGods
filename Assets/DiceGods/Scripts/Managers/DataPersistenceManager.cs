@@ -9,6 +9,7 @@ public class DataPersistenceManager : MonoBehaviour
     [Header("Debugging")]
     [SerializeField] private bool initialiseDataIfNull = false;
     [SerializeField] private bool saveOnQuit = true;
+    [SerializeField] private bool disableDataPersistence = false;
 
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
@@ -18,7 +19,7 @@ public class DataPersistenceManager : MonoBehaviour
     public static DataPersistenceManager instance { get; private set; }
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
-
+    private string selectedSaveID = string.Empty;
     private void Awake()
     {
         if(instance != null)
@@ -31,6 +32,7 @@ public class DataPersistenceManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+        this.selectedSaveID = dataHandler.GetMostRecentSave();
     }
 
     private void OnEnable()
@@ -61,6 +63,13 @@ public class DataPersistenceManager : MonoBehaviour
         Save();
     }
 
+    //update selected saveID
+    public void ChangeSelectedSaveID(string newSaveID)
+    {
+        this.selectedSaveID = newSaveID;
+        LoadSave();
+    }
+
     //Create new save data object
     public void NewSave()
     {
@@ -70,7 +79,12 @@ public class DataPersistenceManager : MonoBehaviour
     //Load existing save
     public void LoadSave()
     {
-        this.saveData = dataHandler.Load();
+        if(disableDataPersistence)
+        {
+            return;
+        }
+        
+        this.saveData = dataHandler.Load(selectedSaveID);
 
        //Debugging only
         if(this.saveData == null && initialiseDataIfNull)
@@ -93,8 +107,12 @@ public class DataPersistenceManager : MonoBehaviour
     //Save runtime data
     public void Save()
     {
+        if (disableDataPersistence)
+        {
+            return;
+        }
 
-        if(this.saveData == null)
+        if (this.saveData == null)
         {
             Debug.LogWarning("No data found - new data needs to be initialised");
             return;
@@ -104,7 +122,10 @@ public class DataPersistenceManager : MonoBehaviour
             dpo.SaveData(ref saveData);
         }
 
-        dataHandler.Save(saveData);
+        //timestamp save
+        saveData.lastUpdated = System.DateTime.Now.ToBinary();
+
+        dataHandler.Save(saveData, selectedSaveID);
     }
 
 
@@ -129,5 +150,11 @@ public class DataPersistenceManager : MonoBehaviour
     public bool HasSaveData()
     {
         return this.saveData != null;
+    }
+
+    //get all save slots from the data handler
+    public Dictionary<string, SaveData> GetAllSaves()
+    {
+        return dataHandler.LoadAllSaves();
     }
 }
