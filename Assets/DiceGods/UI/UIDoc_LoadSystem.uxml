@@ -6,6 +6,7 @@
         </ui:VisualElement>
         <ui:GroupBox style="justify-content: center; align-items: stretch; flex-direction: row;">
             <ui:Button text="Cancel" display-tooltip-when-elided="true" name="lm-button-return" class="button-default" />
+            <ui:Button text="Delete" display-tooltip-when-elided="true" name="lm-button-delete" class="button-default" />
             <ui:Button text="Load Save" display-tooltip-when-elided="true" name="lm-button-load" class="button-default" />
         </ui:GroupBox>
     </ui:VisualElement>

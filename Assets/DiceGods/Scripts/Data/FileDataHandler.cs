@@ -106,6 +106,35 @@ public class FileDataHandler
         }
     }
 
+    public void DeleteSave(string saveID)
+    {
+        if(saveID == null)
+        {
+            return;
+        }
+
+        string fullPath = Path.Combine(dataDirPath, saveID, dataFileName);
+
+        try
+        {
+            if(File.Exists(fullPath))
+            {
+                //Delete entire save directory
+                Directory.Delete(Path.GetDirectoryName(fullPath), true);
+                //Delete only saved file
+                //File.Delete(Path.GetFileName(fullPath), true);
+            }
+            else
+            {
+                Debug.LogWarning("Can't delete save data: " + fullPath + " path not found");
+            }
+        }
+        catch(Exception e)
+        {
+            Debug.LogError("Failed to delete save data for: " + saveID + " at path " + fullPath + "\n" + e);
+        }
+    }
+
     public Dictionary<string, SaveData> LoadAllSaves()
     {
         Dictionary<string, SaveData> savesDictionary = new Dictionary<string, SaveData>();

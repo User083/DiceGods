@@ -32,7 +32,8 @@ public class DataPersistenceManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
-        this.selectedSaveID = dataHandler.GetMostRecentSave();
+        InitSelectedSave();
+        
     }
 
     private void OnEnable()
@@ -68,6 +69,21 @@ public class DataPersistenceManager : MonoBehaviour
     {
         this.selectedSaveID = newSaveID;
         LoadSave();
+    }
+
+    //Delete save
+
+    public void DeleteSaveData(string saveID)
+    {
+        dataHandler.DeleteSave(saveID);
+        InitSelectedSave();
+        LoadSave();
+    }
+
+    private void InitSelectedSave()
+    {
+        this.selectedSaveID = dataHandler.GetMostRecentSave();
+      
     }
 
     //Create new save data object

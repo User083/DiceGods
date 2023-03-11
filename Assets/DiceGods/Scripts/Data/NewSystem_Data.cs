@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class NewSystem_Data
+public class NewSystem_Data : MonoBehaviour
 {
     [Header("Basic")]
     public string systemName;

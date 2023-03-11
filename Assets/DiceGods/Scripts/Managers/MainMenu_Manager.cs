@@ -16,9 +16,11 @@ public class MainMenu_Manager : MonoBehaviour
     [Header("Load Menu Elements")]
     private Button loadSelectedSystem;
     private Button mmButton;
+    private Button deleteButton;
+    public string selectedSave = string.Empty;
  
 
-    
+
     private void OnEnable()
     {
         
@@ -29,28 +31,37 @@ public class MainMenu_Manager : MonoBehaviour
             Debug.Log("No root element found");
         }
 
+        //main menu screen
         newSystem = mm_root.Q<Button>("mm-button-new");
         loadSystem = mm_root.Q<Button>("mm-button-load");
         quit = mm_root.Q<Button>("mm-button-quit");
-        loadSelectedSystem = lm_root.Q<Button>("lm-button-load");
-        mmButton = lm_root.Q<Button>("lm-button-return");
-
-         newSystem.clickable.clicked += () => OnNewSystemClicked();
+        newSystem.clickable.clicked += () => OnNewSystemClicked();
         loadSystem.clickable.clicked += () => disableMainMenu();
         quit.clickable.clicked += () => OnQuitClicked();
+
+        //Load screen
+        loadSelectedSystem = lm_root.Q<Button>("lm-button-load");
+        mmButton = lm_root.Q<Button>("lm-button-return");
+        deleteButton = lm_root.Q<Button>("lm-button-delete");
         mmButton.clickable.clicked += () => enableMainMenu();
         loadSelectedSystem.clickable.clicked += () => OnLoadSystemClicked();
+        deleteButton.clickable.clicked += () => DeleteSave(selectedSave);
+        deleteButton.SetEnabled(false);
 
     }
 
     private void Start()
     {
+        DataSpecificDisable();
+   
+    }
+
+    private void DataSpecificDisable()
+    {
         if (!DataPersistenceManager.instance.HasSaveData())
         {
             loadSystem.SetEnabled(false);
         }
-
-       
     }
 
     public void OnNewSystemClicked()
@@ -65,6 +76,11 @@ public class MainMenu_Manager : MonoBehaviour
         DisableMenuButtons();
         SceneManager.LoadSceneAsync("DG_Tavern");
 
+    }
+
+    private void DeleteSave(string saveID)
+    {
+        DataPersistenceManager.instance.DeleteSaveData(saveID);
     }
 
       public void OnQuitClicked()
@@ -85,11 +101,15 @@ public class MainMenu_Manager : MonoBehaviour
     {
         mainMenu.sortingOrder = 1;
         loadMenu.sortingOrder = 0;
+        DataSpecificDisable();
     }
 
     public void disableMainMenu()
     {
         mainMenu.sortingOrder = 0;
-        loadMenu.sortingOrder = 2;
+        loadMenu.sortingOrder = 1;
+        DataSpecificDisable();
     }
+
+
 }
