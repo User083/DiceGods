@@ -14,8 +14,21 @@ public class DataPersistenceManager : MonoBehaviour
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
     [SerializeField] private bool useEncryption;
+
+    private SaveData saveData; 
+    public SaveData SaveData
+    {
+        get
+        {
+            return saveData;
+        }
+        private set 
+        {
+            saveData = value;
+        }
+    }
+
     
-    private SaveData saveData;
     public static DataPersistenceManager instance { get; private set; }
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
@@ -32,7 +45,7 @@ public class DataPersistenceManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
-        InitSelectedSave();
+        //InitSelectedSave();
         
     }
 
@@ -54,14 +67,21 @@ public class DataPersistenceManager : MonoBehaviour
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        //Call this wherever you want to load
-        LoadSave();
+        if (this.saveData != null)
+        {
+            LoadSave();
+        }
+        
     }
 
     //When scene is unloaded
     public void OnSceneUnloaded(Scene scene)
     {
-        Save();
+        if(this.saveData != null)
+        {
+            Save(fileName);
+        }
+        
     }
 
     //update selected saveID
@@ -87,9 +107,11 @@ public class DataPersistenceManager : MonoBehaviour
     }
 
     //Create new save data object
-    public void NewSave()
+    public void NewSave(string newSaveName)
     {
-        this.saveData= new SaveData();
+        this.fileName = newSaveName;
+        this.dataHandler.UpdateFileName(newSaveName);
+        this.SaveData = new SaveData(fileName);
     }
 
     //Load existing save
@@ -99,20 +121,20 @@ public class DataPersistenceManager : MonoBehaviour
         {
             return;
         }
-        
-        this.saveData = dataHandler.Load(selectedSaveID);
 
-       //Debugging only
-        if(this.saveData == null && initialiseDataIfNull)
-        {
-            NewSave();
-        }
-        
-        if(this.saveData == null)
+         if(this.saveData == null)
         {
             Debug.Log("No data found - new data needs to be initialised");
             return;
         }
+        
+        //Debugging only
+        if(this.saveData == null && initialiseDataIfNull)
+        {
+           NewSave("Debug Save");
+        }
+        
+        this.saveData = dataHandler.Load(selectedSaveID);
 
         foreach(IDataPersistence dpo in dataPersistenceObjects)
         {
@@ -121,8 +143,9 @@ public class DataPersistenceManager : MonoBehaviour
     }
 
     //Save runtime data
-    public void Save()
+    public void Save(string fileName)
     {
+        this.fileName = fileName;
         if (disableDataPersistence)
         {
             return;
@@ -152,7 +175,7 @@ public class DataPersistenceManager : MonoBehaviour
         //Move this to wherever you want to save the game
         if(saveOnQuit)
         {
-            Save();
+            Save(fileName);
         }
         
     }

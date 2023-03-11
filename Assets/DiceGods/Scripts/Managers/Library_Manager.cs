@@ -13,6 +13,14 @@ public class Library_Manager : MonoBehaviour
     private Button tabButtonItems;
     private Label currentTabLabel;
 
+    [Header("System UI Properties")]
+    private Label systemName;
+    private Toggle levelsToggle;
+    private Toggle classesToggle;
+    private Toggle racesToggle;
+    private Toggle coreStatsToggle;
+    private Toggle attributesToggle;
+
     private void OnEnable()
     {
         var root = libraryUI.rootVisualElement;
@@ -20,17 +28,34 @@ public class Library_Manager : MonoBehaviour
         {
             Debug.Log("No root element found");
         }
-
+        
+        
+        //Labels
         currentTabLabel = root.Q<Label>("l-label-current-tab");
+
+        //Toggles
+        levelsToggle = root.Q<Toggle>("l-toggle-levels");
+        classesToggle = root.Q<Toggle>("l-toggle-classes");
+        racesToggle = root.Q<Toggle>("l-toggle-races");
+        coreStatsToggle = root.Q<Toggle>("l-toggle-core-stats");
+        attributesToggle = root.Q<Toggle>("l-toggle-attributes");
+
+        //Buttons
         tavernButton = root.Q<Button>("l-button-tavern");
         tabButtonSystem = root.Q<Button>("l-button-system");
         tabButtonCharacters= root.Q<Button>("l-button-characters");
         tabButtonItems = root.Q<Button>("l-button-items");
+        systemName = root.Q<Label>("l-label-system-name");
         tavernButton.clickable.clicked += () => OnTavernClicked();
         tabButtonSystem.clickable.clicked += () => systemTab();
         tabButtonCharacters.clickable.clicked += () => charactersTab();
         tabButtonItems.clickable.clicked += () => itemsTab();
 
+    }
+
+    private void Start()
+    {
+        initLibrary();
     }
 
     public void OnTavernClicked()
@@ -41,6 +66,7 @@ public class Library_Manager : MonoBehaviour
     private void systemTab()
     {
         currentTabLabel.text = "System";
+        
     }
 
     private void charactersTab()
@@ -51,5 +77,19 @@ public class Library_Manager : MonoBehaviour
     private void itemsTab()
     {
         currentTabLabel.text = "Items";
+    }
+
+    private void initLibrary()
+    {
+        //System Data
+        
+        systemName.text = DataPersistenceManager.instance.SaveData.systemName;
+        levelsToggle.value = DataPersistenceManager.instance.SaveData.useLevels;
+        levelsToggle.SetEnabled(false);
+        classesToggle.value = DataPersistenceManager.instance.SaveData.useClasses;
+        racesToggle.value = DataPersistenceManager.instance.SaveData.useRaces;
+        coreStatsToggle.value = DataPersistenceManager.instance.SaveData.useCoreStats;
+        attributesToggle.value = DataPersistenceManager.instance.SaveData.useAttributes;
+        
     }
 }

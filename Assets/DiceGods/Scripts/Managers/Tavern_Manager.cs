@@ -11,6 +11,7 @@ public class Tavern_Manager : MonoBehaviour
     private Button mainMenu;
     private Button creatorButton;
     private Button encounterButton;
+    private Label tavernName;
 
     private void OnEnable()
     {
@@ -24,10 +25,12 @@ public class Tavern_Manager : MonoBehaviour
         mainMenu = root.Q<Button>("t-button-return");
         creatorButton = root.Q<Button>("t-button-creator");
         encounterButton = root.Q<Button>("t-button-encounter");
+        tavernName = root.Q<Label>("t-label-title");
         libraryButton.clickable.clicked += () => OnLibraryClicked();
         mainMenu.clickable.clicked += () => OnMMClicked();
         creatorButton.SetEnabled(false);
         encounterButton.SetEnabled(false);
+        SetTavernName();
     }
 
     public void OnMMClicked()
@@ -37,6 +40,12 @@ public class Tavern_Manager : MonoBehaviour
     public void OnLibraryClicked()
     {
         SceneManager.LoadSceneAsync("DG_Library");
+    }
+
+    //debug test for file persistence
+    public void SetTavernName()
+    {
+        tavernName.text = DataPersistenceManager.instance.SaveData.fileName;
     }
 
     

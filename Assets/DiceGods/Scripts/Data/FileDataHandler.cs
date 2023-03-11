@@ -19,6 +19,11 @@ public class FileDataHandler
         
     }
 
+    public void UpdateFileName(string newFileName)
+    {
+        this.dataFileName = newFileName;
+    }
+
     public SaveData Load(string saveID)
     {
        if(saveID == null)
