@@ -9,6 +9,7 @@ public class MainMenu_Manager : UI_Manager
     [SerializeField] private UIDocument mainMenu;
     [SerializeField] private UIDocument loadMenu;
     [SerializeField] private UIDocument popupWindow;
+    [SerializeField] private VisualTreeAsset saveSlot;
     private PopupWindow_Manager popupWindowManager;
    
     [Header("Main Menu Elements")]
@@ -21,6 +22,7 @@ public class MainMenu_Manager : UI_Manager
     private Button mmButton;
     private Button deleteButton;
     public string selectedSave = string.Empty;
+    
 
     [Header("Popup")]
     private Button confirmButton;
@@ -41,6 +43,10 @@ public class MainMenu_Manager : UI_Manager
             Debug.Log("No root element found");
         }
 
+        var saveManager = new SaveSlot_Manager();
+
+        saveManager.InitialiseSaveList(lm_root, saveSlot);
+
         confirmButton = popup_root.Q<Button>("popup-button-confirm");
         
         //main menu screen
@@ -55,9 +61,11 @@ public class MainMenu_Manager : UI_Manager
         loadSelectedSystem = lm_root.Q<Button>("lm-button-load");
         mmButton = lm_root.Q<Button>("lm-button-return");
         deleteButton = lm_root.Q<Button>("lm-button-delete");
+        
         mmButton.clickable.clicked += () => enableMainMenu();
         loadSelectedSystem.clickable.clicked += () => OnLoadSystemClicked();
         deleteButton.clickable.clicked += () => ConfirmDelete();
+        
         deleteButton.SetEnabled(false);
  
 

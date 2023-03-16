@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/DiceGods/UI/Styles/USS_Default.uss?fileID=7433441132597879392&amp;guid=6cacdf1acc1283944b1c319cd9117d08&amp;type=3#USS_Default" />
     <ui:VisualElement name="screen-c" class="screen" style="flex-grow: 1; background-color: rgb(87, 76, 57); background-image: url(&apos;project://database/Assets/DiceGods/UI/Graphics/Backdrop.jpg?fileID=2800000&amp;guid=182462af5b3825f4ab97388f559cd6b1&amp;type=3#Backdrop&apos;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.46);">
         <ui:VisualElement name="load-top-panel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-            <ui:ListView focusable="true" name="ListView" style="align-self: center; width: 80%; height: 100%; margin-top: 0;" />
+            <ui:ListView focusable="true" name="lm-listview" style="align-self: center; width: 80%; height: 100%; margin-top: 0;" />
         </ui:VisualElement>
         <ui:GroupBox style="justify-content: center; align-items: stretch; flex-direction: row;">
             <ui:Button text="Cancel" display-tooltip-when-elided="true" name="lm-button-return" class="button-default" />
