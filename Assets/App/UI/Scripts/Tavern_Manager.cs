@@ -29,7 +29,7 @@ public class Tavern_Manager : MonoBehaviour
         tavernName = root.Q<Label>("t-label-title");
         libraryButton.clickable.clicked += () => OnLibraryClicked();
         mainMenu.clickable.clicked += () => OnMMClicked();
-        creatorButton.SetEnabled(false);
+        creatorButton.clickable.clicked += () => ContentCreator();
         encounterButton.SetEnabled(false);
         SetTavernName();
 
@@ -56,5 +56,9 @@ public class Tavern_Manager : MonoBehaviour
         tavernName.text = DataPersistenceManager.instance.activeSave.parentSystem.systemName;
     }
 
+    public void ContentCreator()
+    {
+        SceneManager.LoadSceneAsync("DG_ContentCreator");
+    }
     
 }

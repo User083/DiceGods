@@ -1,10 +1,16 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/App/UI/Styles/StyleDefault.uss?fileID=7433441132597879392&amp;guid=0e7e59b06c57cd34985291de7452f975&amp;type=3#StyleDefault" />
-    <ui:VisualElement class="basic-backdrop" style="align-items: center;">
-        <ui:GroupBox style="width: auto; justify-content: center; height: auto; flex-shrink: 0; flex-grow: 0; background-image: url(&apos;project://database/Assets/App/UI/Graphics/HorizontalMenu.png?fileID=2800000&amp;guid=c83eb62eb3ec70749b4f137642e47434&amp;type=3#HorizontalMenu&apos;); -unity-background-scale-mode: scale-and-crop; max-height: 1013px; max-width: 824px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; min-height: 507px; min-width: 412px; align-items: center;">
-            <ui:Button text="New System" display-tooltip-when-elided="true" name="mm-button-new" enable-rich-text="false" class="text-default button-menu" />
-            <ui:Button text="Load System" display-tooltip-when-elided="true" name="mm-button-load" class="text-default button-menu" />
-            <ui:Button text="Quit" display-tooltip-when-elided="true" name="mm-button-quit" class="text-default button-menu" />
-        </ui:GroupBox>
+    <ui:VisualElement class="basic-backdrop" style="align-items: stretch; justify-content: center;">
+        <ui:VisualElement style="height: 10%; align-items: center; justify-content: center;">
+            <ui:Label tabindex="-1" text="Main Menu" display-tooltip-when-elided="true" class="text-title" />
+        </ui:VisualElement>
+        <ui:VisualElement style="height: 80%; align-items: center; justify-content: center;">
+            <ui:GroupBox style="width: auto; justify-content: center; height: auto; flex-shrink: 0; flex-grow: 0; background-image: url(&apos;project://database/Assets/App/UI/Graphics/HorizontalMenu.png?fileID=2800000&amp;guid=c83eb62eb3ec70749b4f137642e47434&amp;type=3#HorizontalMenu&apos;); -unity-background-scale-mode: scale-and-crop; max-height: 1013px; max-width: 824px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; min-height: 507px; min-width: 412px; align-items: center;">
+                <ui:Button text="New System" display-tooltip-when-elided="true" name="mm-button-new" enable-rich-text="false" class="text-default button-menu" />
+                <ui:Button text="Load System" display-tooltip-when-elided="true" name="mm-button-load" class="text-default button-menu" />
+                <ui:Button text="Quit" display-tooltip-when-elided="true" name="mm-button-quit" class="text-default button-menu" />
+            </ui:GroupBox>
+        </ui:VisualElement>
+        <ui:VisualElement style="height: 10%;" />
     </ui:VisualElement>
 </ui:UXML>

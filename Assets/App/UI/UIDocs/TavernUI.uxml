@@ -1,16 +1,20 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/App/UI/Styles/StyleDefault.uss?fileID=7433441132597879392&amp;guid=0e7e59b06c57cd34985291de7452f975&amp;type=3#StyleDefault" />
-    <ui:VisualElement class="basic-backdrop" style="flex-direction: row;">
-        <ui:VisualElement style="height: 100%; width: 20%; justify-content: space-around; align-items: center;">
-            <ui:GroupBox style="justify-content: space-around; height: 50%; width: 90%;">
-                <ui:Button text="Library" display-tooltip-when-elided="true" name="t-button-library" class="default-button text-default button-menu" />
-                <ui:Button text="Creator" display-tooltip-when-elided="true" name="t-button-creator" class="default-button text-default button-menu" />
-                <ui:Button text="Encounter" display-tooltip-when-elided="true" name="t-button-encounter" class="default-button text-default button-menu" />
-                <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="t-button-return" class="default-button text-default button-menu" />
-            </ui:GroupBox>
-        </ui:VisualElement>
-        <ui:VisualElement style="height: 100%; width: 80%;">
+    <ui:VisualElement class="basic-backdrop" style="flex-direction: column;">
+        <ui:VisualElement style="height: 10%; align-items: center; justify-content: center;">
             <ui:Label text="Tavern Name" display-tooltip-when-elided="true" name="t-label-title" enable-rich-text="false" class="text-title" />
         </ui:VisualElement>
+        <ui:VisualElement style="height: 80%; flex-direction: row;">
+            <ui:VisualElement style="height: 100%; width: 20%; justify-content: space-around; align-items: center;">
+                <ui:GroupBox style="justify-content: space-around; height: 50%; width: 90%;">
+                    <ui:Button text="Library" display-tooltip-when-elided="true" name="t-button-library" class="default-button text-default button-menu" />
+                    <ui:Button text="Creator" display-tooltip-when-elided="true" name="t-button-creator" class="default-button text-default button-menu" />
+                    <ui:Button text="Encounter" display-tooltip-when-elided="true" name="t-button-encounter" class="default-button text-default button-menu" />
+                    <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="t-button-return" class="default-button text-default button-menu" />
+                </ui:GroupBox>
+            </ui:VisualElement>
+            <ui:VisualElement style="height: 100%; width: 80%;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="height: 10%;" />
     </ui:VisualElement>
 </ui:UXML>
