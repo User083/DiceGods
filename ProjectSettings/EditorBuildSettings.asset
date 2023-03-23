@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/App/Scenes/DG_Library.unity
+    guid: 106b86eb2dd9408459eaaa67f5992f56
+  - enabled: 1
+    path: Assets/App/Scenes/DG_MainMenu.unity
+    guid: 348eb0e316c1c25409e9fbb156dd9487
+  - enabled: 1
+    path: Assets/App/Scenes/DG_Tavern.unity
+    guid: 2e5e9754385262144be6e14d0416cf4a
   m_configObjects: {}

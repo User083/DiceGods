@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/App/UI/Styles/StyleDefault.uss?fileID=7433441132597879392&amp;guid=0e7e59b06c57cd34985291de7452f975&amp;type=3#StyleDefault" />
+    <ui:VisualElement class="basic-backdrop" style="align-items: center;">
+        <ui:VisualElement style="flex-grow: 0; align-items: stretch; justify-content: space-around; height: 30%; width: 50%; background-color: rgba(56, 56, 56, 0);">
+            <ui:VisualElement style="background-color: rgba(14, 7, 5, 0);">
+                <ui:Label text="Confirmation text" display-tooltip-when-elided="true" name="popup-label-text" class="text-dark text-default" style="white-space: normal; -unity-text-align: middle-center; font-size: 14px; justify-content: center; flex-wrap: wrap; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+                <ui:TextField picking-mode="Ignore" name="popup-textfield-optional" class="text-default bar" />
+            </ui:VisualElement>
+            <ui:VisualElement style="align-items: center; flex-direction: row; justify-content: center; background-color: rgba(196, 196, 196, 0);">
+                <ui:Button text="Confirm" display-tooltip-when-elided="true" name="popup-button-confirm" class="default-button text-default button-menu" />
+                <ui:Button text="Cancel" display-tooltip-when-elided="true" name="popup-button-cancel" class="default-button text-default button-menu" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
