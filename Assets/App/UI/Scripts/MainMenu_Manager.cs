@@ -25,11 +25,6 @@ public class MainMenu_Manager : MonoBehaviour
     [Header("Popup")]
     private Button confirmButton;
 
-    private void Awake()
-    {
-       
-        
-    }
 
     private void OnEnable()
     {
