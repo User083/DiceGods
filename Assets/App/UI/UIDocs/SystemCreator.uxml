@@ -6,21 +6,8 @@
         </ui:VisualElement>
         <ui:VisualElement style="height: 80%; flex-direction: row; justify-content: space-around;">
             <ui:VisualElement style="width: 5%;" />
-            <ui:VisualElement style="width: 50%;">
-                <ui:ScrollView style="height: 100%; background-image: none;">
-                    <ui:TextField picking-mode="Ignore" label="System name:" password="false" name="ns-textfield-systemname" class="text-default" />
-                    <ui:Toggle label="Levels" name="ns-toggle-levels" class="text-default" />
-                    <ui:Toggle label="Use Races?" name="ns-toggle-races" class="text-default" />
-                    <ui:Foldout text="Races" name="ns-foldout-races" value="false" class="text-default" />
-                    <ui:Toggle label="Use Character Classes?" name="ns-toggle-classes" class="text-default" />
-                    <ui:Foldout text="Classes" name="ns-foldout-classes" value="false" class="text-default" />
-                    <ui:Toggle label="Use Attributes?" name="ns-toggle-attributes" focusable="false" class="text-default" />
-                    <ui:Foldout text="Attributes" name="ns-foldout-att" value="false" class="text-default" />
-                </ui:ScrollView>
-            </ui:VisualElement>
-            <ui:VisualElement style="width: 50%;">
-                <ui:ScrollView style="height: 100%;" />
-            </ui:VisualElement>
+            <ui:VisualElement name="ns-panel-main" style="width: 90%;" />
+            <ui:VisualElement style="width: 5%;" />
         </ui:VisualElement>
         <ui:VisualElement style="flex-direction: row; align-items: center; justify-content: center; height: 10%;">
             <ui:Button text="Back" display-tooltip-when-elided="true" name="ns-button-mm" class="default-button text-default button-menu" />

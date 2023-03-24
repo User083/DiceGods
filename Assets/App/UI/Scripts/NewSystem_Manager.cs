@@ -11,14 +11,16 @@ public class NewSystem_Manager : MonoBehaviour
 {
     [SerializeField] private UI_Manager UIManager;
     [SerializeField] private UIDocument newSystemUI;
-    [SerializeField] private VisualTreeAsset elementSlot;
-   
-
+    [SerializeField] private VisualTreeAsset systemDisplayUI;
+    [SerializeField] private VisualTreeAsset elementSlotUI;
+    private DataPopulater dataPopulater = new DataPopulater();
+    private VisualElement systemDisplay;
     private SaveData newSystemSaveData;   
     private Button createButton;
     private Button resetButton;
     private Button mainMenu;
     private Button confirmButton;
+    private VisualElement mainPanel;
 
     [Header("Core System Details")]
     public SystemData newSystem = new SystemData("New System");
@@ -45,7 +47,9 @@ public class NewSystem_Manager : MonoBehaviour
     {
         var root = newSystemUI.rootVisualElement;
         var popupRoot = UIManager.popupWindow.rootVisualElement;
-
+        mainPanel = root.Q<VisualElement>("ns-panel-main");
+        systemDisplay = systemDisplayUI.Instantiate();
+        systemDisplay.style.flexGrow = 1;
         if (root == null)
         {
             Debug.Log("No root element found");
@@ -56,22 +60,22 @@ public class NewSystem_Manager : MonoBehaviour
         saveNameField = popupRoot.Q<TextField>("popup-textfield-optional");
         
         //Toggles
-        levelsToggle = root.Q<Toggle>("ns-toggle-levels");
-        classesToggle = root.Q<Toggle>("ns-toggle-classes");
-        racesToggle = root.Q<Toggle>("ns-toggle-races");
+        levelsToggle = systemDisplay.Q<Toggle>("ns-toggle-levels");
+        classesToggle = systemDisplay.Q<Toggle>("ns-toggle-classes");
+        racesToggle = systemDisplay.Q<Toggle>("ns-toggle-races");
         //coreStatsToggle = root.Q<Toggle>("ns-toggle-core-stats");
-        attributesToggle = root.Q<Toggle>("ns-toggle-attributes");
+        attributesToggle = systemDisplay.Q<Toggle>("ns-toggle-attributes");
 
         //Foldouts
-        attFoldout = root.Q<Foldout>("ns-foldout-att");
-        racesFoldout = root.Q<Foldout>("ns-foldout-races");
-        classFoldout = root.Q<Foldout>("ns-foldout-classes");
+        attFoldout = systemDisplay.Q<Foldout>("ns-foldout-att");
+        racesFoldout = systemDisplay.Q<Foldout>("ns-foldout-races");
+        classFoldout = systemDisplay.Q<Foldout>("ns-foldout-classes");
 
         //buttons
         createButton = root.Q<Button>("ns-button-create");
         resetButton = root.Q<Button>("ns-button-reset");
         mainMenu = root.Q<Button>("ns-button-mm");
-        systemNameField = root.Q<TextField>("ns-textfield-systemname");
+        systemNameField = systemDisplay.Q<TextField>("ns-textfield-systemname");
 
         //Button bindings
         mainMenu.clickable.clicked += () => ConfirmCancel();
@@ -89,15 +93,12 @@ public class NewSystem_Manager : MonoBehaviour
     private void Start()
     {
         systemNameField.RegisterCallback<ChangeEvent<string>>((e) => { newSystem.systemName = e.newValue; });
-
-        PopulateAttributes();
-        PopulateClasses();
-        PopulateRaces(); 
-        attFoldout.SetEnabled(false);
-        racesFoldout.SetEnabled(false);
-        classFoldout.SetEnabled(false);
+        
+        PopulateData();
+        mainPanel.hierarchy.Add(systemDisplay);
+       
     }
-
+    
 
 
     //User interface handling
@@ -162,63 +163,13 @@ public class NewSystem_Manager : MonoBehaviour
         
     }
 
-    void PopulateAttributes()
+    public void PopulateData()
     {
-        int attI = 0;
-        List<Attribute> attributes = new List<Attribute>();
-        attributes = newSystem.attributes;
-
-        foreach (var attribute in attributes)
-        {
-            var newSlotEntry = elementSlot.Instantiate();
-            var newEntryLogic = new ElementSlot();
-            newSlotEntry.userData = newEntryLogic;
-            newEntryLogic.SetVisualElement(newSlotEntry);
-            newEntryLogic.SetAttributeData(attribute);
-
-            attFoldout.Insert(attI, newSlotEntry);
-            attI++;
-        };
-
+        dataPopulater.PopulateClasses(newSystem, elementSlotUI, classFoldout);
+        dataPopulater.PopulateRaces(newSystem, elementSlotUI, racesFoldout);
+        dataPopulater.PopulateAttributes(newSystem, elementSlotUI, attFoldout);
     }
 
-    void PopulateRaces()
-    {
-        int raceI = 0;
-        List<Race> races = new List<Race>();
-        races = newSystem.races;
-
-        foreach (var race in races)
-        {
-            var newSlotEntry = elementSlot.Instantiate();
-            var newEntryLogic = new ElementSlot();
-            newSlotEntry.userData = newEntryLogic;
-            newEntryLogic.SetVisualElement(newSlotEntry);
-            newEntryLogic.SetRaceData(race);
-
-            racesFoldout.Insert(raceI, newSlotEntry);
-            raceI++;
-        };
-    }
-
-    void PopulateClasses()
-    {
-        int classI = 0;
-        List<CharacterClass> classes = new List<CharacterClass>();
-        classes = newSystem.characterClasses;
-
-        foreach (var charClass in classes)
-        {
-            var newSlotEntry = elementSlot.Instantiate();
-            var newEntryLogic = new ElementSlot();
-            newSlotEntry.userData = newEntryLogic;
-            newEntryLogic.SetVisualElement(newSlotEntry);
-            newEntryLogic.SetCharClassData(charClass);
-
-            classFoldout.Insert(classI, newSlotEntry);
-            classI++;
-        };
-    }
 
 
 

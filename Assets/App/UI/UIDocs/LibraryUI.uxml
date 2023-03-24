@@ -10,11 +10,18 @@
                     <ui:Button text="System" display-tooltip-when-elided="true" name="l-button-system" class="button-menu text-default" />
                     <ui:Button text="Characters" display-tooltip-when-elided="true" name="l-button-characters" class="button-menu text-default" />
                     <ui:Button text="Items" display-tooltip-when-elided="true" name="l-button-items" class="button-menu text-default" />
-                    <ui:Button text="Tavern" display-tooltip-when-elided="true" name="l-button-tavern" class="button-menu text-default" style="width: 90%;" />
+                    <ui:Button text="Tavern" display-tooltip-when-elided="true" name="l-button-tavern" class="button-menu text-default" />
                 </ui:GroupBox>
             </ui:VisualElement>
-            <ui:VisualElement style="width: 90%; align-items: center; justify-content: center;">
-                <ui:Label text="System" display-tooltip-when-elided="true" name="l-label-current-tab" class="text-title" style="font-size: 60px; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-align: upper-center; white-space: normal; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+            <ui:VisualElement style="width: 90%; align-items: stretch; justify-content: center;">
+                <ui:VisualElement style="height: 10%; justify-content: center; align-items: flex-start;">
+                    <ui:Label text="System" display-tooltip-when-elided="true" name="l-label-current-tab" class="text-title" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-direction: row; height: 100%;">
+                    <ui:VisualElement style="width: 5%;" />
+                    <ui:VisualElement name="l-panel-main" style="height: 100%; justify-content: center; align-items: stretch; flex-grow: 1; width: 90%;" />
+                    <ui:VisualElement style="width: 5%;" />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement style="height: 10%;" />

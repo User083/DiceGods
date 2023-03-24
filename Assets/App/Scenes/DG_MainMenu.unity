@@ -354,7 +354,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIManager: {fileID: 208716852}
   newSystemUI: {fileID: 405272379}
-  elementSlot: {fileID: 9197481963319205126, guid: e537738b659dbd94db79c07dd6fd7389, type: 3}
+  systemDisplayUI: {fileID: 9197481963319205126, guid: af18eb347a89c8e49a827b0f7a2e521d, type: 3}
+  elementSlotUI: {fileID: 9197481963319205126, guid: e537738b659dbd94db79c07dd6fd7389, type: 3}
   newSystem:
     systemName: 
     systemID: New System4

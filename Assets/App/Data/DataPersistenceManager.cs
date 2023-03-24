@@ -20,7 +20,7 @@ public class DataPersistenceManager : MonoBehaviour
     private List<IDataPersistence> dataPersistenceObjects;
 
 
-
+   
     private void Awake()
     {
         if (instance != null)
@@ -34,20 +34,7 @@ public class DataPersistenceManager : MonoBehaviour
         LoadAllSaves();
         dataPersistenceObjects = FindAllDataPersistenceObjects();
     }
-
-    private void OnEnable()
-    {
-     
-    }
-
-
-    private void Start()
-    {
-      
-    }
-
-   
-
+  
     private string generateSaveID(string fileName)
     {
         string random = UnityEngine.Random.Range(0, 500).ToString();
@@ -188,10 +175,10 @@ public class DataPersistenceManager : MonoBehaviour
         foreach (DirectoryInfo dirInfo in dirInfos)
         {
             string saveID = dirInfo.Name;
-            //Debug.Log(dirInfo.Name + " directoryName");
+            
 
             string fullPath = Path.Combine(saveDirectoryPath, saveID, saveID);
-            //Debug.Log(fullPath + " fullpath");
+            
             if (!File.Exists(fullPath))
             {
                 continue;
