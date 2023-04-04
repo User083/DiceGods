@@ -11,6 +11,7 @@ public class Library_Manager : MonoBehaviour
     [SerializeField] private VisualTreeAsset systemDisplayUI;
     [SerializeField] private VisualTreeAsset elementSlotUI;
     [SerializeField] private VisualTreeAsset charDisplayDoc;
+    [SerializeField] private VisualTreeAsset itemDisplayDoc;
 
     private DataPopulater dataPopulater = new DataPopulater();
     private VisualElement systemDisplay;
@@ -23,6 +24,8 @@ public class Library_Manager : MonoBehaviour
     private VisualElement currentTab;
     private SystemData currentSystemData;
     private CharacterDisplay character;
+    private VisualElement itemDisplay;
+    private ItemDisplay item;
 
     [Header("System UI Properties")]
     private TextField systemName;
@@ -38,6 +41,7 @@ public class Library_Manager : MonoBehaviour
         currentSystemData = new SystemData("Default");
         systemDisplay = systemDisplayUI.Instantiate();
         characterDisplay = charDisplayDoc.Instantiate();
+        itemDisplay = itemDisplayDoc.Instantiate();
         systemDisplay.style.flexGrow = 1;
         characterDisplay.style.flexGrow = 1;
     }
@@ -45,6 +49,7 @@ public class Library_Manager : MonoBehaviour
     {
 
         character = new CharacterDisplay(characterDisplay, elementSlotUI);
+        item = new ItemDisplay(itemDisplay, elementSlotUI);
         var root = libraryUI.rootVisualElement;
         
         if (root == null)
@@ -74,10 +79,7 @@ public class Library_Manager : MonoBehaviour
         tabButtonSystem.clickable.clicked += () => systemTab();
         tabButtonCharacters.clickable.clicked += () => charactersTab();
         tabButtonItems.clickable.clicked += () => itemsTab();
-
-        
-
-        
+   
     }
 
     private void Start()
@@ -109,7 +111,7 @@ public class Library_Manager : MonoBehaviour
     {
         currentTabLabel.text = "Items";
         clearTab();
-       
+        currentTab.Add(itemDisplay);
     }
 
     private void clearTab()
@@ -122,6 +124,11 @@ public class Library_Manager : MonoBehaviour
         if (currentTab.Contains(characterDisplay))
         {
             currentTab.Remove(characterDisplay);
+        }
+
+        if (currentTab.Contains(itemDisplay))
+        {
+            currentTab.Remove(itemDisplay);
         }
 
     }

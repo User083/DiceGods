@@ -65,3 +65,4 @@ MonoBehaviour:
   systemDisplayUI: {fileID: 9197481963319205126, guid: af18eb347a89c8e49a827b0f7a2e521d, type: 3}
   elementSlotUI: {fileID: 9197481963319205126, guid: e537738b659dbd94db79c07dd6fd7389, type: 3}
   charDisplayDoc: {fileID: 9197481963319205126, guid: 6c4e9ea3513fde44393e6d6d8ae3966f, type: 3}
+  itemDisplayDoc: {fileID: 9197481963319205126, guid: 2179a6c63482bd349b834f71f8f966e8, type: 3}

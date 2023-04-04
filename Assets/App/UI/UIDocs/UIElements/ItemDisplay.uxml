@@ -1,16 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/App/UI/Styles/StyleDefault.uss?fileID=7433441132597879392&amp;guid=0e7e59b06c57cd34985291de7452f975&amp;type=3#StyleDefault" />
-    <ui:VisualElement name="sd-root" class="basic-backdrop" style="background-image: none; height: auto; width: auto; align-items: stretch; justify-content: flex-start;">
+    <ui:VisualElement name="cd-root" class="basic-backdrop" style="background-image: none; height: auto; width: auto; align-items: stretch; justify-content: flex-start;">
         <ui:VisualElement style="height: 90%;">
             <ui:ScrollView style="height: 100%; background-image: none;">
-                <ui:TextField picking-mode="Ignore" label="System name:" password="false" name="ns-textfield-systemname" class="text-default" />
-                <ui:Toggle label="Levels" name="ns-toggle-levels" class="text-default" />
-                <ui:Toggle label="Use Races?" name="ns-toggle-races" class="text-default" />
-                <ui:Foldout text="Races" name="ns-foldout-races" value="false" class="text-default" />
-                <ui:Toggle label="Use Character Classes?" name="ns-toggle-classes" class="text-default" />
-                <ui:Foldout text="Classes" name="ns-foldout-classes" value="false" class="text-default" />
-                <ui:Toggle label="Use Attributes?" name="ns-toggle-attributes" focusable="false" class="text-default" />
-                <ui:Foldout text="Attributes" name="ns-foldout-att" value="false" class="text-default" />
+                <ui:TextField picking-mode="Ignore" label="Name:" password="false" name="id-textfield-name" class="text-default" />
+                <ui:TextField picking-mode="Ignore" label="Description:" password="false" name="id-textfield-description" class="text-default" />
+                <ui:FloatField label="Value:" value="0" name="id-floatfield-value" class="text-default" />
+                <ui:FloatField label="Weight:" value="0" name="id-floatfield-weight" class="text-default" />
+                <ui:SliderInt picking-mode="Ignore" label="Level:" value="0" high-value="20" name="id-slider-level" class="text-default" />
             </ui:ScrollView>
         </ui:VisualElement>
     </ui:VisualElement>

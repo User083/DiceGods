@@ -15,6 +15,7 @@ public class Character : CharacterData
         _name = name;
         _SystemID = parentSystem.systemID;
         _description = desc;
+        _ID = generateCharacterID(name);
         //Following values default to -1 if system doesn't use them
         _value = -1;
         _weight = -1;
@@ -28,6 +29,14 @@ public class Character : CharacterData
         _minHealth = 0;
         _maxHealth = 100;
         _curHealth = _maxHealth;
+    }
+
+    private string generateCharacterID(string characterName)
+    {
+        string random = Random.Range(0, 9999).ToString();
+        string characterID = characterName + random;
+
+        return characterID;
     }
 
     private void SetupHealth()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SystemData : DefaultSystemData
+public class SystemData 
 {
     [Header("System Info")]
     public string systemName;
@@ -27,28 +27,22 @@ public class SystemData : DefaultSystemData
     {
         
         this.systemName = systemName;
-        systemID = string.Empty;
         setDefaultValues();
     }
 
     public void setDefaultValues()
     {
-        
-        attributes = InitAttributes(this);
-        characterClasses = InitClasses(this);
-        races = InitRaces(this);
+        DefaultSystemData temp = new DefaultSystemData();
+        attributes = temp.InitAttributes(this);
+        characterClasses = temp.InitClasses(this);
+        races = temp.InitRaces(this);
     }
 
     public void SetID()
     {
-        if(systemID!= null || systemID != string.Empty)
-        {
-            systemID = generateSystemID(systemName);
-        }
-        else
-        {
-            Debug.LogWarning("System ID already set to: " + systemID);
-        }       
+
+        systemID = generateSystemID(systemName);
+     
     }
     private string generateSystemID(string systemName)
     {

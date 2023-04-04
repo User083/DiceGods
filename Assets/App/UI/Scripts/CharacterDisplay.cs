@@ -103,4 +103,10 @@ public class CharacterDisplay
         }
 
     }
+
+    public void ResetFields()
+    {
+        Name.value = string.Empty; 
+        Description.value = string.Empty;
+    }
 }

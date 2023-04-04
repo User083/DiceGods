@@ -100,8 +100,7 @@ public class NewSystem_Manager : MonoBehaviour
     private void Start()
     {
         
-        systemNameField.RegisterCallback<ChangeEvent<string>>((e) => { newSystem.systemName = e.newValue; });
-        
+        systemNameField.RegisterCallback<ChangeEvent<string>>((e) => { newSystem.systemName = e.newValue; });      
         PopulateData();
         mainPanel.hierarchy.Add(systemDisplay);
        
@@ -119,12 +118,12 @@ public class NewSystem_Manager : MonoBehaviour
 
     public void CreateNewSystem()
     {
-        newSystem.SetID();
+        
         newSystemSaveData = DataPersistenceManager.instance.initialiseNewSave(saveName);
         newSystemSaveData.parentSystem = newSystem;
         SetSystemValues();
-        DataPersistenceManager.instance.Save(newSystemSaveData, newSystemSaveData.saveID);
-        
+        newSystem.SetID();
+        DataPersistenceManager.instance.Save(newSystemSaveData, newSystemSaveData.saveID);       
         UIManager.popupWindowManager.Cancel();
         SceneManager.LoadSceneAsync("DG_Tavern");
 

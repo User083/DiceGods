@@ -21,5 +21,7 @@ public class SaveData
     {
         this.fileName = fileName;
         parentSystem = new SystemData("New System");
+        characterList = new List<Character>();
+        itemList = new List<Item>();
     }
 }

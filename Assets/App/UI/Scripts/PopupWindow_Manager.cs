@@ -41,12 +41,14 @@ public class PopupWindow_Manager : MonoBehaviour
     {
         popupWindow.sortingOrder = 0;
         promptText.text = string.Empty;
-       
+        confirmButton.visible = true;
+        cancelButton.text = "Cancel";
     }
 
     public void SetPromptText(string newText)
     {
         promptText.text = newText;
+        
     }
 
     public void RenderTextField(string label, string value)
@@ -54,6 +56,13 @@ public class PopupWindow_Manager : MonoBehaviour
         optionalText.visible = true;
         optionalText.label = label;
         optionalText.value = value;
+    }
+
+    public void SingleButtonPrompt(string prompt)
+    {
+        SetPromptText(prompt);
+        confirmButton.visible = false;
+        cancelButton.text = "OK";
     }
        
 }
