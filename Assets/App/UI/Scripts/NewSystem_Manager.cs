@@ -23,7 +23,7 @@ public class NewSystem_Manager : MonoBehaviour
     private VisualElement mainPanel;
 
     [Header("Core System Details")]
-    public SystemData newSystem = new SystemData("New System");
+    public SystemData newSystem;
     private string saveName;
 
 
@@ -42,7 +42,10 @@ public class NewSystem_Manager : MonoBehaviour
     private Foldout racesFoldout;
 
 
-
+    private void Awake()
+    {
+        newSystem = new SystemData("New System");
+    }
     private void OnEnable()
     {
         var root = newSystemUI.rootVisualElement;
@@ -82,6 +85,10 @@ public class NewSystem_Manager : MonoBehaviour
         resetButton.clickable.clicked += () => ConfirmReset();
         createButton.clickable.clicked += () => ConfirmNewSystem();
 
+        attFoldout.SetEnabled(false);
+        racesFoldout.SetEnabled(false);
+        classFoldout.SetEnabled(false); 
+
         saveNameField.RegisterCallback<ChangeEvent<string>>((e) => { saveName = e.newValue; });
         attributesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { attFoldout.SetEnabled(e.newValue); });
         classesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { classFoldout.SetEnabled(e.newValue); });
@@ -92,6 +99,7 @@ public class NewSystem_Manager : MonoBehaviour
 
     private void Start()
     {
+        
         systemNameField.RegisterCallback<ChangeEvent<string>>((e) => { newSystem.systemName = e.newValue; });
         
         PopulateData();
@@ -111,6 +119,7 @@ public class NewSystem_Manager : MonoBehaviour
 
     public void CreateNewSystem()
     {
+        newSystem.SetID();
         newSystemSaveData = DataPersistenceManager.instance.initialiseNewSave(saveName);
         newSystemSaveData.parentSystem = newSystem;
         SetSystemValues();

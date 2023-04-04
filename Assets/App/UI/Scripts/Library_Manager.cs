@@ -10,15 +10,19 @@ public class Library_Manager : MonoBehaviour
     [SerializeField] private UIDocument libraryUI;
     [SerializeField] private VisualTreeAsset systemDisplayUI;
     [SerializeField] private VisualTreeAsset elementSlotUI;
+    [SerializeField] private VisualTreeAsset charDisplayDoc;
+
     private DataPopulater dataPopulater = new DataPopulater();
     private VisualElement systemDisplay;
+    private VisualElement characterDisplay;
     private Button tavernButton;
     private Button tabButtonSystem;
     private Button tabButtonCharacters;
     private Button tabButtonItems;
     private Label currentTabLabel;
     private VisualElement currentTab;
-    private SystemData currentSystemData = new SystemData("Default");
+    private SystemData currentSystemData;
+    private CharacterDisplay character;
 
     [Header("System UI Properties")]
     private TextField systemName;
@@ -28,12 +32,19 @@ public class Library_Manager : MonoBehaviour
     private Toggle coreStatsToggle;
     private Toggle attributesToggle;
 
+
+    private void Awake()
+    {
+        currentSystemData = new SystemData("Default");
+        systemDisplay = systemDisplayUI.Instantiate();
+        characterDisplay = charDisplayDoc.Instantiate();
+        systemDisplay.style.flexGrow = 1;
+        characterDisplay.style.flexGrow = 1;
+    }
     private void OnEnable()
     {
 
-        systemDisplay = systemDisplayUI.Instantiate();
-        systemDisplay.style.flexGrow = 1;
-
+        character = new CharacterDisplay(characterDisplay, elementSlotUI);
         var root = libraryUI.rootVisualElement;
         
         if (root == null)
@@ -82,12 +93,7 @@ public class Library_Manager : MonoBehaviour
     private void systemTab()
     {
         currentTabLabel.text = "System";
-
-
-        if (currentTab.Contains(systemDisplay))
-        {
-            currentTab.Remove(systemDisplay);
-        }
+        clearTab();
         currentTab.Add(systemDisplay);
         
     }
@@ -95,25 +101,36 @@ public class Library_Manager : MonoBehaviour
     private void charactersTab()
     {
         currentTabLabel.text = "Characters";
-        if (currentTab.Contains(systemDisplay))
-        {
-            currentTab.Remove(systemDisplay);
-        }
+        clearTab();
+        currentTab.Add(characterDisplay);
     }
 
     private void itemsTab()
     {
         currentTabLabel.text = "Items";
-        if(currentTab.Contains(systemDisplay))
+        clearTab();
+       
+    }
+
+    private void clearTab()
+    {
+        if (currentTab.Contains(systemDisplay))
         {
             currentTab.Remove(systemDisplay);
         }
-        
+
+        if (currentTab.Contains(characterDisplay))
+        {
+            currentTab.Remove(characterDisplay);
+        }
+
     }
 
     private void initLibrary()
     {
         currentSystemData = DataPersistenceManager.instance.activeSave.parentSystem;
+        character.SetDisplayData(currentSystemData, true);
+
         levelsToggle.value = currentSystemData.useLevels;
         racesToggle.value = currentSystemData.useRaces;
         classesToggle.value = currentSystemData.useClasses;
@@ -141,10 +158,6 @@ public class Library_Manager : MonoBehaviour
         {
             systemDisplay.Q<Foldout>("ns-foldout-classes").SetEnabled(false);
         }
-        
-        
-        
-
 
     }
 }

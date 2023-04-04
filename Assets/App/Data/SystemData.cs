@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SystemData 
+public class SystemData : DefaultSystemData
 {
     [Header("System Info")]
     public string systemName;
     public string systemID;
-    public DefaultSystemData defaultData = new DefaultSystemData();
 
     [Header("Core Components")]
     public bool useLevels;
@@ -16,7 +15,7 @@ public class SystemData
     public List<CharacterClass> characterClasses;
     public bool useRaces;
     public List<Race> races;
-   
+  
 
     [Header("Attributes & Skills")]
     public bool useCoreStats;
@@ -28,18 +27,36 @@ public class SystemData
     {
         
         this.systemName = systemName;
-        systemID = systemName + "4";
+        systemID = string.Empty;
         setDefaultValues();
     }
 
     public void setDefaultValues()
     {
-       
-        attributes = defaultData.InitAttributes(this);
-        characterClasses = defaultData.InitClasses(this);
-        races = defaultData.InitRaces(this);
+        
+        attributes = InitAttributes(this);
+        characterClasses = InitClasses(this);
+        races = InitRaces(this);
     }
 
+    public void SetID()
+    {
+        if(systemID!= null || systemID != string.Empty)
+        {
+            systemID = generateSystemID(systemName);
+        }
+        else
+        {
+            Debug.LogWarning("System ID already set to: " + systemID);
+        }       
+    }
+    private string generateSystemID(string systemName)
+    {
+        string random = Random.Range(0, 9999).ToString();
+        string systemID = systemName + random;
+
+        return systemID;
+    }
 
 
 }

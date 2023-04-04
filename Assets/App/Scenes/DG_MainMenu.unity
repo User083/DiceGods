@@ -288,6 +288,71 @@ MonoBehaviour:
     saveID: 
     timeStamp: 0
     parentSystem:
+      strength:
+        _name: 
+        _description: 
+        parentSystem: 
+        base_value: 0
+        max_value: 0
+        final_value: 0
+      intelligence:
+        _name: 
+        _description: 
+        parentSystem: 
+        base_value: 0
+        max_value: 0
+        final_value: 0
+      wisdom:
+        _name: 
+        _description: 
+        parentSystem: 
+        base_value: 0
+        max_value: 0
+        final_value: 0
+      dexterity:
+        _name: 
+        _description: 
+        parentSystem: 
+        base_value: 0
+        max_value: 0
+        final_value: 0
+      persuasion:
+        _name: 
+        _description: 
+        parentSystem: 
+        base_value: 0
+        max_value: 0
+        final_value: 0
+      warrior:
+        parentSystem: 
+        _name: 
+        _description: 
+        _classID: 
+      mage:
+        parentSystem: 
+        _name: 
+        _description: 
+        _classID: 
+      rogue:
+        parentSystem: 
+        _name: 
+        _description: 
+        _classID: 
+      human:
+        _parentSystemID: 
+        _name: 
+        _description: 
+        _raceID: 
+      elf:
+        _parentSystemID: 
+        _name: 
+        _description: 
+        _raceID: 
+      dwarf:
+        _parentSystemID: 
+        _name: 
+        _description: 
+        _raceID: 
       systemName: 
       systemID: 
       useLevels: 0
@@ -308,6 +373,71 @@ MonoBehaviour:
       saveID: 
       timeStamp: 0
       parentSystem:
+        strength:
+          _name: 
+          _description: 
+          parentSystem: 
+          base_value: 0
+          max_value: 0
+          final_value: 0
+        intelligence:
+          _name: 
+          _description: 
+          parentSystem: 
+          base_value: 0
+          max_value: 0
+          final_value: 0
+        wisdom:
+          _name: 
+          _description: 
+          parentSystem: 
+          base_value: 0
+          max_value: 0
+          final_value: 0
+        dexterity:
+          _name: 
+          _description: 
+          parentSystem: 
+          base_value: 0
+          max_value: 0
+          final_value: 0
+        persuasion:
+          _name: 
+          _description: 
+          parentSystem: 
+          base_value: 0
+          max_value: 0
+          final_value: 0
+        warrior:
+          parentSystem: 
+          _name: 
+          _description: 
+          _classID: 
+        mage:
+          parentSystem: 
+          _name: 
+          _description: 
+          _classID: 
+        rogue:
+          parentSystem: 
+          _name: 
+          _description: 
+          _classID: 
+        human:
+          _parentSystemID: 
+          _name: 
+          _description: 
+          _raceID: 
+        elf:
+          _parentSystemID: 
+          _name: 
+          _description: 
+          _raceID: 
+        dwarf:
+          _parentSystemID: 
+          _name: 
+          _description: 
+          _raceID: 
         systemName: 
         systemID: 
         useLevels: 0
@@ -322,132 +452,17 @@ MonoBehaviour:
         attMaxLevel: 0
       characterList: []
       itemList: []
---- !u!1 &405272377
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 405272380}
-  - component: {fileID: 405272379}
-  - component: {fileID: 405272378}
-  m_Layer: 5
-  m_Name: SystemCreator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &405272378
+--- !u!114 &405272379 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2768797901427115628, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+  m_PrefabInstance: {fileID: 2768797901559624023}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405272377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 966a78b09c4b0e3439e94c852e2e0db5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UIManager: {fileID: 208716852}
-  newSystemUI: {fileID: 405272379}
-  systemDisplayUI: {fileID: 9197481963319205126, guid: af18eb347a89c8e49a827b0f7a2e521d, type: 3}
-  elementSlotUI: {fileID: 9197481963319205126, guid: e537738b659dbd94db79c07dd6fd7389, type: 3}
-  newSystem:
-    systemName: 
-    systemID: New System4
-    useLevels: 0
-    useClasses: 0
-    characterClasses:
-    - parentSystem: New System4
-      _name: Warrior
-      _description: Strong class with focus on melee
-    - parentSystem: New System4
-      _name: Mage
-      _description: Powerful magic users
-    - parentSystem: New System4
-      _name: Rogue
-      _description: Dexterous and stealthy
-    useRaces: 0
-    races:
-    - parentSystem: New System4
-      _name: Human
-      _description: A balanced race
-    - parentSystem: New System4
-      _name: Elf
-      _description: A lithe and magical race
-    - parentSystem: New System4
-      _name: Dwarf
-      _description: A sturdy, warrior-like race
-    useCoreStats: 0
-    coreStats: []
-    useAttributes: 0
-    attributes:
-    - _name: Strength
-      _description: Measure of a character's raw physical ability
-      parentSystem: New System4
-      base_value: 10
-      max_value: 20
-      final_value: 0
-    - _name: Intelligence
-      _description: Measure of a character's analytical and deductive abilities
-      parentSystem: New System4
-      base_value: 10
-      max_value: 20
-      final_value: 0
-    - _name: Wisdom
-      _description: Measure of a character's willpower and knowledge of the world
-      parentSystem: New System4
-      base_value: 10
-      max_value: 20
-      final_value: 0
-    - _name: Dexterity
-      _description: Measure of a character's agility and aim
-      parentSystem: New System4
-      base_value: 10
-      max_value: 20
-      final_value: 0
-    - _name: Persuasion
-      _description: Measure of a character's ability to persuade others
-      parentSystem: New System4
-      base_value: 10
-      max_value: 20
-      final_value: 0
-    attMaxLevel: 0
---- !u!114 &405272379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405272377}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 8c58ba83361bf924baa46300cc38738e, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 7d515348a90f1d94287ed961eb1657c2, type: 3}
-  m_SortingOrder: 0
---- !u!4 &405272380
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405272377}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &467775454
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +685,69 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fc8319b8d077c24fb590907177d42b6, type: 3}
+--- !u!1001 &2768797901559624023
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2768797901427115627, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768797901427115627, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768797901427115627, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768797901427115627, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768797901427115627, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768797901427115627, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768797901427115627, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768797901427115627, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768797901427115627, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768797901427115627, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768797901427115627, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768797901427115629, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: UIManager
+      value: 
+      objectReference: {fileID: 208716852}
+    - target: {fileID: 2768797901427115630, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: m_Name
+      value: SystemCreator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
 --- !u!1001 &3164028107283858594
 PrefabInstance:
   m_ObjectHideFlags: 0

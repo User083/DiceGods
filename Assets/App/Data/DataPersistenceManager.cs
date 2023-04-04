@@ -12,8 +12,6 @@ public class DataPersistenceManager : MonoBehaviour
     private Dictionary<string, SaveData> existingSaves = new Dictionary<string, SaveData>();
     public SaveData activeSave;
     
-    public RPGSystem SystemManager;
-
     private string saveDirectoryPath = "";
     private string saveFileName = "";
     private string activeSaveID;
@@ -35,9 +33,10 @@ public class DataPersistenceManager : MonoBehaviour
         dataPersistenceObjects = FindAllDataPersistenceObjects();
     }
   
+    //Rare safety check for duplicate IDs still needs implementing
     private string generateSaveID(string fileName)
     {
-        string random = UnityEngine.Random.Range(0, 500).ToString();
+        string random = UnityEngine.Random.Range(0, 9999).ToString();
         string saveID = fileName + random;
 
         return saveID;
