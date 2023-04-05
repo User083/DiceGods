@@ -74,10 +74,6 @@ public class MainMenu_Manager : MonoBehaviour
         UIManager.saveManager.InitialiseSaveList(UIManager.loadMenu.rootVisualElement);
     }
 
-    private void Update()
-    {
-        
-    }
 
     public void OnLoadSystemClicked()
     {

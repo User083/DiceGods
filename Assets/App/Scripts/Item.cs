@@ -14,8 +14,9 @@ public class Item : MonoBehaviour
     public int _level;
     public float _quality;
 
-    public Item(string name, string desc)
+    public Item(SystemData parentSystem, string name, string desc)
     {
+        _ID = generateItemID(name);
         _name = name;
         _description = desc;
         _value = -1;
@@ -23,5 +24,13 @@ public class Item : MonoBehaviour
         _level = -1;
         _quality = -1;
       
+    }
+
+    private string generateItemID(string itemName)
+    {
+        string random = Random.Range(0, 9999).ToString();
+        string itemID = itemName + random;
+
+        return itemID;
     }
 }

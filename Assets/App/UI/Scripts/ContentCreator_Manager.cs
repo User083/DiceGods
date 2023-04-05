@@ -121,16 +121,13 @@ public class ContentCreator_Manager : MonoBehaviour
     {
         if(currentTab == Tab.CHARACTER)
         {
-            SetCharacterValues();
+            SetCharacterValues(activeSave.parentSystem);
 
             if (currentCharacter != null && currentCharacter._ID != string.Empty)
             {
                 activeSave.characterList.Add(currentCharacter);
                 DataPersistenceManager.instance.Save(activeSave, activeSave.saveID);
-                currentCharacter = null;
-                character.ResetFields();
-                currentName = string.Empty;
-                currentDescription = string.Empty;
+                ClearAll();
             }
             else
             {
@@ -142,13 +139,12 @@ public class ContentCreator_Manager : MonoBehaviour
 
         if (currentTab == Tab.ITEM)
         {
+            SetItemValues(activeSave.parentSystem);
             if (currentItem != null && currentItem._ID != string.Empty)
             {
                 activeSave.itemList.Add(currentItem);
                 DataPersistenceManager.instance.Save(activeSave, activeSave.saveID);
-                currentItem = null;
-                currentName = string.Empty;
-                currentDescription = string.Empty;
+                ClearAll();
             }
             else
             {
@@ -162,8 +158,7 @@ public class ContentCreator_Manager : MonoBehaviour
 
     private void CharacterCreator()
     {
-        currentName= string.Empty;
-        currentDescription= string.Empty;
+        ClearAll();
         currentTab = Tab.CHARACTER;
         RemoveExistingPanel();
         ccDisplayPanel.Add(characterDisplay);
@@ -171,10 +166,9 @@ public class ContentCreator_Manager : MonoBehaviour
 
     private void ItemCreator()
     {
-        currentName = string.Empty;
-        currentDescription = string.Empty;
-        RemoveExistingPanel();
+        ClearAll();
         currentTab = Tab.ITEM;
+        RemoveExistingPanel();
         ccDisplayPanel.Add(itemDisplay);
     }
 
@@ -191,15 +185,69 @@ public class ContentCreator_Manager : MonoBehaviour
         }
     }
 
-    private void SetCharacterValues()
+    private void SetCharacterValues(SystemData parentSystem)
     {
         currentName = character.Name.value;
         currentDescription = character.Description.value;
         if(currentName != string.Empty)
         {
-            currentCharacter = new Character(activeSave.parentSystem, currentName, currentDescription);
-        }
-       
+            currentCharacter = new Character(parentSystem, currentName, currentDescription);
+            if(parentSystem.useRaces)
+            {
+                foreach (var race in parentSystem.races)
+                {
+                    if (race._name == character.Race.value)
+                    {
+                        currentCharacter._race = race;
+                    }
+                }
+            }
 
+            if(parentSystem.useClasses)
+            {
+                foreach (var charClass in parentSystem.characterClasses)
+                {
+                    if (charClass._name == character.Class.value)
+                    {
+                        currentCharacter._class = charClass;
+                    }
+                }
+            }
+
+            if (parentSystem.useLevels)
+            {
+                currentCharacter._level = character.Level.value;
+            }
+
+            if (parentSystem.useWeight)
+            {
+                currentCharacter._weight = character.Weight.value;
+            }
+
+            if (parentSystem.charsHaveValue)
+            {
+                currentCharacter._value = character.Value.value;
+            }
+
+        }
+
+    }
+
+    private void SetItemValues(SystemData parentSystem)
+    {
+        currentName = item.Name.value;
+        currentDescription = item.Description.value;
+        if (currentName != string.Empty)
+        {
+            currentItem = new Item(parentSystem, currentName, currentDescription);
+        }
+    }
+    private void ClearAll()
+    {
+        currentName = string.Empty;
+        currentDescription = string.Empty;
+        currentItem = null;
+        currentCharacter = null;
+        ResetFields();
     }
 }

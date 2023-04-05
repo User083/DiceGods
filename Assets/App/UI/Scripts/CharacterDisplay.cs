@@ -10,6 +10,7 @@ public class CharacterDisplay
     public VisualElement root;
     public DataPopulater populater = new DataPopulater();
     private VisualTreeAsset elementSlot;
+    
     [Header ("Data Fields")]
     public TextField Name;
     public TextField Description;
@@ -19,6 +20,11 @@ public class CharacterDisplay
     public DropdownField Race;
     public DropdownField Class;
     public Foldout Attributes;
+
+    [Header("Data")]
+    private Dictionary<string, string> RaceDictionary = new Dictionary<string, string>();
+    private Dictionary<string, string> ClassDictionary = new Dictionary<string, string>();
+
 
     public CharacterDisplay(VisualElement root, VisualTreeAsset attributeElementSlot)
     {
@@ -74,6 +80,24 @@ public class CharacterDisplay
             Attributes.SetEnabled(editable);
         }
 
+        if(!parentSystem.useWeight)
+        {
+            Weight.RemoveFromHierarchy();
+        }
+        else
+        {
+            Weight.SetEnabled(editable);
+        }
+
+        if(!parentSystem.charsHaveValue)
+        {
+            Value.RemoveFromHierarchy();
+        }
+        else
+        {
+            Value.SetEnabled(editable);
+        }
+
         if(!parentSystem.useLevels)
         {
             Level.RemoveFromHierarchy();
@@ -91,6 +115,20 @@ public class CharacterDisplay
         else
         {
             Class.SetEnabled(editable);
+            foreach (var charClass in parentSystem.characterClasses)
+            {
+                ClassDictionary.Add(charClass._classID, charClass._name);
+            }
+
+            if (ClassDictionary.Count > 0)
+            {
+                Class.choices.Clear();
+                foreach (KeyValuePair<string, string> item in ClassDictionary)
+                {
+                    Class.choices.Add(item.Value);
+                }
+                Class.value = Class.choices[0];
+            }
         }
 
         if(!parentSystem.useRaces)
@@ -100,6 +138,21 @@ public class CharacterDisplay
         else
         {
             Race.SetEnabled(editable);
+            foreach(var race in parentSystem.races)
+            {
+                RaceDictionary.Add(race._raceID, race._name);
+            }
+
+            if(RaceDictionary.Count > 0)
+            {
+                Race.choices.Clear();
+                foreach(KeyValuePair<string, string> item in RaceDictionary)
+                {
+                    Race.choices.Add(item.Value);
+
+                }
+                Race.value = Race.choices[0];
+            }
         }
 
     }
@@ -108,5 +161,10 @@ public class CharacterDisplay
     {
         Name.value = string.Empty; 
         Description.value = string.Empty;
+        Race.value = Race.choices[0];
+        Class.value = Class.choices[0];
+        Weight.value = 0;
+        Value.value = 0;
+        Level.value = 0;
     }
 }

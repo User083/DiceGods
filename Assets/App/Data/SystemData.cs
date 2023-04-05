@@ -11,10 +11,14 @@ public class SystemData
 
     [Header("Core Components")]
     public bool useLevels;
+    public bool useWeight;
+    public bool charsHaveValue;
     public bool useClasses;
     public List<CharacterClass> characterClasses;
+    public Dictionary<string, CharacterClass> classesByID;
     public bool useRaces;
     public List<Race> races;
+    public Dictionary <string, Race> racesByID;
   
 
     [Header("Attributes & Skills")]
@@ -27,7 +31,10 @@ public class SystemData
     {
         
         this.systemName = systemName;
+        classesByID = new Dictionary<string, CharacterClass>();
+        racesByID= new Dictionary<string, Race>();
         setDefaultValues();
+        SetupDictionaries();
     }
 
     public void setDefaultValues()
@@ -50,6 +57,18 @@ public class SystemData
         string systemID = systemName + random;
 
         return systemID;
+    }
+
+    public void SetupDictionaries()
+    {
+        foreach(var charClass in characterClasses)
+        {
+            classesByID.Add(charClass._classID, charClass);
+        }
+        foreach(var race in races)
+        {
+            racesByID.Add(race._raceID, race);
+        }
     }
 
 
