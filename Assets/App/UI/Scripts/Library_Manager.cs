@@ -12,7 +12,9 @@ public class Library_Manager : MonoBehaviour
     [SerializeField] private VisualTreeAsset elementSlotUI;
     [SerializeField] private VisualTreeAsset charDisplayDoc;
     [SerializeField] private VisualTreeAsset itemDisplayDoc;
+    [SerializeField] private VisualTreeAsset saveSlotUI;
 
+    [Header("Main")]
     private DataPopulater dataPopulater = new DataPopulater();
     private VisualElement systemDisplay;
     private VisualElement characterDisplay;
@@ -21,11 +23,14 @@ public class Library_Manager : MonoBehaviour
     private Button tabButtonCharacters;
     private Button tabButtonItems;
     private Label currentTabLabel;
+    private ListView characterListView;
+    private ListView itemListView;
     private VisualElement currentTab;
     private SystemData currentSystemData;
     private CharacterDisplay character;
     private VisualElement itemDisplay;
     private ItemDisplay item;
+    private SaveData activeSave;
 
     [Header("System UI Properties")]
     private TextField systemName;
@@ -34,14 +39,18 @@ public class Library_Manager : MonoBehaviour
     private Toggle racesToggle;
     private Toggle coreStatsToggle;
     private Toggle attributesToggle;
+    private Toggle valueToggle;
+    private Toggle weightToggle;
 
 
     private void Awake()
     {
+        activeSave = DataPersistenceManager.instance.activeSave;
         currentSystemData = new SystemData("Default");
         systemDisplay = systemDisplayUI.Instantiate();
         characterDisplay = charDisplayDoc.Instantiate();
         itemDisplay = itemDisplayDoc.Instantiate();
+        characterListView = dataPopulater.PopulateCharacters(activeSave, saveSlotUI);
         systemDisplay.style.flexGrow = 1;
         characterDisplay.style.flexGrow = 1;
     }
@@ -104,6 +113,7 @@ public class Library_Manager : MonoBehaviour
     {
         currentTabLabel.text = "Characters";
         clearTab();
+        currentTab.Add(characterListView);
         currentTab.Add(characterDisplay);
     }
 
@@ -136,7 +146,7 @@ public class Library_Manager : MonoBehaviour
     private void initLibrary()
     {
         currentSystemData = DataPersistenceManager.instance.activeSave.parentSystem;
-        character.SetDisplayData(currentSystemData, true);
+        character.SetDisplayData(currentSystemData, false);
 
         levelsToggle.value = currentSystemData.useLevels;
         racesToggle.value = currentSystemData.useRaces;

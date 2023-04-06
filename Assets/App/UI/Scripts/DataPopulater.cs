@@ -63,4 +63,40 @@ public class DataPopulater
             classI++;
         };
     }
+
+    public ListView PopulateCharacters(SaveData activeSave, VisualTreeAsset saveSlot)
+    {
+        ListView list = new ListView();
+        List<string> characters = new List<string>();
+
+        foreach (var character in activeSave.characterList)
+        {
+            characters.Add(character._name);
+        }
+        
+
+        list.makeItem = () =>
+        {
+            var newSlotEntry = saveSlot.Instantiate();
+
+            var newEntryLogic = new SaveSlot();
+
+            newSlotEntry.userData = newEntryLogic;
+
+            newEntryLogic.SetVisualElement(newSlotEntry);
+
+            return newSlotEntry;
+        };
+
+        
+        list.bindItem = (item, index) =>
+        {
+            (item.userData as SaveSlot).SetSlotData(characters[index]);
+        };
+
+        list.fixedItemHeight = 45;
+        list.itemsSource = characters;
+
+        return list;
+    }
 }

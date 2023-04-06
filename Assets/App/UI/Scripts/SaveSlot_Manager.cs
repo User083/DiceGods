@@ -49,7 +49,7 @@ public class SaveSlot_Manager : MonoBehaviour
             (item.userData as SaveSlot).SetSlotData(saveList[index]);
         };
 
-        saveListView.fixedItemHeight = 45;
+        saveListView.fixedItemHeight = 30;
         saveListView.itemsSource = saveList;
         
     }

@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &174664401053107530
 MonoBehaviour:
@@ -66,3 +66,4 @@ MonoBehaviour:
   elementSlotUI: {fileID: 9197481963319205126, guid: e537738b659dbd94db79c07dd6fd7389, type: 3}
   charDisplayDoc: {fileID: 9197481963319205126, guid: 6c4e9ea3513fde44393e6d6d8ae3966f, type: 3}
   itemDisplayDoc: {fileID: 9197481963319205126, guid: 2179a6c63482bd349b834f71f8f966e8, type: 3}
+  saveSlotUI: {fileID: 9197481963319205126, guid: 8e5be1b98bb9ee14d9a20e2503951f65, type: 3}
