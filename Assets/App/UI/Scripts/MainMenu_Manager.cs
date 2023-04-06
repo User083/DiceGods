@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
 public class MainMenu_Manager : MonoBehaviour
@@ -19,7 +20,8 @@ public class MainMenu_Manager : MonoBehaviour
     private Button mmButton;
     private Button deleteButton;
     private ListView loadList;
-    private string selectedSave = string.Empty;
+    private SaveData selectedSave;
+    
     
 
     [Header("Popup")]
@@ -65,6 +67,7 @@ public class MainMenu_Manager : MonoBehaviour
         
         deleteButton.SetEnabled(false);
         loadSelectedSystem.SetEnabled(false);
+        loadList.onSelectionChange += OnSaveChange;
 
     }
 
@@ -77,14 +80,14 @@ public class MainMenu_Manager : MonoBehaviour
 
     public void OnLoadSystemClicked()
     {
-        if(selectedSave == string.Empty || selectedSave == null)
+        if(selectedSave == null)
         {
             Debug.LogError("No save selected - unable to load.");
             return;
         }
         else
         {
-            DataPersistenceManager.instance.updateActiveSave(selectedSave);
+            DataPersistenceManager.instance.updateActiveSave(selectedSave.saveID);
             
             DisableMenuButtons();
             SceneManager.LoadSceneAsync("DG_Tavern");
@@ -104,11 +107,6 @@ public class MainMenu_Manager : MonoBehaviour
         Application.Quit();
     }
 
-    public void selectLoad()
-    {
-        selectedSave = loadList.selectedItem.ToString();
-       
-    }
 
     private void DisableMenuButtons()
     {
@@ -144,23 +142,28 @@ public class MainMenu_Manager : MonoBehaviour
         UIManager.loadMenu.sortingOrder = 2;
         UIManager.popupWindow.sortingOrder = 0;
         UIManager.systemCreator.sortingOrder = 0;
-        loadList.onSelectionChange += (e => {
-            if (loadList.selectedItem != null)
-            {
-                selectedSave = loadList.selectedItem.ToString();
-                deleteButton.SetEnabled(true);
-                loadSelectedSystem.SetEnabled(true);
-            }
-            else
-            {
-                selectedSave = string.Empty;
-                deleteButton.SetEnabled(false);
-                loadSelectedSystem.SetEnabled(false);
-            }
-        });
+        
+        
 
     }
 
+    public void OnSaveChange(IEnumerable<object> selectedItems)
+    {
+        var currentSave = loadList.selectedItem as SaveData;
+
+        if (currentSave == null)
+        {
+            selectedSave = null;
+            deleteButton.SetEnabled(false);
+            loadSelectedSystem.SetEnabled(false);
+            return;
+        }
+
+        selectedSave = currentSave;
+        deleteButton.SetEnabled(true);
+        loadSelectedSystem.SetEnabled(true);
+        Debug.Log(selectedSave);
+    }
     public void enableSystemMenu()
     {
         UIManager.mainMenu.sortingOrder = 1;
@@ -172,7 +175,7 @@ public class MainMenu_Manager : MonoBehaviour
     public void ConfirmDelete()
     {
         DisableMenuButtons();
-        confirmButton.clickable.clicked += () => DeleteSave(selectedSave);
+        confirmButton.clickable.clicked += () => DeleteSave(selectedSave.saveID);
         UIManager.popupWindowManager.SetPromptText("Are you sure you want to delete this save?");
         UIManager.popupWindow.sortingOrder = 3;
         

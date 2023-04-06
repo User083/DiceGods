@@ -19,12 +19,12 @@ public class SaveSlot_Manager : MonoBehaviour
     }
 
     
-    List<string> saveList;
+    List<SaveData> saveList;
 
     void EnumerateAllSaves()
     {
-        saveList= new List<string>();
-        saveList = DataPersistenceManager.instance.LoadAllSaves().Keys.ToList();
+        saveList= new List<SaveData>();
+        saveList = DataPersistenceManager.instance.LoadAllSaves().Values.ToList();
        
 
     }
@@ -35,7 +35,7 @@ public class SaveSlot_Manager : MonoBehaviour
         {
             var newSlotEntry = saveSlotElement.Instantiate();
 
-            var newEntryLogic = new SaveSlot();
+            var newEntryLogic = new SingleSlot();
 
             newSlotEntry.userData = newEntryLogic;
 
@@ -46,7 +46,7 @@ public class SaveSlot_Manager : MonoBehaviour
 
         saveListView.bindItem = (item, index) =>
         {
-            (item.userData as SaveSlot).SetSlotData(saveList[index]);
+            (item.userData as SingleSlot).SetSaveData(saveList[index]);
         };
 
         saveListView.fixedItemHeight = 30;
@@ -54,12 +54,13 @@ public class SaveSlot_Manager : MonoBehaviour
         
     }
 
-    public void removeSaveFromList(string saveID)
+    public void removeSaveFromList(SaveData save)
     {
-        if(saveID != null || saveID != string.Empty)
+        if(save != null)
         {
-            saveList.Remove(saveID);
-            saveListView.Rebuild();
+                    saveList.Remove(save);
+                    saveListView.Rebuild();
+
         }
         
     }

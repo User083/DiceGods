@@ -64,22 +64,25 @@ public class DataPopulater
         };
     }
 
-    public ListView PopulateCharacters(SaveData activeSave, VisualTreeAsset saveSlot)
+    List<Character> allCharacters;
+    public void EnumerateCharacters(SaveData activeSave)
+    {
+         allCharacters = new List<Character>();
+        allCharacters.AddRange(activeSave.characterList);
+
+    }
+
+    public ListView PopulateCharacters(SaveData activeSave, VisualTreeAsset librarySlot)
     {
         ListView list = new ListView();
-        List<string> characters = new List<string>();
-
-        foreach (var character in activeSave.characterList)
-        {
-            characters.Add(character._name);
-        }
         
+       
 
         list.makeItem = () =>
         {
-            var newSlotEntry = saveSlot.Instantiate();
+            var newSlotEntry = librarySlot.Instantiate();
 
-            var newEntryLogic = new SaveSlot();
+            var newEntryLogic = new SingleSlot();
 
             newSlotEntry.userData = newEntryLogic;
 
@@ -91,11 +94,11 @@ public class DataPopulater
         
         list.bindItem = (item, index) =>
         {
-            (item.userData as SaveSlot).SetSlotData(characters[index]);
+            (item.userData as SingleSlot).SetCharData(allCharacters[index]);
         };
 
         list.fixedItemHeight = 45;
-        list.itemsSource = characters;
+        list.itemsSource = allCharacters;
 
         return list;
     }

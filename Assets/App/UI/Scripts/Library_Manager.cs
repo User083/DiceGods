@@ -12,7 +12,7 @@ public class Library_Manager : MonoBehaviour
     [SerializeField] private VisualTreeAsset elementSlotUI;
     [SerializeField] private VisualTreeAsset charDisplayDoc;
     [SerializeField] private VisualTreeAsset itemDisplayDoc;
-    [SerializeField] private VisualTreeAsset saveSlotUI;
+    [SerializeField] private VisualTreeAsset librarySlotUI;
 
     [Header("Main")]
     private DataPopulater dataPopulater = new DataPopulater();
@@ -50,7 +50,8 @@ public class Library_Manager : MonoBehaviour
         systemDisplay = systemDisplayUI.Instantiate();
         characterDisplay = charDisplayDoc.Instantiate();
         itemDisplay = itemDisplayDoc.Instantiate();
-        characterListView = dataPopulater.PopulateCharacters(activeSave, saveSlotUI);
+        dataPopulater.EnumerateCharacters(activeSave);
+        characterListView = dataPopulater.PopulateCharacters(activeSave, librarySlotUI);
         systemDisplay.style.flexGrow = 1;
         characterDisplay.style.flexGrow = 1;
     }
@@ -88,6 +89,7 @@ public class Library_Manager : MonoBehaviour
         tabButtonSystem.clickable.clicked += () => systemTab();
         tabButtonCharacters.clickable.clicked += () => charactersTab();
         tabButtonItems.clickable.clicked += () => itemsTab();
+        characterListView.onSelectionChange += OnCharSelected;
    
     }
 
@@ -140,6 +142,19 @@ public class Library_Manager : MonoBehaviour
         {
             currentTab.Remove(itemDisplay);
         }
+    }
+
+    private void OnCharSelected(IEnumerable<object> selectedItems)
+    {
+        var selectedChar = characterListView.selectedItem as Character;
+        if(selectedChar == null)
+        {
+            character.ResetFields();
+            return;
+        }
+
+        Debug.Log("Testing");
+        //character.DisplayCharacter(selectedChar);
 
     }
 
@@ -148,6 +163,7 @@ public class Library_Manager : MonoBehaviour
         currentSystemData = DataPersistenceManager.instance.activeSave.parentSystem;
         character.SetDisplayData(currentSystemData, false);
 
+        //Needs to be taken out into elementslot script
         levelsToggle.value = currentSystemData.useLevels;
         racesToggle.value = currentSystemData.useRaces;
         classesToggle.value = currentSystemData.useClasses;
