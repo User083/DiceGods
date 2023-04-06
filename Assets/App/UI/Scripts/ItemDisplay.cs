@@ -29,4 +29,72 @@ public class ItemDisplay
 
     }
 
+    public void DisplayItem(Item item)
+    {
+        Name.value = item._name;
+        Description.value = item._description;
+        if (Value != null)
+        {
+            Value.value = item._value;
+        }
+        if (Weight != null)
+        {
+            Weight.value = item._weight;
+        }
+        if (Level != null)
+        {
+            Level.value = item._level;
+        }
+    }
+
+    public void SetDisplayData(SystemData parentSystem, bool editable)
+    {
+        if (parentSystem == null)
+        {
+            Debug.LogError("No parent system found - characters can't exist outside a system. Have you loaded a save?");
+        }
+        Name.SetEnabled(editable);
+        Description.SetEnabled(editable);
+        Value.SetEnabled(editable);
+        Weight.SetEnabled(editable);
+
+        if (!parentSystem.useWeight)
+        {
+            Weight.RemoveFromHierarchy();
+        }
+        else
+        {
+            Weight.SetEnabled(editable);
+        }
+
+        if (!parentSystem.charsHaveValue)
+        {
+            Value.RemoveFromHierarchy();
+        }
+        else
+        {
+            Value.SetEnabled(editable);
+        }
+
+        if (!parentSystem.useLevels)
+        {
+            Level.RemoveFromHierarchy();
+        }
+        else
+        {
+            Level.highValue = parentSystem.attMaxLevel;
+            Level.SetEnabled(editable);
+        }
+
+    }
+
+    public void ResetFields()
+    {
+        Name.value = string.Empty;
+        Description.value = string.Empty;
+        Weight.value = 0;
+        Value.value = 0;
+        Level.value = 0;
+    }
+
 }

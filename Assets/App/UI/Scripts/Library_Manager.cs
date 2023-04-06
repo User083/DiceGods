@@ -12,7 +12,7 @@ public class Library_Manager : MonoBehaviour
     [SerializeField] private VisualTreeAsset elementSlotUI;
     [SerializeField] private VisualTreeAsset charDisplayDoc;
     [SerializeField] private VisualTreeAsset itemDisplayDoc;
-    [SerializeField] private VisualTreeAsset librarySlotUI;
+    [SerializeField] private VisualTreeAsset singleSlotUI;
 
     [Header("Main")]
     private DataPopulater dataPopulater = new DataPopulater();
@@ -51,9 +51,12 @@ public class Library_Manager : MonoBehaviour
         characterDisplay = charDisplayDoc.Instantiate();
         itemDisplay = itemDisplayDoc.Instantiate();
         dataPopulater.EnumerateCharacters(activeSave);
-        characterListView = dataPopulater.PopulateCharacters(activeSave, librarySlotUI);
+        dataPopulater.EnumerateItems(activeSave);
+        characterListView = dataPopulater.PopulateCharacters(singleSlotUI);
+        itemListView = dataPopulater.PopulateItems(singleSlotUI);
         systemDisplay.style.flexGrow = 1;
         characterDisplay.style.flexGrow = 1;
+        itemDisplay.style.flexGrow = 1;
     }
     private void OnEnable()
     {
@@ -90,7 +93,9 @@ public class Library_Manager : MonoBehaviour
         tabButtonCharacters.clickable.clicked += () => charactersTab();
         tabButtonItems.clickable.clicked += () => itemsTab();
         characterListView.onSelectionChange += OnCharSelected;
-   
+        itemListView.onSelectionChange += OnItemSelected;
+
+
     }
 
     private void Start()
@@ -123,6 +128,7 @@ public class Library_Manager : MonoBehaviour
     {
         currentTabLabel.text = "Items";
         clearTab();
+        currentTab.Add(itemListView);
         currentTab.Add(itemDisplay);
     }
 
@@ -157,10 +163,23 @@ public class Library_Manager : MonoBehaviour
 
     }
 
+    private void OnItemSelected(IEnumerable<object> selectedItems)
+    {
+        var selectedItem = itemListView.selectedItem as Item;
+        if (selectedItem == null)
+        {
+            character.ResetFields();
+            return;
+        }
+
+        item.DisplayItem(selectedItem);
+    }
+
     private void initLibrary()
     {
         currentSystemData = DataPersistenceManager.instance.activeSave.parentSystem;
         character.SetDisplayData(currentSystemData, false);
+        item.SetDisplayData(currentSystemData, false);
 
         //Needs to be taken out into elementslot script
         levelsToggle.value = currentSystemData.useLevels;

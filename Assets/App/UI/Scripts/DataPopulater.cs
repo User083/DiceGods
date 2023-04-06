@@ -65,6 +65,7 @@ public class DataPopulater
     }
 
     List<Character> allCharacters;
+    List<Item> allItems;
     public void EnumerateCharacters(SaveData activeSave)
     {
          allCharacters = new List<Character>();
@@ -72,15 +73,20 @@ public class DataPopulater
 
     }
 
-    public ListView PopulateCharacters(SaveData activeSave, VisualTreeAsset librarySlot)
+    public void EnumerateItems(SaveData activeSave)
+    {
+        allItems = new List<Item>();
+        allItems.AddRange(activeSave.itemList);
+
+    }
+
+    public ListView PopulateCharacters(VisualTreeAsset singleSlot)
     {
         ListView list = new ListView();
-        
-       
 
         list.makeItem = () =>
         {
-            var newSlotEntry = librarySlot.Instantiate();
+            var newSlotEntry = singleSlot.Instantiate();
 
             var newEntryLogic = new SingleSlot();
 
@@ -99,6 +105,35 @@ public class DataPopulater
 
         list.fixedItemHeight = 45;
         list.itemsSource = allCharacters;
+
+        return list;
+    }
+
+    public ListView PopulateItems(VisualTreeAsset singleSlot)
+    {
+        ListView list = new ListView();
+
+        list.makeItem = () =>
+        {
+            var newSlotEntry = singleSlot.Instantiate();
+
+            var newEntryLogic = new SingleSlot();
+
+            newSlotEntry.userData = newEntryLogic;
+
+            newEntryLogic.SetVisualElement(newSlotEntry);
+
+            return newSlotEntry;
+        };
+
+
+        list.bindItem = (item, index) =>
+        {
+            (item.userData as SingleSlot).SetItemData(allItems[index]);
+        };
+
+        list.fixedItemHeight = 45;
+        list.itemsSource = allItems;
 
         return list;
     }

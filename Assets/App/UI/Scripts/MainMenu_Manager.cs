@@ -21,8 +21,6 @@ public class MainMenu_Manager : MonoBehaviour
     private Button deleteButton;
     private ListView loadList;
     private SaveData selectedSave;
-    
-    
 
     [Header("Popup")]
     private Button confirmButton;
@@ -40,10 +38,6 @@ public class MainMenu_Manager : MonoBehaviour
         {
             Debug.Log("No root element found");
         }
-
-        
-
-        
 
         confirmButton = popup_root.Q<Button>("popup-button-confirm");
         
@@ -142,9 +136,6 @@ public class MainMenu_Manager : MonoBehaviour
         UIManager.loadMenu.sortingOrder = 2;
         UIManager.popupWindow.sortingOrder = 0;
         UIManager.systemCreator.sortingOrder = 0;
-        
-        
-
     }
 
     public void OnSaveChange(IEnumerable<object> selectedItems)
@@ -178,13 +169,11 @@ public class MainMenu_Manager : MonoBehaviour
         confirmButton.clickable.clicked += () => DeleteSave(selectedSave.saveID);
         UIManager.popupWindowManager.SetPromptText("Are you sure you want to delete this save?");
         UIManager.popupWindow.sortingOrder = 3;
-        
 
     }
 
     private void ConfirmQuit()
     {
-       
         confirmButton.clickable.clicked += () => OnQuitClicked();
         UIManager.popupWindowManager.SetPromptText("Are you sure you want to quit to desktop?");
         UIManager.popupWindow.sortingOrder = 3;
