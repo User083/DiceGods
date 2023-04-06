@@ -4,7 +4,7 @@ using UnityEngine;
 
 [System.Serializable]
 
-public class Item : MonoBehaviour
+public class Item 
 {
     public string _ID;
     public string _name;

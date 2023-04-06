@@ -114,6 +114,7 @@ public class ContentCreator_Manager : MonoBehaviour
     public void ResetFields()
     {
         character.ResetFields();
+        item.ResetFields();
         popupWindowManager.Cancel();
     }
 
@@ -240,6 +241,21 @@ public class ContentCreator_Manager : MonoBehaviour
         if (currentName != string.Empty)
         {
             currentItem = new Item(parentSystem, currentName, currentDescription);
+            
+            if (parentSystem.useLevels)
+            {
+                currentItem._level = item.Level.value;
+            }
+
+            if (parentSystem.useWeight)
+            {
+                currentItem._weight = item.Weight.value;
+            }
+
+            if (parentSystem.charsHaveValue)
+            {
+                currentItem._value = item.Value.value;
+            }
         }
     }
     private void ClearAll()

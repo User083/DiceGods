@@ -141,11 +141,13 @@ public class Library_Manager : MonoBehaviour
 
         if (currentTab.Contains(characterDisplay))
         {
+            currentTab.Remove(characterListView);
             currentTab.Remove(characterDisplay);
         }
 
         if (currentTab.Contains(itemDisplay))
         {
+            currentTab.Remove(itemListView);
             currentTab.Remove(itemDisplay);
         }
     }
@@ -168,7 +170,7 @@ public class Library_Manager : MonoBehaviour
         var selectedItem = itemListView.selectedItem as Item;
         if (selectedItem == null)
         {
-            character.ResetFields();
+            item.ResetFields();
             return;
         }
 
