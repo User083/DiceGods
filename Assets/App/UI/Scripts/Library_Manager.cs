@@ -153,8 +153,7 @@ public class Library_Manager : MonoBehaviour
             return;
         }
 
-        Debug.Log("Testing");
-        //character.DisplayCharacter(selectedChar);
+       character.DisplayCharacter(selectedChar);
 
     }
 

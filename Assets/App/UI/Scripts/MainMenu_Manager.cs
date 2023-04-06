@@ -162,7 +162,7 @@ public class MainMenu_Manager : MonoBehaviour
         selectedSave = currentSave;
         deleteButton.SetEnabled(true);
         loadSelectedSystem.SetEnabled(true);
-        Debug.Log(selectedSave);
+        
     }
     public void enableSystemMenu()
     {
