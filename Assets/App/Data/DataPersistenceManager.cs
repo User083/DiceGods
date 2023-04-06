@@ -34,18 +34,19 @@ public class DataPersistenceManager : MonoBehaviour
     }
   
     //Rare safety check for duplicate IDs still needs implementing
-    private string generateSaveID(string fileName)
+    public string generateUniqueID(string name)
     {
-        string random = UnityEngine.Random.Range(0, 9999).ToString();
-        string saveID = fileName + random;
+        string nameID = name.Replace(" ", "");
+        string random = UnityEngine.Random.Range(0, 99999).ToString();
+        string ID = nameID + random;
 
-        return saveID;
+        return ID;
     }
 
     public SaveData initialiseNewSave(string fileName)
     {       
         SaveData newSave = new SaveData(fileName);     
-        newSave.saveID = generateSaveID(fileName);
+        newSave.saveID = generateUniqueID(fileName);
         saveFileName = fileName;
         Save(newSave, newSave.saveID);
         activeSave = newSave;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -36,6 +37,8 @@ public class NewSystem_Manager : MonoBehaviour
     private Toggle racesToggle;
     private Toggle coreStatsToggle;
     private Toggle attributesToggle;
+    private Toggle charsHaveValueToggle;
+    private Toggle weightToggle;
     //Foldouts
     private Foldout attFoldout;
     private Foldout classFoldout;
@@ -100,13 +103,11 @@ public class NewSystem_Manager : MonoBehaviour
     private void Start()
     {
         
-        systemNameField.RegisterCallback<ChangeEvent<string>>((e) => { newSystem.systemName = e.newValue; });      
+             
         PopulateData();
         mainPanel.hierarchy.Add(systemDisplay);
        
     }
-    
-
 
     //User interface handling
 
@@ -119,13 +120,32 @@ public class NewSystem_Manager : MonoBehaviour
     public void CreateNewSystem()
     {
         
-        newSystemSaveData = DataPersistenceManager.instance.initialiseNewSave(saveName);
-        newSystemSaveData.parentSystem = newSystem;
-        SetSystemValues();
-        newSystem.SetID();
-        DataPersistenceManager.instance.Save(newSystemSaveData, newSystemSaveData.saveID);       
-        UIManager.popupWindowManager.Cancel();
-        SceneManager.LoadSceneAsync("DG_Tavern");
+        if(newSystem.systemName != string.Empty)
+        {
+            SetSystemValues();
+            newSystem.SetID();
+            
+            newSystem.UpdateIDs();
+            if (newSystem.systemID != string.Empty)
+            {
+                newSystemSaveData = DataPersistenceManager.instance.initialiseNewSave(saveName); ;
+                newSystemSaveData.parentSystem = newSystem;
+                DataPersistenceManager.instance.Save(newSystemSaveData, newSystemSaveData.saveID);
+                UIManager.popupWindowManager.Cancel();
+                SceneManager.LoadSceneAsync("DG_Tavern");
+            }
+            else
+            {
+                Debug.Log("System ID not generated");
+            }
+
+        }
+        else
+        {
+            UIManager.popupWindowManager.SingleButtonPrompt("Please fill in the required fields.");
+            UIManager.popupWindow.sortingOrder = 3;
+            confirmButton.clickable.clicked += () => UIManager.popupWindowManager.Cancel();
+        }
 
     }
 
@@ -163,11 +183,13 @@ public class NewSystem_Manager : MonoBehaviour
 
     private void SetSystemValues()
     {
+        newSystem.systemName = systemNameField.value;
         newSystem.useLevels = levelsToggle.value;
         newSystem.useClasses = classesToggle.value;
         newSystem.useRaces = racesToggle.value;
         //newSystem.useCoreStats = coreStatsToggle.value;
         newSystem.useAttributes = attributesToggle.value;
+
         
     }
 
@@ -177,37 +199,5 @@ public class NewSystem_Manager : MonoBehaviour
         dataPopulater.PopulateRaces(newSystem, elementSlotUI, racesFoldout);
         dataPopulater.PopulateAttributes(newSystem, elementSlotUI, attFoldout);
     }
-
-
-
-
-    //Data handling
-    //void IDataPersistence.LoadData(SaveData data)
-    //{
-    //    this.newSystem.systemName = data.parentSystem.systemName;
-    //    this.useLevels = data.parentSystem.useLevels;
-    //    this.useClasses = data.parentSystem.useClasses;
-    //    this.characterClasses = data.parentSystem.characterClasses;
-    //    this.useRaces = data.parentSystem.useRaces;
-    //    this.races = data.parentSystem.races;
-    //    this.useCoreStats = data.parentSystem.useCoreStats;
-    //    this.coreStats = data.parentSystem.coreStats;
-    //    this.useAttributes = data.parentSystem.useAttributes;
-    //    this.atrributes = data.parentSystem.atrributes;
-    //}
-
-    //void IDataPersistence.SaveData(SaveData data)
-    //{
-    //    data.parentSystem.systemName = this.systemName;
-    //    data.parentSystem.useLevels = this.useLevels;
-    //    data.parentSystem.useClasses = this.useClasses;
-    //    data.parentSystem.characterClasses = this.characterClasses;
-    //    data.parentSystem.useRaces = this.useRaces;
-    //    data.parentSystem.races = this.races;
-    //    data.parentSystem.useCoreStats = this.useCoreStats;
-    //    data.parentSystem.coreStats = this.coreStats;
-    //    data.parentSystem.useAttributes = this.useAttributes;
-    //    data.parentSystem.atrributes = this.atrributes;
-    //}
 
 }

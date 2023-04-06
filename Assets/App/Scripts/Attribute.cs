@@ -7,7 +7,7 @@ public class Attribute : Abstract_Parent
 {
 
    
-    public string parentSystem;
+    public string _parentSystemID;
     public int base_value;
     public int max_value;
     public int final_value;
@@ -16,7 +16,7 @@ public class Attribute : Abstract_Parent
     public Attribute(SystemData parentSystem, string name, string desc, int defVal)
     {
         
-        this.parentSystem = parentSystem.systemID; 
+        _parentSystemID = parentSystem.systemID; 
         _name = name;
         _description = desc;
         max_value = 20;

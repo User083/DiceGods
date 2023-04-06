@@ -48,17 +48,9 @@ public class SystemData
     public void SetID()
     {
 
-        systemID = generateSystemID(systemName);
-     
-    }
-    private string generateSystemID(string systemName)
-    {
-        string random = Random.Range(0, 9999).ToString();
-        string systemID = systemName + random;
+        systemID = DataPersistenceManager.instance.generateUniqueID(systemName);
 
-        return systemID;
     }
-
     public void SetupDictionaries()
     {
         foreach(var charClass in characterClasses)
@@ -71,5 +63,22 @@ public class SystemData
         }
     }
 
+    public void UpdateIDs()
+    {
+        foreach(var att in attributes)
+        {
+            att._parentSystemID = systemID;
+        }
 
+        foreach (var charClass in characterClasses)
+        {
+            charClass._parentSystemID = systemID;
+        }
+
+        foreach (var race in races)
+        {
+            race._parentSystemID = systemID;
+        }
+
+    }
 }
