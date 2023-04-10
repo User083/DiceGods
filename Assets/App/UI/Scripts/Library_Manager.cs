@@ -30,6 +30,7 @@ public class Library_Manager : MonoBehaviour
     private CharacterDisplay character;
     private VisualElement itemDisplay;
     private ItemDisplay item;
+    private SystemDisplay system;
     private SaveData activeSave;
 
     [Header("System UI Properties")]
@@ -63,6 +64,7 @@ public class Library_Manager : MonoBehaviour
 
         character = new CharacterDisplay(characterDisplay, elementSlotUI);
         item = new ItemDisplay(itemDisplay, elementSlotUI);
+        system = new SystemDisplay(systemDisplay, elementSlotUI);
         var root = libraryUI.rootVisualElement;
         
         if (root == null)
@@ -183,21 +185,8 @@ public class Library_Manager : MonoBehaviour
         currentSystemData = DataPersistenceManager.instance.activeSave.parentSystem;
         character.SetDisplayData(currentSystemData, false);
         item.SetDisplayData(currentSystemData, false);
-
-        //Needs to be taken out into elementslot script
-        levelsToggle.value = currentSystemData.useLevels;
-        racesToggle.value = currentSystemData.useRaces;
-        classesToggle.value = currentSystemData.useClasses;
-        attributesToggle.value = currentSystemData.useAttributes;
-        systemName.value = currentSystemData.systemName;
-        systemName.SetEnabled(false);
-        levelsToggle.SetEnabled(false);
-        racesToggle.SetEnabled(false);
-        classesToggle.SetEnabled(false);
-        attributesToggle.SetEnabled(false);
-        dataPopulater.PopulateAttributes(currentSystemData, elementSlotUI, systemDisplay.Q<Foldout>("ns-foldout-att"));
-        dataPopulater.PopulateRaces(currentSystemData, elementSlotUI, systemDisplay.Q<Foldout>("ns-foldout-races"));
-        dataPopulater.PopulateClasses(currentSystemData, elementSlotUI, systemDisplay.Q<Foldout>("ns-foldout-classes"));
+        system.SetDisplayData(currentSystemData, false);
+        system.PopulateSystemData(currentSystemData);
         if(!currentSystemData.useAttributes)
         {
             systemDisplay.Q<Foldout>("ns-foldout-att").SetEnabled(false);

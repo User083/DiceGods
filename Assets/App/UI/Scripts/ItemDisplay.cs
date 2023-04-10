@@ -53,10 +53,8 @@ public class ItemDisplay
         {
             Debug.LogError("No parent system found - characters can't exist outside a system. Have you loaded a save?");
         }
-        Name.SetEnabled(editable);
-        Description.SetEnabled(editable);
-        Value.SetEnabled(editable);
-        Weight.SetEnabled(editable);
+        Name.isReadOnly = !editable;
+        Description.isReadOnly = !editable;
 
         if (!parentSystem.useWeight)
         {
@@ -64,7 +62,7 @@ public class ItemDisplay
         }
         else
         {
-            Weight.SetEnabled(editable);
+            Weight.isReadOnly = !editable;
         }
 
         if (!parentSystem.charsHaveValue)
@@ -73,7 +71,7 @@ public class ItemDisplay
         }
         else
         {
-            Value.SetEnabled(editable);
+            Value.isReadOnly = !editable;
         }
 
         if (!parentSystem.useLevels)

@@ -32,6 +32,8 @@ public class SystemDisplay
     {
         this.root = root;
         elementSlot = attributeElementSlot;
+
+        systemNameField = root.Q<TextField>("ns-textfield-systemname");
         //Toggles
         levelsToggle = root.Q<Toggle>("ns-toggle-levels");
         classesToggle = root.Q<Toggle>("ns-toggle-classes");
@@ -46,6 +48,15 @@ public class SystemDisplay
         classFoldout = root.Q<Foldout>("ns-foldout-classes");
     }
 
+    public void PopulateSystemData(SystemData currentSystemData)
+    {
+        levelsToggle.value = currentSystemData.useLevels;
+        racesToggle.value = currentSystemData.useRaces;
+        classesToggle.value = currentSystemData.useClasses;
+        attributesToggle.value = currentSystemData.useAttributes;
+        systemNameField.value = currentSystemData.systemName;
+    }
+
     public void SetDisplayData(SystemData parentSystem, bool editable)
     {
         
@@ -58,6 +69,16 @@ public class SystemDisplay
     
         if(editable)
         {
+
+            attFoldout.SetEnabled(false);
+            classFoldout.SetEnabled(false);
+            racesFoldout.SetEnabled(false);
+
+
+        }
+        else
+        {
+            systemNameField.isReadOnly= true;
             levelsToggle.SetEnabled(editable);
             classesToggle.SetEnabled(editable);
             racesToggle.SetEnabled(editable);
@@ -65,15 +86,12 @@ public class SystemDisplay
             attributesToggle.SetEnabled(editable);
             charsHaveValueToggle.SetEnabled(editable);
             weightToggle.SetEnabled(editable);
-            attFoldout.SetEnabled(false);
-            classFoldout.SetEnabled(false);
-            racesFoldout.SetEnabled(false);
-
-            populater.PopulateAttributes(parentSystem, elementSlot, attFoldout);
-            populater.PopulateRaces(parentSystem, elementSlot, racesFoldout);
-            populater.PopulateClasses(parentSystem, elementSlot, classFoldout);
         }
-        
+
+        populater.PopulateAttributes(parentSystem, elementSlot, attFoldout);
+        populater.PopulateRaces(parentSystem, elementSlot, racesFoldout);
+        populater.PopulateClasses(parentSystem, elementSlot, classFoldout);
+
     }
 
     public void ResetFields()

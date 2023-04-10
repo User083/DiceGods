@@ -65,10 +65,10 @@ public class CharacterDisplay
         {
             Debug.LogError("No parent system found - characters can't exist outside a system. Have you loaded a save?");
         }
-        Name.SetEnabled(editable);
-        Description.SetEnabled(editable);
-        Value.SetEnabled(editable);
-        Weight.SetEnabled(editable);
+        Name.isReadOnly = !editable;
+        Description.isReadOnly = !editable;
+        Value.isReadOnly = !editable;
+        Weight.isReadOnly = !editable;
         
         if(!parentSystem.useAttributes)
         {
@@ -86,7 +86,7 @@ public class CharacterDisplay
         }
         else
         {
-            Weight.SetEnabled(editable);
+            Weight.isReadOnly = !editable;
         }
 
         if(!parentSystem.charsHaveValue)

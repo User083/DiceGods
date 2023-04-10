@@ -31,20 +31,6 @@ public class NewSystem_Manager : MonoBehaviour
 
     [Header("Core System Details UI Elements")]
     private TextField saveNameField;
-    private TextField systemNameField;
-    //Toggles
-    private Toggle levelsToggle;
-    private Toggle classesToggle;
-    private Toggle racesToggle;
-    private Toggle coreStatsToggle;
-    private Toggle attributesToggle;
-    private Toggle charsHaveValueToggle;
-    private Toggle weightToggle;
-    //Foldouts
-    private Foldout attFoldout;
-    private Foldout classFoldout;
-    private Foldout racesFoldout;
-
 
     private void Awake()
     {
@@ -72,7 +58,7 @@ public class NewSystem_Manager : MonoBehaviour
         createButton = root.Q<Button>("ns-button-create");
         resetButton = root.Q<Button>("ns-button-reset");
         mainMenu = root.Q<Button>("ns-button-mm");
-        systemNameField = systemDisplay.Q<TextField>("ns-textfield-systemname");
+
 
         //Button bindings
         mainMenu.clickable.clicked += () => ConfirmCancel();

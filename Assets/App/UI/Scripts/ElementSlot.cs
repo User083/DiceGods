@@ -65,5 +65,10 @@ public class ElementSlot
 
     }
 
+    public string GetID()
+    {
+        return slotID;
+    }
+
     
 }
