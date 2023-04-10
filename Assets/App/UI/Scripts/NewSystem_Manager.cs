@@ -15,6 +15,7 @@ public class NewSystem_Manager : MonoBehaviour
     [SerializeField] private VisualTreeAsset systemDisplayUI;
     [SerializeField] private VisualTreeAsset elementSlotUI;
     private DataPopulater dataPopulater = new DataPopulater();
+    private SystemDisplay system;
     private VisualElement systemDisplay;
     private SaveData newSystemSaveData;   
     private Button createButton;
@@ -53,9 +54,11 @@ public class NewSystem_Manager : MonoBehaviour
     {
         var root = newSystemUI.rootVisualElement;
         var popupRoot = UIManager.popupWindow.rootVisualElement;
+        
         mainPanel = root.Q<VisualElement>("ns-panel-main");
         systemDisplay = systemDisplayUI.Instantiate();
         systemDisplay.style.flexGrow = 1;
+        system = new SystemDisplay(systemDisplay, elementSlotUI);
         if (root == null)
         {
             Debug.Log("No root element found");
@@ -65,18 +68,6 @@ public class NewSystem_Manager : MonoBehaviour
         confirmButton = popupRoot.Q<Button>("popup-button-confirm");
         saveNameField = popupRoot.Q<TextField>("popup-textfield-optional");
         
-        //Toggles
-        levelsToggle = systemDisplay.Q<Toggle>("ns-toggle-levels");
-        classesToggle = systemDisplay.Q<Toggle>("ns-toggle-classes");
-        racesToggle = systemDisplay.Q<Toggle>("ns-toggle-races");
-        //coreStatsToggle = root.Q<Toggle>("ns-toggle-core-stats");
-        attributesToggle = systemDisplay.Q<Toggle>("ns-toggle-attributes");
-
-        //Foldouts
-        attFoldout = systemDisplay.Q<Foldout>("ns-foldout-att");
-        racesFoldout = systemDisplay.Q<Foldout>("ns-foldout-races");
-        classFoldout = systemDisplay.Q<Foldout>("ns-foldout-classes");
-
         //buttons
         createButton = root.Q<Button>("ns-button-create");
         resetButton = root.Q<Button>("ns-button-reset");
@@ -88,25 +79,19 @@ public class NewSystem_Manager : MonoBehaviour
         resetButton.clickable.clicked += () => ConfirmReset();
         createButton.clickable.clicked += () => ConfirmNewSystem();
 
-        attFoldout.SetEnabled(false);
-        racesFoldout.SetEnabled(false);
-        classFoldout.SetEnabled(false); 
-
         saveNameField.RegisterCallback<ChangeEvent<string>>((e) => { saveName = e.newValue; });
-        attributesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { attFoldout.SetEnabled(e.newValue); });
-        classesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { classFoldout.SetEnabled(e.newValue); });
-        racesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { racesFoldout.SetEnabled(e.newValue); });
-
 
     }
 
     private void Start()
     {
-        
-             
+      
         PopulateData();
         mainPanel.hierarchy.Add(systemDisplay);
-       
+        system.attributesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.attFoldout.SetEnabled(e.newValue); });
+        system.classesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.classFoldout.SetEnabled(e.newValue); });
+        system.racesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.racesFoldout.SetEnabled(e.newValue); });
+
     }
 
     //User interface handling
@@ -151,7 +136,7 @@ public class NewSystem_Manager : MonoBehaviour
 
     private void resetSystemFields()
     {
-        
+        system.ResetFields();
         UIManager.popupWindowManager.Cancel();
     }
 
@@ -183,21 +168,20 @@ public class NewSystem_Manager : MonoBehaviour
 
     private void SetSystemValues()
     {
-        newSystem.systemName = systemNameField.value;
-        newSystem.useLevels = levelsToggle.value;
-        newSystem.useClasses = classesToggle.value;
-        newSystem.useRaces = racesToggle.value;
-        //newSystem.useCoreStats = coreStatsToggle.value;
-        newSystem.useAttributes = attributesToggle.value;
+        newSystem.systemName = system.systemNameField.value;
+        newSystem.useLevels = system.levelsToggle.value;
+        newSystem.useClasses = system.classesToggle.value;
+        newSystem.useRaces = system.racesToggle.value;
+        newSystem.useCoreStats = system.coreStatsToggle.value;
+        newSystem.useAttributes = system.attributesToggle.value;
 
         
     }
 
     public void PopulateData()
     {
-        dataPopulater.PopulateClasses(newSystem, elementSlotUI, classFoldout);
-        dataPopulater.PopulateRaces(newSystem, elementSlotUI, racesFoldout);
-        dataPopulater.PopulateAttributes(newSystem, elementSlotUI, attFoldout);
+        system.SetDisplayData(newSystem, true);
+
     }
 
 }

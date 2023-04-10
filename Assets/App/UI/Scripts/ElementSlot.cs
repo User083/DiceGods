@@ -6,18 +6,23 @@ using UnityEngine.UIElements;
 
 public class ElementSlot 
 {
+    public VisualElement root;
     public Label title;
     public TextField name;
     public TextField description;
     public IntegerField defaultValue;
     public IntegerField maxValue;
+    public Button removeButton;
+    public string slotID;
     public void SetVisualElement(VisualElement visualElement)
     {
-        title = visualElement.Q<Label>("se-label-title");
-        name = visualElement.Q<TextField>("se-textfield-name");
-        description = visualElement.Q<TextField>("se-textfield-description");
-        defaultValue = visualElement.Q<IntegerField>("se-intfield-default");
-        maxValue = visualElement.Q<IntegerField>("se-intfield-max");
+        root = visualElement;
+        title = root.Q<Label>("se-label-title");
+        name = root.Q<TextField>("se-textfield-name");
+        description = root.Q<TextField>("se-textfield-description");
+        defaultValue = root.Q<IntegerField>("se-intfield-default");
+        maxValue = root.Q<IntegerField>("se-intfield-max");
+        removeButton = root.Q<Button>("se-button-remove");
     }
 
     public void SetAttributeData(Attribute att)
@@ -31,6 +36,7 @@ public class ElementSlot
         description.value = att._description;
         defaultValue.value = att.base_value;
         maxValue.value = att.max_value;
+        
     }
 
     public void SetCharClassData(CharacterClass charClass)
@@ -42,6 +48,7 @@ public class ElementSlot
         maxValue.RemoveFromHierarchy();
         name.value = charClass._name;
         description.value = charClass._description;
+        slotID = charClass._classID;
         
     }
 
@@ -54,6 +61,7 @@ public class ElementSlot
         maxValue.RemoveFromHierarchy();
         name.value = race._name;
         description.value = race._description;
+        slotID = race._raceID;
 
     }
 

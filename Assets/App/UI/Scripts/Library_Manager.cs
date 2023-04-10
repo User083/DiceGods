@@ -101,6 +101,7 @@ public class Library_Manager : MonoBehaviour
     private void Start()
     {
         initLibrary();
+        systemTab();
     }
 
     public void OnTavernClicked()

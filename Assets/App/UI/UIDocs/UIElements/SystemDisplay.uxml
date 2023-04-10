@@ -3,14 +3,17 @@
     <ui:VisualElement name="sd-root" class="basic-backdrop" style="background-image: none; height: auto; width: auto; align-items: stretch; justify-content: flex-start;">
         <ui:VisualElement style="height: 90%;">
             <ui:ScrollView style="height: 100%; background-image: none;">
-                <ui:TextField picking-mode="Ignore" label="System name:" password="false" name="ns-textfield-systemname" class="text-default" />
-                <ui:Toggle label="Levels" name="ns-toggle-levels" class="text-default" />
-                <ui:Toggle label="Use Races?" name="ns-toggle-races" class="text-default" />
-                <ui:Foldout text="Races" name="ns-foldout-races" value="false" class="text-default" />
-                <ui:Toggle label="Use Character Classes?" name="ns-toggle-classes" class="text-default" />
-                <ui:Foldout text="Classes" name="ns-foldout-classes" value="false" class="text-default" />
-                <ui:Toggle label="Use Attributes?" name="ns-toggle-attributes" focusable="false" class="text-default" />
-                <ui:Foldout text="Attributes" name="ns-foldout-att" value="false" class="text-default" />
+                <ui:TextField picking-mode="Ignore" label="System name:" password="false" name="ns-textfield-systemname" class="text-field-text" />
+                <ui:Toggle label="Levels" name="ns-toggle-levels" class="text-field-text" />
+                <ui:Toggle label="Use weight?" name="ns-toggle-weight" tooltip="Does this system take into account the weight of characters?" class="text-field-text" />
+                <ui:Toggle label="Use character value?" name="ns-toggle-value" tooltip="Do characters have monetary value in this world?" class="text-field-text" />
+                <ui:Toggle label="Use CoreStats?" name="ns-toggle-stats" class="text-field-text" />
+                <ui:Toggle label="Use Races?" name="ns-toggle-races" class="text-field-text" />
+                <ui:Foldout text="Races" name="ns-foldout-races" value="false" class="text-field-text" style="display: flex;" />
+                <ui:Toggle label="Use Character Classes?" name="ns-toggle-classes" class="text-field-text" />
+                <ui:Foldout text="Classes" name="ns-foldout-classes" value="false" class="text-field-text" />
+                <ui:Toggle label="Use Attributes?" name="ns-toggle-attributes" focusable="false" class="text-field-text" />
+                <ui:Foldout text="Attributes" name="ns-foldout-att" value="false" class="text-field-text" />
             </ui:ScrollView>
         </ui:VisualElement>
     </ui:VisualElement>

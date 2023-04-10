@@ -3,11 +3,11 @@
     <ui:VisualElement name="cd-root" class="basic-backdrop" style="background-image: none; height: auto; width: auto; align-items: stretch; justify-content: flex-start;">
         <ui:VisualElement style="height: 90%;">
             <ui:ScrollView style="height: 100%; background-image: none;">
-                <ui:TextField picking-mode="Ignore" label="Name:" password="false" name="id-textfield-name" class="text-default" />
-                <ui:TextField picking-mode="Ignore" label="Description:" password="false" name="id-textfield-description" class="text-default" />
-                <ui:FloatField label="Value:" value="0" name="id-floatfield-value" class="text-default" />
-                <ui:FloatField label="Weight:" value="0" name="id-floatfield-weight" class="text-default" />
-                <ui:SliderInt picking-mode="Ignore" label="Level:" value="0" high-value="20" name="id-slider-level" class="text-default" />
+                <ui:TextField picking-mode="Ignore" label="Name:" password="false" name="id-textfield-name" class="text-field-text" />
+                <ui:TextField picking-mode="Ignore" label="Description:" password="false" name="id-textfield-description" class="text-field-text" />
+                <ui:FloatField label="Value:" value="0" name="id-floatfield-value" class="text-field-text" />
+                <ui:FloatField label="Weight:" value="0" name="id-floatfield-weight" class="text-field-text" />
+                <ui:SliderInt picking-mode="Ignore" label="Level:" value="0" high-value="20" name="id-slider-level" class="text-field-text" />
             </ui:ScrollView>
         </ui:VisualElement>
     </ui:VisualElement>

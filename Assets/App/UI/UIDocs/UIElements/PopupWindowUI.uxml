@@ -3,8 +3,8 @@
     <ui:VisualElement class="basic-backdrop" style="align-items: center;">
         <ui:VisualElement style="flex-grow: 0; align-items: stretch; justify-content: space-around; height: 30%; width: 50%; background-color: rgba(56, 56, 56, 0);">
             <ui:VisualElement style="background-color: rgba(14, 7, 5, 0);">
-                <ui:Label text="Confirmation text" display-tooltip-when-elided="true" name="popup-label-text" class="text-dark text-default" style="white-space: normal; -unity-text-align: middle-center; font-size: 14px; justify-content: center; flex-wrap: wrap; -unity-font-style: bold; color: rgb(255, 255, 255);" />
-                <ui:TextField picking-mode="Ignore" name="popup-textfield-optional" class="text-default bar" />
+                <ui:Label text="Confirmation text" display-tooltip-when-elided="true" name="popup-label-text" class="text-dark text-default text-field-text" style="justify-content: center; flex-wrap: wrap; -unity-text-align: middle-center;" />
+                <ui:TextField picking-mode="Ignore" name="popup-textfield-optional" class="bar text-field-text" />
             </ui:VisualElement>
             <ui:VisualElement style="align-items: center; flex-direction: row; justify-content: center; background-color: rgba(196, 196, 196, 0);">
                 <ui:Button text="Confirm" display-tooltip-when-elided="true" name="popup-button-confirm" class="default-button text-default button-menu" />

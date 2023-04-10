@@ -29,7 +29,7 @@
     -unity-font-style: bold;
     color: rgb(205, 192, 181);
     -unity-font-definition: none;
-    -unity-font: url('project://database/Assets/App/UI/Fonts/Cardinal.ttf?fileID=12800000&guid=cc5854a261629e6479076651762f68ac&type=3#Cardinal');
+    -unity-font: url('project://database/Assets/App/UI/Fonts/BLKCHCRY.TTF?fileID=12800000&guid=acf84b78cf427b143902ae2b264b0af6&type=3#BLKCHCRY');
     -unity-text-align: middle-center;
 }
 
@@ -52,7 +52,7 @@
     color: rgb(248, 236, 223);
     white-space: normal;
     -unity-text-align: middle-center;
-    -unity-font: url('project://database/Assets/App/UI/Fonts/Cardinal.ttf?fileID=12800000&guid=cc5854a261629e6479076651762f68ac&type=3#Cardinal');
+    -unity-font: url('project://database/Assets/App/UI/Fonts/BLKCHCRY.TTF?fileID=12800000&guid=acf84b78cf427b143902ae2b264b0af6&type=3#BLKCHCRY');
     -unity-font-definition: none;
     -unity-font-style: normal;
 }
@@ -82,6 +82,9 @@
     -unity-background-scale-mode: stretch-to-fill;
     color: var(--darkest-brown);
     justify-content: center;
+    -unity-font-definition: none;
+    -unity-font: url('project://database/Assets/App/UI/Fonts/AppleGaramond.ttf?fileID=12800000&guid=59d826c17169d9b44924c828b7644e07&type=3#AppleGaramond');
+    font-size: 15px;
 }
 
 .unity-base-text-field__input--single-line:hover {
@@ -139,4 +142,24 @@
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 0;
+}
+
+.text-field-text {
+    font-size: 18px;
+    color: rgb(248, 236, 223);
+    white-space: normal;
+    -unity-text-align: middle-left;
+    -unity-font: url('project://database/Assets/App/UI/Fonts/AppleGaramond.ttf?fileID=12800000&guid=59d826c17169d9b44924c828b7644e07&type=3#AppleGaramond');
+    -unity-font-definition: none;
+    -unity-font-style: normal;
+}
+
+.text-paragraph {
+    font-size: 18px;
+    color: rgb(248, 236, 223);
+    white-space: normal;
+    -unity-text-align: middle-left;
+    -unity-font: url('project://database/Assets/App/UI/Fonts/AppleGaramond.ttf?fileID=12800000&guid=59d826c17169d9b44924c828b7644e07&type=3#AppleGaramond');
+    -unity-font-definition: none;
+    -unity-font-style: normal;
 }
