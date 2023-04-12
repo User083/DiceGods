@@ -6,9 +6,8 @@ using UnityEngine;
 public class Abstract_Parent 
 {
 
-    public string _name;
-    public string _description;
 
-    
+
+
 
 }

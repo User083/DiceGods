@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,9 +15,11 @@ public class NewSystem_Manager : MonoBehaviour
     [SerializeField] private UIDocument newSystemUI;
     [SerializeField] private VisualTreeAsset systemDisplayUI;
     [SerializeField] private VisualTreeAsset elementSlotUI;
+    [SerializeField] private VisualTreeAsset editorDocUI;
     private DataPopulater dataPopulater = new DataPopulater();
     private SystemDisplay system;
     private VisualElement systemDisplay;
+    private VisualElement editorDisplay;
     private SaveData newSystemSaveData;   
     private Button createButton;
     private Button resetButton;
@@ -44,7 +47,9 @@ public class NewSystem_Manager : MonoBehaviour
         mainPanel = root.Q<VisualElement>("ns-panel-main");
         systemDisplay = systemDisplayUI.Instantiate();
         systemDisplay.style.flexGrow = 1;
+        
         system = new SystemDisplay(systemDisplay, elementSlotUI);
+        
         if (root == null)
         {
             Debug.Log("No root element found");
@@ -66,18 +71,17 @@ public class NewSystem_Manager : MonoBehaviour
         createButton.clickable.clicked += () => ConfirmNewSystem();
 
         saveNameField.RegisterCallback<ChangeEvent<string>>((e) => { saveName = e.newValue; });
+        
 
     }
 
     private void Start()
     {
-      
-        PopulateData();
-        mainPanel.hierarchy.Add(systemDisplay);
-        system.attributesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.attFoldout.SetEnabled(e.newValue); });
+        system.ListEditorSetup(editorDocUI);
+        system.attributesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.attButton.SetEnabled(e.newValue); });
         system.classesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.classFoldout.SetEnabled(e.newValue); });
         system.racesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.racesFoldout.SetEnabled(e.newValue); });
-
+        system.attButton.clickable.clicked += () => DisplayAttributes();
     }
 
     //User interface handling
@@ -132,6 +136,7 @@ public class NewSystem_Manager : MonoBehaviour
         confirmButton.clickable.clicked += () => resetSystemFields();
         UIManager.popupWindowManager.SetPromptText("Are you sure you want reset all fields to default?");
         UIManager.popupWindow.sortingOrder = 3;
+
     }
 
     private void ConfirmCancel()
@@ -160,7 +165,7 @@ public class NewSystem_Manager : MonoBehaviour
         newSystem.useRaces = system.racesToggle.value;
         newSystem.useCoreStats = system.coreStatsToggle.value;
         newSystem.useAttributes = system.attributesToggle.value;
-
+        newSystem.attributes = (List<Attribute>)system.attList.itemsSource;
         
     }
 
@@ -168,6 +173,20 @@ public class NewSystem_Manager : MonoBehaviour
     {
         system.SetDisplayData(newSystem, true);
 
+    }
+ 
+    public void LaunchSystemCreator()
+    {
+        PopulateData();
+        mainPanel.hierarchy.Add(systemDisplay);
+        system.attList.onSelectionChange += system.OnAttChange;
+
+    }
+
+    public void DisplayAttributes()
+    {
+        system.DisplayAttributes();
+        mainPanel.Add(system.editorRoot);
     }
 
 }

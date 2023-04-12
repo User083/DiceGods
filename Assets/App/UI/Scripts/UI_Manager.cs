@@ -13,6 +13,7 @@ public class UI_Manager : MonoBehaviour
     public SaveSlot_Manager saveManager;
     public PopupWindow_Manager popupWindowManager;
     public MainMenu_Manager mainMenuManager;
+    public NewSystem_Manager systemManager;
 
     private void Awake()
     {

@@ -12,8 +12,9 @@ public class ElementSlot
     public TextField description;
     public IntegerField defaultValue;
     public IntegerField maxValue;
-    public Button removeButton;
     public string slotID;
+    public string type;
+    public int index;
     public void SetVisualElement(VisualElement visualElement)
     {
         root = visualElement;
@@ -22,7 +23,6 @@ public class ElementSlot
         description = root.Q<TextField>("se-textfield-description");
         defaultValue = root.Q<IntegerField>("se-intfield-default");
         maxValue = root.Q<IntegerField>("se-intfield-max");
-        removeButton = root.Q<Button>("se-button-remove");
     }
 
     public void SetAttributeData(Attribute att)
@@ -36,10 +36,11 @@ public class ElementSlot
         description.value = att._description;
         defaultValue.value = att.base_value;
         maxValue.value = att.max_value;
+        type = "attribute";
         
     }
 
-    public void SetCharClassData(CharacterClass charClass)
+    public void SetCharClassData(CharacterClass charClass, int index)
     {
         title.text = charClass._name;
         name.label = "Name:";
@@ -48,11 +49,12 @@ public class ElementSlot
         maxValue.RemoveFromHierarchy();
         name.value = charClass._name;
         description.value = charClass._description;
-        slotID = charClass._classID;
-        
+        slotID = charClass._ID;
+        type = "class";
+        this.index = index;
     }
 
-    public void SetRaceData(Race race)
+    public void SetRaceData(Race race, int index)
     {
         title.text = race._name;
         name.label = "Name:";
@@ -61,8 +63,9 @@ public class ElementSlot
         maxValue.RemoveFromHierarchy();
         name.value = race._name;
         description.value = race._description;
-        slotID = race._raceID;
-
+        slotID = race._ID;
+        type = "race";
+        this.index = index;
     }
 
     public string GetID()
@@ -70,5 +73,9 @@ public class ElementSlot
         return slotID;
     }
 
+    public string GetSlotType()
+    {
+        return type;
+    }
     
 }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Attribute : Abstract_Parent
+public class Attribute 
 {
 
-   
+    public string _name;
+    public string _description;
+    public string _ID;
     public string _parentSystemID;
     public int base_value;
     public int max_value;
@@ -19,6 +21,7 @@ public class Attribute : Abstract_Parent
         _parentSystemID = parentSystem.systemID; 
         _name = name;
         _description = desc;
+        _ID = "Default" + name;
         max_value = 20;
         base_value= defVal;
     }

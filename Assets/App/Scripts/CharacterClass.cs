@@ -8,14 +8,14 @@ public class CharacterClass
     public string _parentSystemID;
     public string _name;
     public string _description;
-    public string _classID;
+    public string _ID;
 
     public CharacterClass(SystemData parentSystem, string name, string desc)
     {
         _parentSystemID = parentSystem.systemID;
         _name = name;
         _description = desc;
-        _classID = generateClassID(name);
+        _ID = generateClassID(name);
         
     }
 
@@ -25,7 +25,7 @@ public class CharacterClass
         _parentSystemID = parentSystem.systemID;
         _name = "Default";
         _description = "Default placeholder class with no effect on gameplay or stats";
-        _classID = parentSystem.systemID + "DefaultCharacterClass";
+        _ID = parentSystem.systemID + "DefaultCharacterClass";
     }
 
     private string generateClassID(string className)

@@ -161,6 +161,7 @@ public class MainMenu_Manager : MonoBehaviour
         UIManager.loadMenu.sortingOrder = 1;
         UIManager.popupWindow.sortingOrder = 0;
         UIManager.systemCreator.sortingOrder= 2;
+        UIManager.systemManager.LaunchSystemCreator();
     }
 
     public void ConfirmDelete()

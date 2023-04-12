@@ -9,7 +9,7 @@ public class Race
     public string _parentSystemID;
     public string _name;
     public string _description;
-    public string _raceID;
+    public string _ID;
 
     //Constructor for custom race creation 
     public Race(SystemData parentSystem, string name, string desc)
@@ -17,7 +17,7 @@ public class Race
         _parentSystemID = parentSystem.systemID;
         _name = name;
         _description = desc;
-        _raceID = generateRaceID(name);
+        _ID = generateRaceID(name);
     }
 
     //Default fallback
@@ -26,7 +26,7 @@ public class Race
         _parentSystemID = parentSystem.systemID;
         _name = "Default";
         _description = "Default placeholder race with no effect on gameplay or stats";
-        _raceID = parentSystem.systemID + "DefaultRace";
+        _ID = parentSystem.systemID + "DefaultRace";
     }
 
     //Generate unique race ID when creating custom race

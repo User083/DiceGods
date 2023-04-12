@@ -55,11 +55,11 @@ public class SystemData
     {
         foreach(var charClass in characterClasses)
         {
-            classesByID.Add(charClass._classID, charClass);
+            classesByID.Add(charClass._ID, charClass);
         }
         foreach(var race in races)
         {
-            racesByID.Add(race._raceID, race);
+            racesByID.Add(race._ID, race);
         }
     }
 

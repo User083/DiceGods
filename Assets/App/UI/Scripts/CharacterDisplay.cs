@@ -19,6 +19,7 @@ public class CharacterDisplay
     public SliderInt Level;
     public DropdownField Race;
     public DropdownField Class;
+    private ListView attList;
     public Foldout Attributes;
 
     [Header("Data")]
@@ -76,7 +77,9 @@ public class CharacterDisplay
         }
         else
         {
-            populater.PopulateAttributes(parentSystem, elementSlot, Attributes);
+            populater.EnumerateAttributes(parentSystem);
+            attList = populater.PopulateAttributes(elementSlot);
+            Attributes.Add(attList);
             Attributes.SetEnabled(editable);
         }
 
@@ -117,7 +120,7 @@ public class CharacterDisplay
             Class.SetEnabled(editable);
             foreach (var charClass in parentSystem.characterClasses)
             {
-                ClassDictionary.Add(charClass._classID, charClass._name);
+                ClassDictionary.Add(charClass._ID, charClass._name);
             }
 
             if (ClassDictionary.Count > 0)
@@ -140,7 +143,7 @@ public class CharacterDisplay
             Race.SetEnabled(editable);
             foreach(var race in parentSystem.races)
             {
-                RaceDictionary.Add(race._raceID, race._name);
+                RaceDictionary.Add(race._ID, race._name);
             }
 
             if(RaceDictionary.Count > 0)

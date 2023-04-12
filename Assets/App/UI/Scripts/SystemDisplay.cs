@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,6 +9,9 @@ public class SystemDisplay
     public DataPopulater populater = new DataPopulater();
     private VisualTreeAsset elementSlot;
     private SystemData blankSystem;
+    public ListEditor editor;
+    public VisualElement editorRoot;
+    
 
     [Header("Core System Details UI Elements")]
     public TextField saveNameField;
@@ -23,6 +24,13 @@ public class SystemDisplay
     public Toggle attributesToggle;
     public Toggle charsHaveValueToggle;
     public Toggle weightToggle;
+    //SelectedItems
+    public Attribute selectedAtt;
+    public ElementSlot selectedSlot;
+    //Listviews
+    public ListView attList;
+    //Buttons
+    public Button attButton;
     //Foldouts
     public Foldout attFoldout;
     public Foldout classFoldout;
@@ -46,6 +54,9 @@ public class SystemDisplay
         attFoldout = root.Q<Foldout>("ns-foldout-att");
         racesFoldout = root.Q<Foldout>("ns-foldout-races");
         classFoldout = root.Q<Foldout>("ns-foldout-classes");
+
+        attButton = root.Q<Button>("ns-button-attributes");
+        
     }
 
     public void PopulateSystemData(SystemData currentSystemData)
@@ -69,8 +80,8 @@ public class SystemDisplay
     
         if(editable)
         {
-
-            attFoldout.SetEnabled(false);
+            attButton.SetEnabled(false);
+            //attFoldout.SetEnabled(false);
             classFoldout.SetEnabled(false);
             racesFoldout.SetEnabled(false);
 
@@ -87,8 +98,9 @@ public class SystemDisplay
             charsHaveValueToggle.SetEnabled(editable);
             weightToggle.SetEnabled(editable);
         }
-
-        populater.PopulateAttributes(parentSystem, elementSlot, attFoldout);
+        populater.EnumerateAttributes(parentSystem);
+        attList = populater.PopulateAttributes(elementSlot);
+        //attFoldout.Add(attList);
         populater.PopulateRaces(parentSystem, elementSlot, racesFoldout);
         populater.PopulateClasses(parentSystem, elementSlot, classFoldout);
 
@@ -104,8 +116,53 @@ public class SystemDisplay
         charsHaveValueToggle.value = false;
         weightToggle.value = false;
 
-        populater.PopulateAttributes(blankSystem, elementSlot, attFoldout);
+        populater.EnumerateAttributes(blankSystem);
+        populater.PopulateAttributes(elementSlot);
         populater.PopulateRaces(blankSystem, elementSlot, racesFoldout);
         populater.PopulateClasses(blankSystem, elementSlot, classFoldout);
+    }
+
+    public void OnAttChange(IEnumerable<object> selectedItems)
+    {
+        var currentAtt = attList.selectedItem as Attribute;
+
+        if (currentAtt == null)
+        {
+            selectedAtt = null;
+            editor.SetButtonStatus(false, true, false);
+            return;
+        }
+
+        selectedAtt = currentAtt;
+        editor.SetButtonStatus(true, true, true);
+
+    }
+
+    public void ListEditorSetup(VisualTreeAsset editorDoc)
+    {
+        editorRoot = editorDoc.Instantiate();
+        editorRoot.style.flexGrow = 1;
+        editor = new ListEditor(editorRoot);
+        editor.removeButton.clickable.clicked += () => RemoveListItem();
+        
+    }
+
+    public void DisplayAttributes()
+    {
+        if(editor.activeList != null)
+        {
+            editor.RemoveList();
+        }
+        editor.AddList(attList);
+    }
+
+    public void RemoveListItem()
+    {
+        if(editor.activeList == attList)
+        {
+            attList.itemsSource.Remove(selectedAtt);
+
+            attList.RefreshItems();
+        }
     }
 }

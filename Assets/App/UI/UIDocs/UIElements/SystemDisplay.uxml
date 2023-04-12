@@ -13,6 +13,7 @@
                 <ui:Toggle label="Use Character Classes?" name="ns-toggle-classes" class="text-field-text" />
                 <ui:Foldout text="Classes" name="ns-foldout-classes" value="false" class="text-field-text" />
                 <ui:Toggle label="Use Attributes?" name="ns-toggle-attributes" focusable="false" class="text-field-text" />
+                <ui:Button tabindex="-1" text="Attributes" display-tooltip-when-elided="true" name="ns-button-attributes" class="text-default" style="background-image: url(&apos;project://database/Assets/App/UI/Graphics/ButtonEdged.png?fileID=2800000&amp;guid=3c0f9cdcd86981c4ba4095fabbbf566e&amp;type=3#ButtonEdged&apos;); justify-content: center; align-items: center; width: 10%; height: 10%; -unity-background-scale-mode: stretch-to-fill; background-color: rgba(255, 255, 255, 0); border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; overflow: hidden; flex-wrap: wrap;" />
                 <ui:Foldout text="Attributes" name="ns-foldout-att" value="false" class="text-field-text" />
             </ui:ScrollView>
         </ui:VisualElement>
