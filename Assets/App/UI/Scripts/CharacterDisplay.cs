@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -19,8 +20,10 @@ public class CharacterDisplay
     public SliderInt Level;
     public DropdownField Race;
     public DropdownField Class;
-    private ListView attList;
     public Foldout Attributes;
+    public IntegerField LevelDisplay;
+    public GroupBox levelBox;
+    public Label levelLabel;
 
     [Header("Data")]
     private Dictionary<string, string> RaceDictionary = new Dictionary<string, string>();
@@ -39,6 +42,10 @@ public class CharacterDisplay
         Attributes = root.Q<Foldout>("cd-foldout-att");
         Class = root.Q<DropdownField>("cd-dropdown-class");
         Race = root.Q<DropdownField>("cd-dropdown-race");
+        LevelDisplay = root.Q<IntegerField>("cd-intfield-level");
+        levelBox = root.Q<GroupBox>("cd-levelbox");
+        levelLabel = root.Q<Label>("cd-label-level");
+        Level.RegisterCallback<ChangeEvent<int>>((e) => { levelLabel.text=e.newValue.ToString(); });
     }
 
     
@@ -54,9 +61,9 @@ public class CharacterDisplay
         {
             Weight.value = currentChar._weight;
         }
-        if (Level != null)
+        if (LevelDisplay != null)
         {
-            Level.value = currentChar._level;
+            LevelDisplay.value = currentChar._level;
         }
 
     }
@@ -77,10 +84,9 @@ public class CharacterDisplay
         }
         else
         {
-            populater.EnumerateAttributes(parentSystem);
-            attList = populater.PopulateAttributes(elementSlot);
-            Attributes.Add(attList);
-            Attributes.SetEnabled(editable);
+
+            populater.PopulateAttributes(parentSystem, elementSlot, Attributes);
+            Attributes.SetEnabled(true);
         }
 
         if(!parentSystem.useWeight)
@@ -103,12 +109,23 @@ public class CharacterDisplay
 
         if(!parentSystem.useLevels)
         {
-            Level.RemoveFromHierarchy();
+            levelBox.RemoveFromHierarchy();
+            LevelDisplay.RemoveFromHierarchy();
         }
         else
         {
-            Level.highValue = parentSystem.attMaxLevel;
-            Level.SetEnabled(editable);
+           if(editable)
+            {
+                Level.highValue = parentSystem.attMaxLevel;
+                Level.SetEnabled(editable);
+                LevelDisplay.RemoveFromHierarchy();
+            }
+            else
+            {
+                levelBox.RemoveFromHierarchy();
+                
+            }
+
         }
 
         if(!parentSystem.useClasses)

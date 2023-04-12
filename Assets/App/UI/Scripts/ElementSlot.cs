@@ -40,7 +40,7 @@ public class ElementSlot
         
     }
 
-    public void SetCharClassData(CharacterClass charClass, int index)
+    public void SetCharClassData(CharacterClass charClass)
     {
         title.text = charClass._name;
         name.label = "Name:";
@@ -51,10 +51,10 @@ public class ElementSlot
         description.value = charClass._description;
         slotID = charClass._ID;
         type = "class";
-        this.index = index;
+       
     }
 
-    public void SetRaceData(Race race, int index)
+    public void SetRaceData(Race race)
     {
         title.text = race._name;
         name.label = "Name:";
@@ -65,7 +65,7 @@ public class ElementSlot
         description.value = race._description;
         slotID = race._ID;
         type = "race";
-        this.index = index;
+  
     }
 
     public string GetID()

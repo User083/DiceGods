@@ -79,9 +79,13 @@ public class NewSystem_Manager : MonoBehaviour
     {
         system.ListEditorSetup(editorDocUI);
         system.attributesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.attButton.SetEnabled(e.newValue); });
-        system.classesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.classFoldout.SetEnabled(e.newValue); });
-        system.racesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.racesFoldout.SetEnabled(e.newValue); });
-        system.attButton.clickable.clicked += () => DisplayAttributes();
+        system.classesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.classButton.SetEnabled(e.newValue); });
+        system.racesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.raceButton.SetEnabled(e.newValue); });
+        system.coreStatsToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.statsButton.SetEnabled(e.newValue); });
+        system.attButton.clickable.clicked += () => system.DisplayAttributes(mainPanel);
+        system.raceButton.clickable.clicked += () => system.DisplayRaces(mainPanel);
+        system.classButton.clickable.clicked += () => system.DisplayClasses(mainPanel);
+        system.statsButton.clickable.clicked += () => system.DisplayStats(mainPanel);
     }
 
     //User interface handling
@@ -166,12 +170,14 @@ public class NewSystem_Manager : MonoBehaviour
         newSystem.useCoreStats = system.coreStatsToggle.value;
         newSystem.useAttributes = system.attributesToggle.value;
         newSystem.attributes = (List<Attribute>)system.attList.itemsSource;
-        
+        newSystem.races = (List<Race>)system.raceList.itemsSource;
+        newSystem.characterClasses = (List<CharacterClass>)system.classList.itemsSource;
+
     }
 
     public void PopulateData()
     {
-        system.SetDisplayData(newSystem, true);
+        system.SetEditableSystem(newSystem);
 
     }
  
@@ -179,14 +185,9 @@ public class NewSystem_Manager : MonoBehaviour
     {
         PopulateData();
         mainPanel.hierarchy.Add(systemDisplay);
-        system.attList.onSelectionChange += system.OnAttChange;
 
     }
 
-    public void DisplayAttributes()
-    {
-        system.DisplayAttributes();
-        mainPanel.Add(system.editorRoot);
-    }
+  
 
 }

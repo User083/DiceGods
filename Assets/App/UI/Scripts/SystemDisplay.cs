@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.UIElements;
 
 public class SystemDisplay 
@@ -26,15 +27,24 @@ public class SystemDisplay
     public Toggle weightToggle;
     //SelectedItems
     public Attribute selectedAtt;
-    public ElementSlot selectedSlot;
+    public Race selectedRace;
+    public CharacterClass selectedClass;
+    public Stat selectedStat;
     //Listviews
     public ListView attList;
+    public ListView raceList;
+    public ListView classList;
+    public ListView statList;
     //Buttons
     public Button attButton;
+    public Button raceButton;
+    public Button classButton;
+    public Button statsButton;
     //Foldouts
     public Foldout attFoldout;
     public Foldout classFoldout;
     public Foldout racesFoldout;
+    public Foldout statsFoldout;
 
     public SystemDisplay(VisualElement root, VisualTreeAsset attributeElementSlot)
     {
@@ -54,8 +64,12 @@ public class SystemDisplay
         attFoldout = root.Q<Foldout>("ns-foldout-att");
         racesFoldout = root.Q<Foldout>("ns-foldout-races");
         classFoldout = root.Q<Foldout>("ns-foldout-classes");
-
+        statsFoldout = root.Q<Foldout>("ns-foldout-stats");
+        //Buttons
         attButton = root.Q<Button>("ns-button-attributes");
+        raceButton = root.Q<Button>("ns-button-races");
+        classButton = root.Q<Button>("ns-button-classes");
+        statsButton = root.Q<Button>("ns-button-stats");
         
     }
 
@@ -76,19 +90,6 @@ public class SystemDisplay
             Debug.LogError("No parent system found - characters can't exist outside a system. Have you loaded a save?");
         }
 
-        blankSystem = parentSystem;
-    
-        if(editable)
-        {
-            attButton.SetEnabled(false);
-            //attFoldout.SetEnabled(false);
-            classFoldout.SetEnabled(false);
-            racesFoldout.SetEnabled(false);
-
-
-        }
-        else
-        {
             systemNameField.isReadOnly= true;
             levelsToggle.SetEnabled(editable);
             classesToggle.SetEnabled(editable);
@@ -97,13 +98,38 @@ public class SystemDisplay
             attributesToggle.SetEnabled(editable);
             charsHaveValueToggle.SetEnabled(editable);
             weightToggle.SetEnabled(editable);
-        }
-        populater.EnumerateAttributes(parentSystem);
-        attList = populater.PopulateAttributes(elementSlot);
-        //attFoldout.Add(attList);
+        attButton.RemoveFromHierarchy();
+        raceButton.RemoveFromHierarchy();
+        classButton.RemoveFromHierarchy();
+        statsButton.RemoveFromHierarchy();
+
+        populater.PopulateAttributes(parentSystem, elementSlot, attFoldout);
         populater.PopulateRaces(parentSystem, elementSlot, racesFoldout);
         populater.PopulateClasses(parentSystem, elementSlot, classFoldout);
 
+    }
+
+    public void SetEditableSystem(SystemData parentSystem)
+    {
+        blankSystem = parentSystem;
+
+        //Setup default fields
+        attFoldout.RemoveFromHierarchy();
+        racesFoldout.RemoveFromHierarchy();
+        classFoldout.RemoveFromHierarchy();
+        statsFoldout.RemoveFromHierarchy();
+        attButton.SetEnabled(false);
+        raceButton.SetEnabled(false);
+        classButton.SetEnabled(false);
+        statsButton.SetEnabled(false);
+
+        //Populate system defaults for editing
+        populater.EnumerateAttributes(parentSystem);
+        attList = populater.PopulateAttributeList(elementSlot);
+        populater.EnumerateRaces(parentSystem);
+        raceList = populater.PopulateRaceList(elementSlot);
+        populater.EnumerateClasses(parentSystem);
+        classList = populater.PopulateClassList(elementSlot);
     }
 
     public void ResetFields()
@@ -117,11 +143,14 @@ public class SystemDisplay
         weightToggle.value = false;
 
         populater.EnumerateAttributes(blankSystem);
-        populater.PopulateAttributes(elementSlot);
-        populater.PopulateRaces(blankSystem, elementSlot, racesFoldout);
-        populater.PopulateClasses(blankSystem, elementSlot, classFoldout);
+        attList = populater.PopulateAttributeList(elementSlot);
+        populater.EnumerateRaces(blankSystem);
+        raceList =populater.PopulateRaceList(elementSlot);
+        populater.EnumerateClasses(blankSystem);
+        classList = populater.PopulateClassList(elementSlot);
     }
 
+    //Handle list selection changes
     public void OnAttChange(IEnumerable<object> selectedItems)
     {
         var currentAtt = attList.selectedItem as Attribute;
@@ -129,7 +158,7 @@ public class SystemDisplay
         if (currentAtt == null)
         {
             selectedAtt = null;
-            editor.SetButtonStatus(false, true, false);
+
             return;
         }
 
@@ -137,6 +166,40 @@ public class SystemDisplay
         editor.SetButtonStatus(true, true, true);
 
     }
+
+    public void OnRaceChange(IEnumerable<object> selectedItems)
+    {
+        var currentRace = raceList.selectedItem as Race;
+
+        if (currentRace == null)
+        {
+            selectedRace = null;
+
+            return;
+        }
+
+        selectedRace = currentRace;
+        editor.SetButtonStatus(true, true, true);
+
+    }
+
+    public void OnClassChange(IEnumerable<object> selectedItems)
+    {
+        var currentClass = classList.selectedItem as CharacterClass;
+
+        if (currentClass == null)
+        {
+            selectedClass = null;
+
+            return;
+        }
+
+        selectedClass = currentClass;
+        editor.SetButtonStatus(true, true, true);
+
+    }
+
+    //Setup list editor
 
     public void ListEditorSetup(VisualTreeAsset editorDoc)
     {
@@ -147,22 +210,128 @@ public class SystemDisplay
         
     }
 
-    public void DisplayAttributes()
+    //display relevant list
+    public void DisplayAttributes(VisualElement panel)
     {
-        if(editor.activeList != null)
+        ClearSelection();
+        if (editor.activeList != null)
         {
             editor.RemoveList();
         }
         editor.AddList(attList);
+
+        if (panel.Contains(editorRoot))
+        {
+            panel.Remove(editorRoot);
+        }
+        panel.Add(editorRoot);
+        attList.onSelectionChange += OnAttChange;
     }
 
+    public void DisplayClasses(VisualElement panel)
+    {
+        ClearSelection();
+        if (editor.activeList != null)
+        {
+            editor.RemoveList();
+        }
+        editor.AddList(classList);
+
+        if (panel.Contains(editorRoot))
+        {
+            panel.Remove(editorRoot);
+        }
+        panel.Add(editorRoot);
+        classList.onSelectionChange += OnClassChange;
+    }
+
+    public void DisplayRaces(VisualElement panel)
+    {
+        ClearSelection();
+        if (editor.activeList != null)
+        {
+            editor.RemoveList();
+            
+        }
+        editor.AddList(raceList);
+
+        if (panel.Contains(editorRoot))
+        {
+            panel.Remove(editorRoot);
+        }
+        panel.Add(editorRoot);
+        raceList.onSelectionChange += OnRaceChange;
+    }
+
+    public void DisplayStats(VisualElement panel)
+    {
+        ClearSelection();
+        if (editor.activeList != null)
+        {
+            editor.RemoveList();
+        }
+        editor.AddList(statList);
+
+        if(panel.Contains(editorRoot))
+        {
+            panel.Remove(editorRoot);
+        }
+        panel.Add(editorRoot);
+    }
+
+    //Remove selected item from list
     public void RemoveListItem()
     {
         if(editor.activeList == attList)
         {
             attList.itemsSource.Remove(selectedAtt);
-
+            selectedAtt= null;
             attList.RefreshItems();
+            return;
         }
+
+        if(editor.activeList == raceList)
+        {
+            raceList.itemsSource.Remove(selectedRace);
+            selectedRace = null;
+            raceList.RefreshItems();
+            return;
+        }
+
+        if (editor.activeList == classList)
+        {
+            classList.itemsSource.Remove(selectedClass);
+            selectedClass = null;
+            classList.RefreshItems();
+            return;
+        }
+
+        if (editor.activeList == statList)
+        {
+            statList.itemsSource.Remove(selectedStat);
+            selectedStat = null;
+            statList.RefreshItems();
+            return;
+        }
+    }
+
+    private void ClearSelection()
+    {
+
+        attList.ClearSelection();
+        raceList.ClearSelection();
+        classList.ClearSelection();
+       
+
+        editor.SetButtonStatus(false, true, false);
+    }
+
+    private bool isSomethingSelected()
+    {
+        if(selectedAtt != null|| selectedClass != null || selectedRace != null || selectedStat != null)
+        {
+            return true;
+        }
+        return false;
     }
 }

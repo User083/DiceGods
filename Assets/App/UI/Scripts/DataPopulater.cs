@@ -5,27 +5,27 @@ using UnityEngine.UIElements;
 
 public class DataPopulater 
 {
-    
-    //public void PopulateAttributes(SystemData newSystem, VisualTreeAsset elementSlot, Foldout foldout)
-    //{
-    //    int attI = 0;
-    //    List<Attribute> attributes = new List<Attribute>();
-    //    attributes = newSystem.attributes;
 
-    //    foreach (var attribute in attributes)
-    //    {
-    //        var newSlotEntry = elementSlot.Instantiate();
-    //        var newEntryLogic = new ElementSlot();
-    //        newSlotEntry.userData = newEntryLogic;
-    //        newEntryLogic.SetVisualElement(newSlotEntry);
-    //        newEntryLogic.SetAttributeData(attribute);
+    public void PopulateAttributes(SystemData newSystem, VisualTreeAsset elementSlot, Foldout foldout)
+    {
+        int attI = 0;
+        List<Attribute> attributes = new List<Attribute>();
+        attributes = newSystem.attributes;
 
-    //        foldout.Insert(attI, newSlotEntry);
-            
-    //        attI++;
-    //    };
+        foreach (var attribute in attributes)
+        {
+            var newSlotEntry = elementSlot.Instantiate();
+            var newEntryLogic = new ElementSlot();
+            newSlotEntry.userData = newEntryLogic;
+            newEntryLogic.SetVisualElement(newSlotEntry);
+            newEntryLogic.SetAttributeData(attribute);
 
-    //}
+            foldout.Insert(attI, newSlotEntry);
+
+            attI++;
+        };
+
+    }
 
 
     public void PopulateRaces(SystemData newSystem, VisualTreeAsset elementSlot, Foldout foldout)
@@ -40,7 +40,7 @@ public class DataPopulater
             var newEntryLogic = new ElementSlot();
             newSlotEntry.userData = newEntryLogic;
             newEntryLogic.SetVisualElement(newSlotEntry);
-            newEntryLogic.SetRaceData(race, raceI);
+            newEntryLogic.SetRaceData(race);
 
             foldout.Insert(raceI, newSlotEntry);
             raceI++;
@@ -59,7 +59,7 @@ public class DataPopulater
             var newEntryLogic = new ElementSlot();
             newSlotEntry.userData = newEntryLogic;
             newEntryLogic.SetVisualElement(newSlotEntry);
-            newEntryLogic.SetCharClassData(charClass, classI);
+            newEntryLogic.SetCharClassData(charClass);
 
             foldout.Insert(classI, newSlotEntry);
             classI++;
@@ -73,7 +73,7 @@ public class DataPopulater
         allAttributes.AddRange(activeSystem.attributes);
 
     }
-    public ListView PopulateAttributes(VisualTreeAsset elementSlot)
+    public ListView PopulateAttributeList(VisualTreeAsset elementSlot)
     {
         ListView list = new ListView();
 
@@ -98,6 +98,78 @@ public class DataPopulater
 
         list.fixedItemHeight = 300;
         list.itemsSource = allAttributes;
+
+        return list;
+    }
+
+    List<Race> allRaces;
+    public void EnumerateRaces(SystemData activeSystem)
+    {
+        allRaces = new List<Race>();
+        allRaces.AddRange(activeSystem.races);
+
+    }
+    public ListView PopulateRaceList(VisualTreeAsset elementSlot)
+    {
+        ListView list = new ListView();
+
+        list.makeItem = () =>
+        {
+            var newSlotEntry = elementSlot.Instantiate();
+
+            var newEntryLogic = new ElementSlot();
+
+            newSlotEntry.userData = newEntryLogic;
+
+            newEntryLogic.SetVisualElement(newSlotEntry);
+
+            return newSlotEntry;
+        };
+
+
+        list.bindItem = (item, index) =>
+        {
+            (item.userData as ElementSlot).SetRaceData(allRaces[index]);
+        };
+
+        list.fixedItemHeight = 200;
+        list.itemsSource = allRaces;
+
+        return list;
+    }
+
+    List<CharacterClass> allClasses;
+    public void EnumerateClasses(SystemData activeSystem)
+    {
+        allClasses = new List<CharacterClass>();
+        allClasses.AddRange(activeSystem.characterClasses);
+
+    }
+    public ListView PopulateClassList(VisualTreeAsset elementSlot)
+    {
+        ListView list = new ListView();
+
+        list.makeItem = () =>
+        {
+            var newSlotEntry = elementSlot.Instantiate();
+
+            var newEntryLogic = new ElementSlot();
+
+            newSlotEntry.userData = newEntryLogic;
+
+            newEntryLogic.SetVisualElement(newSlotEntry);
+
+            return newSlotEntry;
+        };
+
+
+        list.bindItem = (item, index) =>
+        {
+            (item.userData as ElementSlot).SetCharClassData(allClasses[index]);
+        };
+
+        list.fixedItemHeight = 200;
+        list.itemsSource = allClasses;
 
         return list;
     }

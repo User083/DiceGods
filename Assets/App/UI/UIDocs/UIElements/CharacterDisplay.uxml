@@ -7,7 +7,11 @@
                 <ui:TextField picking-mode="Ignore" label="Description:" password="false" name="cd-textfield-characterdesc" class="text-field-text" />
                 <ui:FloatField label="Value:" value="0" name="cd-floatfield-value" class="text-field-text" />
                 <ui:FloatField label="Weight:" value="0" name="cd-floatfield-weight" class="text-field-text" />
-                <ui:SliderInt picking-mode="Ignore" label="Level:" value="0" high-value="20" name="cd-slider-level" class="text-field-text" />
+                <ui:GroupBox name="cd-levelbox" style="flex-direction: row; align-items: center; justify-content: space-between;">
+                    <ui:SliderInt picking-mode="Ignore" label="Level:" value="0" high-value="20" name="cd-slider-level" class="text-field-text" style="width: 90%; justify-content: center;" />
+                    <ui:Label tabindex="-1" text="0" display-tooltip-when-elided="true" name="cd-label-level" class="text-field-text" style="width: 10%; align-items: center; -unity-text-align: upper-center;" />
+                </ui:GroupBox>
+                <ui:IntegerField label="Level:" value="0" name="cd-intfield-level" readonly="true" class="text-field-text" />
                 <ui:DropdownField label="Race:" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="cd-dropdown-race" class="text-field-text" />
                 <ui:DropdownField label="Class:" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="cd-dropdown-class" class="text-field-text" />
                 <ui:Foldout text="Attributes:" name="cd-foldout-att" value="false" class="text-field-text" />

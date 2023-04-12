@@ -239,6 +239,7 @@ MonoBehaviour:
   saveManager: {fileID: 1455594052}
   popupWindowManager: {fileID: 3164028107283858595}
   mainMenuManager: {fileID: 166635658}
+  systemManager: {fileID: 865960667}
 --- !u!1 &354359935
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,74 +289,11 @@ MonoBehaviour:
     saveID: 
     timeStamp: 0
     parentSystem:
-      strength:
-        _name: 
-        _description: 
-        parentSystem: 
-        base_value: 0
-        max_value: 0
-        final_value: 0
-      intelligence:
-        _name: 
-        _description: 
-        parentSystem: 
-        base_value: 0
-        max_value: 0
-        final_value: 0
-      wisdom:
-        _name: 
-        _description: 
-        parentSystem: 
-        base_value: 0
-        max_value: 0
-        final_value: 0
-      dexterity:
-        _name: 
-        _description: 
-        parentSystem: 
-        base_value: 0
-        max_value: 0
-        final_value: 0
-      persuasion:
-        _name: 
-        _description: 
-        parentSystem: 
-        base_value: 0
-        max_value: 0
-        final_value: 0
-      warrior:
-        parentSystem: 
-        _name: 
-        _description: 
-        _classID: 
-      mage:
-        parentSystem: 
-        _name: 
-        _description: 
-        _classID: 
-      rogue:
-        parentSystem: 
-        _name: 
-        _description: 
-        _classID: 
-      human:
-        _parentSystemID: 
-        _name: 
-        _description: 
-        _raceID: 
-      elf:
-        _parentSystemID: 
-        _name: 
-        _description: 
-        _raceID: 
-      dwarf:
-        _parentSystemID: 
-        _name: 
-        _description: 
-        _raceID: 
       systemName: 
       systemID: 
       useLevels: 0
+      useWeight: 0
+      charsHaveValue: 0
       useClasses: 0
       characterClasses: []
       useRaces: 0
@@ -367,91 +305,6 @@ MonoBehaviour:
       attMaxLevel: 0
     characterList: []
     itemList: []
-  SystemManager:
-    activeSave:
-      fileName: 
-      saveID: 
-      timeStamp: 0
-      parentSystem:
-        strength:
-          _name: 
-          _description: 
-          parentSystem: 
-          base_value: 0
-          max_value: 0
-          final_value: 0
-        intelligence:
-          _name: 
-          _description: 
-          parentSystem: 
-          base_value: 0
-          max_value: 0
-          final_value: 0
-        wisdom:
-          _name: 
-          _description: 
-          parentSystem: 
-          base_value: 0
-          max_value: 0
-          final_value: 0
-        dexterity:
-          _name: 
-          _description: 
-          parentSystem: 
-          base_value: 0
-          max_value: 0
-          final_value: 0
-        persuasion:
-          _name: 
-          _description: 
-          parentSystem: 
-          base_value: 0
-          max_value: 0
-          final_value: 0
-        warrior:
-          parentSystem: 
-          _name: 
-          _description: 
-          _classID: 
-        mage:
-          parentSystem: 
-          _name: 
-          _description: 
-          _classID: 
-        rogue:
-          parentSystem: 
-          _name: 
-          _description: 
-          _classID: 
-        human:
-          _parentSystemID: 
-          _name: 
-          _description: 
-          _raceID: 
-        elf:
-          _parentSystemID: 
-          _name: 
-          _description: 
-          _raceID: 
-        dwarf:
-          _parentSystemID: 
-          _name: 
-          _description: 
-          _raceID: 
-        systemName: 
-        systemID: 
-        useLevels: 0
-        useClasses: 0
-        characterClasses: []
-        useRaces: 0
-        races: []
-        useCoreStats: 0
-        coreStats: []
-        useAttributes: 0
-        attributes: []
-        attMaxLevel: 0
-      characterList: []
-      itemList: []
 --- !u!114 &405272379 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2768797901427115628, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
@@ -561,6 +414,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &865960667 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2768797901427115629, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+  m_PrefabInstance: {fileID: 2768797901559624023}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966a78b09c4b0e3439e94c852e2e0db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1081723678
@@ -741,6 +605,10 @@ PrefabInstance:
       propertyPath: UIManager
       value: 
       objectReference: {fileID: 208716852}
+    - target: {fileID: 2768797901427115629, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: editorDocUI
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: 4528847c7a3c25140b34c63c6f500f2f, type: 3}
     - target: {fileID: 2768797901427115630, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
       propertyPath: m_Name
       value: SystemCreator

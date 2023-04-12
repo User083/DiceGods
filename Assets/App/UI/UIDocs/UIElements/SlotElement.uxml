@@ -3,8 +3,7 @@
     <ui:VisualElement name="VisualElement" style="height: 5%; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; align-items: stretch; justify-content: space-around; flex-grow: 1; background-image: none; -unity-background-scale-mode: scale-and-crop; flex-direction: row;">
         <ui:ScrollView style="flex-wrap: nowrap; width: 100%;">
             <ui:GroupBox style="flex-direction: row; justify-content: space-between;">
-                <ui:Label text="Attribute" display-tooltip-when-elided="true" name="se-label-title" class="text-title" />
-                <ui:Button tabindex="-1" text="X" display-tooltip-when-elided="true" name="se-button-remove" class="text-field-text" style="background-image: url(&apos;project://database/Assets/App/UI/Graphics/ButtonEdged.png?fileID=2800000&amp;guid=3c0f9cdcd86981c4ba4095fabbbf566e&amp;type=3#ButtonEdged&apos;); background-color: rgba(56, 56, 56, 0);" />
+                <ui:Label text="Attribute" display-tooltip-when-elided="true" name="se-label-title" class="text-title" style="font-size: 20px;" />
             </ui:GroupBox>
             <ui:TextField picking-mode="Ignore" label="Name:" text="Strength" name="se-textfield-name" readonly="true" class="text-field-text" />
             <ui:TextField picking-mode="Ignore" label="Description:" value="filler text" text="Measure of a character&apos;s raw physical ability." name="se-textfield-description" password="false" readonly="true" class="text-field-text" />
