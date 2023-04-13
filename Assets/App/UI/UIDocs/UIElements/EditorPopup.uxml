@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/App/UI/Styles/StyleDefault.uss?fileID=7433441132597879392&amp;guid=0e7e59b06c57cd34985291de7452f975&amp;type=3#StyleDefault" />
+    <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: center;">
+        <ui:VisualElement name="ep-panel-main" style="width: 50%; height: 50%; flex-wrap: wrap;">
+            <ui:VisualElement name="ep-panel-editor" style="height: 90%;" />
+            <ui:VisualElement style="height: 10%; flex-direction: row; align-items: center; justify-content: center;">
+                <ui:Button tabindex="-1" text="Cancel" display-tooltip-when-elided="true" name="ep-button-cancel" class="text-default" />
+                <ui:Button tabindex="-1" text="Create" display-tooltip-when-elided="true" name="ep-button-create" class="text-default" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

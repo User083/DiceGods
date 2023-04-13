@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
 public class SystemDisplay 
 {
@@ -11,7 +13,13 @@ public class SystemDisplay
     private VisualTreeAsset elementSlot;
     private SystemData blankSystem;
     public ListEditor editor;
-    public VisualElement editorRoot;
+    public VisualElement editorListRoot;
+    public VisualElement editorPopupRoot;
+    public VisualElement editorPanel;
+    public UIDocument editorPopupUI;
+    public VisualElement activeEditorSlot;
+    public ElementSlot activeEditorSlotLogic;
+    public NewSystem_Manager systemManager;
     
 
     [Header("Core System Details UI Elements")]
@@ -199,15 +207,22 @@ public class SystemDisplay
 
     }
 
-    //Setup list editor
+    //Setup editor tool docs
 
-    public void ListEditorSetup(VisualTreeAsset editorDoc)
+    public void EditorSetup(VisualTreeAsset editorList, UIDocument editorPopup, NewSystem_Manager systemManager)
     {
-        editorRoot = editorDoc.Instantiate();
-        editorRoot.style.flexGrow = 1;
-        editor = new ListEditor(editorRoot);
+        this.systemManager = systemManager;
+        editorListRoot = editorList.Instantiate();
+        editorListRoot.style.flexGrow = 1;
+        editorPopupUI = editorPopup;
+        editorPopupRoot = editorPopup.rootVisualElement;
+        editor = new ListEditor(editorListRoot, editorPopupRoot);
+        editorPanel = editorPopupRoot.Q<VisualElement>("ep-panel-editor");
         editor.removeButton.clickable.clicked += () => RemoveListItem();
-        
+        editor.newButton.clickable.clicked += () => AddNew();
+        editor.cancelButton.clickable.clicked += () => CancelEdit();
+        editor.createButton.clickable.clicked += () => AddToList(editor.activeList);
+
     }
 
     //display relevant list
@@ -220,11 +235,11 @@ public class SystemDisplay
         }
         editor.AddList(attList);
 
-        if (panel.Contains(editorRoot))
+        if (panel.Contains(editorListRoot))
         {
-            panel.Remove(editorRoot);
+            panel.Remove(editorListRoot);
         }
-        panel.Add(editorRoot);
+        panel.Add(editorListRoot);
         attList.onSelectionChange += OnAttChange;
     }
 
@@ -237,11 +252,11 @@ public class SystemDisplay
         }
         editor.AddList(classList);
 
-        if (panel.Contains(editorRoot))
+        if (panel.Contains(editorListRoot))
         {
-            panel.Remove(editorRoot);
+            panel.Remove(editorListRoot);
         }
-        panel.Add(editorRoot);
+        panel.Add(editorListRoot);
         classList.onSelectionChange += OnClassChange;
     }
 
@@ -255,11 +270,11 @@ public class SystemDisplay
         }
         editor.AddList(raceList);
 
-        if (panel.Contains(editorRoot))
+        if (panel.Contains(editorListRoot))
         {
-            panel.Remove(editorRoot);
+            panel.Remove(editorListRoot);
         }
-        panel.Add(editorRoot);
+        panel.Add(editorListRoot);
         raceList.onSelectionChange += OnRaceChange;
     }
 
@@ -272,11 +287,11 @@ public class SystemDisplay
         }
         editor.AddList(statList);
 
-        if(panel.Contains(editorRoot))
+        if(panel.Contains(editorListRoot))
         {
-            panel.Remove(editorRoot);
+            panel.Remove(editorListRoot);
         }
-        panel.Add(editorRoot);
+        panel.Add(editorListRoot);
     }
 
     //Remove selected item from list
@@ -326,12 +341,52 @@ public class SystemDisplay
         editor.SetButtonStatus(false, true, false);
     }
 
-    private bool isSomethingSelected()
+    private void AddNew()
     {
-        if(selectedAtt != null|| selectedClass != null || selectedRace != null || selectedStat != null)
+        editorPopupUI.sortingOrder = 3;
+        activeEditorSlot = elementSlot.Instantiate();
+        activeEditorSlotLogic = new ElementSlot();
+        activeEditorSlot.userData = activeEditorSlotLogic;
+        activeEditorSlotLogic.SetVisualElement(activeEditorSlot);
+        activeEditorSlotLogic.name.isReadOnly= false;
+        activeEditorSlotLogic.description.isReadOnly= false;
+        activeEditorSlotLogic.defaultValue.isReadOnly= false;
+        editorPanel.Add(activeEditorSlot);
+
+    }
+
+    private void CancelEdit()
+    {
+        editorPopupUI.sortingOrder = 0;
+        editorPanel.Remove(activeEditorSlot);
+        activeEditorSlot = null;
+    }
+
+    private void AddToList(ListView list)
+    {
+
+
+        if (list == attList)
         {
-            return true;
+            Attribute temp = new Attribute(systemManager.newSystem, activeEditorSlotLogic.name.value, activeEditorSlotLogic.description.value, activeEditorSlotLogic.defaultValue.value);
+            list.itemsSource.Add(temp);
+            list.RefreshItems();
         }
-        return false;
+
+        if (list == raceList)
+        {
+            Race temp = new Race(systemManager.newSystem, activeEditorSlotLogic.name.value, activeEditorSlotLogic.description.value);
+            list.itemsSource.Add(temp);
+            list.RefreshItems();
+        }
+
+        if (list == classList)
+        {
+            CharacterClass temp = new CharacterClass(systemManager.newSystem, activeEditorSlotLogic.name.value, activeEditorSlotLogic.description.value);
+            list.itemsSource.Add(temp);
+            list.RefreshItems();
+        }
+
+        CancelEdit();
     }
 }

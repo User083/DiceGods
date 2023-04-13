@@ -15,6 +15,7 @@ public class NewSystem_Manager : MonoBehaviour
     [SerializeField] private VisualTreeAsset systemDisplayUI;
     [SerializeField] private VisualTreeAsset elementSlotUI;
     [SerializeField] private VisualTreeAsset editorDocUI;
+    [SerializeField] private UIDocument editorPopupDocUI;
     private DataPopulater dataPopulater = new DataPopulater();
     private SystemDisplay system;
     private VisualElement systemDisplay;
@@ -76,7 +77,7 @@ public class NewSystem_Manager : MonoBehaviour
 
     private void Start()
     {
-        system.ListEditorSetup(editorDocUI);
+        system.EditorSetup(editorDocUI, editorPopupDocUI, this);
         system.attributesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.attButton.SetEnabled(e.newValue); });
         system.classesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.classButton.SetEnabled(e.newValue); });
         system.racesToggle.RegisterCallback<ChangeEvent<bool>>((e) => { system.raceButton.SetEnabled(e.newValue); });

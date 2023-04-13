@@ -66,7 +66,7 @@ public class DataPopulater
         };
     }
 
-    List<Attribute> allAttributes;
+    public List<Attribute> allAttributes;
     public void EnumerateAttributes(SystemData activeSystem)
     {
         allAttributes = new List<Attribute>();

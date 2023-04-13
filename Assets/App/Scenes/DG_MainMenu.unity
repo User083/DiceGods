@@ -609,6 +609,10 @@ PrefabInstance:
       propertyPath: editorDocUI
       value: 
       objectReference: {fileID: 9197481963319205126, guid: 4528847c7a3c25140b34c63c6f500f2f, type: 3}
+    - target: {fileID: 2768797901427115629, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
+      propertyPath: editorPopupDocUI
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: c3eee3c5003bf85479f231b08f07ad18, type: 3}
     - target: {fileID: 2768797901427115630, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
       propertyPath: m_Name
       value: SystemCreator
