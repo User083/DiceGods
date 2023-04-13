@@ -96,7 +96,7 @@ public class DataPopulater
             (item.userData as ElementSlot).SetAttributeData(allAttributes[index]);
         };
 
-        list.fixedItemHeight = 300;
+        list.fixedItemHeight = 270;
         list.itemsSource = allAttributes;
 
         return list;

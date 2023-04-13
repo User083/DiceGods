@@ -219,7 +219,7 @@ public class SystemDisplay
         editor = new ListEditor(editorListRoot, editorPopupRoot);
         editorPanel = editorPopupRoot.Q<VisualElement>("ep-panel-editor");
         editor.removeButton.clickable.clicked += () => RemoveListItem();
-        editor.newButton.clickable.clicked += () => AddNew();
+        editor.newButton.clickable.clicked += () => AddNew(editor.activeList);
         editor.cancelButton.clickable.clicked += () => CancelEdit();
         editor.createButton.clickable.clicked += () => AddToList(editor.activeList);
 
@@ -341,7 +341,8 @@ public class SystemDisplay
         editor.SetButtonStatus(false, true, false);
     }
 
-    private void AddNew()
+    //Open the individual slot editor and set up slot logic
+    private void AddNew(ListView list)
     {
         editorPopupUI.sortingOrder = 3;
         activeEditorSlot = elementSlot.Instantiate();
@@ -350,7 +351,21 @@ public class SystemDisplay
         activeEditorSlotLogic.SetVisualElement(activeEditorSlot);
         activeEditorSlotLogic.name.isReadOnly= false;
         activeEditorSlotLogic.description.isReadOnly= false;
-        activeEditorSlotLogic.defaultValue.isReadOnly= false;
+        activeEditorSlotLogic.maxValue.isReadOnly = false;
+        activeEditorSlotLogic.defaultValue.isReadOnly = false;
+        if (list == attList)
+        {
+            activeEditorSlotLogic.SetDisplay("attribute");
+        }
+        if (list == raceList)
+        {
+            activeEditorSlotLogic.SetDisplay("race");
+        }
+        if (list == classList)
+        {
+            activeEditorSlotLogic.SetDisplay("class");
+        }
+
         editorPanel.Add(activeEditorSlot);
 
     }
@@ -362,13 +377,12 @@ public class SystemDisplay
         activeEditorSlot = null;
     }
 
+    //Add newly created element to the relevant List
     private void AddToList(ListView list)
     {
-
-
         if (list == attList)
         {
-            Attribute temp = new Attribute(systemManager.newSystem, activeEditorSlotLogic.name.value, activeEditorSlotLogic.description.value, activeEditorSlotLogic.defaultValue.value);
+            Attribute temp = new Attribute(systemManager.newSystem, activeEditorSlotLogic.name.value, activeEditorSlotLogic.description.value, activeEditorSlotLogic.defaultValueSlider.value);
             list.itemsSource.Add(temp);
             list.RefreshItems();
         }
@@ -386,6 +400,7 @@ public class SystemDisplay
             list.itemsSource.Add(temp);
             list.RefreshItems();
         }
+
 
         CancelEdit();
     }

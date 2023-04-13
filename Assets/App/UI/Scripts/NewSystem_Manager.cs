@@ -102,8 +102,7 @@ public class NewSystem_Manager : MonoBehaviour
         if(newSystem.systemName != string.Empty)
         {
             SetSystemValues();
-            newSystem.SetID();
-            
+            newSystem.SetID();            
             newSystem.UpdateIDs();
             if (newSystem.systemID != string.Empty)
             {
