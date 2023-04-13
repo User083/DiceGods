@@ -475,6 +475,54 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 609b2e7e756bed446b0c5a65125d6552, type: 3}
   m_SortingOrder: 0
+--- !u!1 &1435210455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1435210457}
+  - component: {fileID: 1435210456}
+  m_Layer: 5
+  m_Name: EditorPopup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1435210456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435210455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 8c58ba83361bf924baa46300cc38738e, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: c3eee3c5003bf85479f231b08f07ad18, type: 3}
+  m_SortingOrder: 0
+--- !u!4 &1435210457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435210455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1455594052 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1140617250890074017, guid: 7fc8319b8d077c24fb590907177d42b6, type: 3}
@@ -612,7 +660,7 @@ PrefabInstance:
     - target: {fileID: 2768797901427115629, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
       propertyPath: editorPopupDocUI
       value: 
-      objectReference: {fileID: 9197481963319205126, guid: c3eee3c5003bf85479f231b08f07ad18, type: 3}
+      objectReference: {fileID: 1435210456}
     - target: {fileID: 2768797901427115630, guid: 87923f769d6bc434bbf621878f70d6ac, type: 3}
       propertyPath: m_Name
       value: SystemCreator

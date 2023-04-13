@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/App/UI/Styles/StyleDefault.uss?fileID=7433441132597879392&amp;guid=0e7e59b06c57cd34985291de7452f975&amp;type=3#StyleDefault" />
     <ui:VisualElement name="sd-root" class="basic-backdrop" style="background-image: none; height: auto; width: auto; align-items: stretch; justify-content: flex-start;">
         <ui:VisualElement style="height: 90%;">
-            <ui:ScrollView style="height: 100%; background-image: none;">
+            <ui:ScrollView name="sd-scrollview" style="height: 100%; background-image: none;">
                 <ui:TextField picking-mode="Ignore" label="System name:" password="false" name="ns-textfield-systemname" class="text-field-text" />
                 <ui:Toggle label="Levels" name="ns-toggle-levels" class="text-field-text" />
                 <ui:Toggle label="Use weight?" name="ns-toggle-weight" tooltip="Does this system take into account the weight of characters?" class="text-field-text" />
