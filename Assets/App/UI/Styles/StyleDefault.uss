@@ -1,6 +1,9 @@
 :root {
-    --light-brown: rgb(196, 187, 175);
     --light-teal: rgb(48, 116, 115);
+    --medium-teal: rgb(48, 116, 115);
+    --dark-teal: rgb(2, 39, 37);
+    -lightest-brown: rgb(196, 187, 175);
+    --light-brown: rgb(165, 151, 139);
     --medium-brown: rgb(92, 71, 66);
     --darkest-brown: rgb(24, 19, 17);
 }
@@ -88,31 +91,80 @@
 }
 
 .unity-base-text-field__input--single-line:hover {
-    border-color: var(--light-teal);
+    border-color: red;
+
 }
 
-.unity-base-text-field__input--single-line:checked {
-    border-color: var(--light-teal);
+.unity-base-text-field__label:focus {
+    
+    color: red;
 }
 
 .button-menu:hover {
     color: var(--light-teal);
 }
 
+
+
 .bar {
     background-image: url('project://database/Assets/App/UI/Graphics/Bar.png?fileID=2800000&guid=d9338fc80689da245b66eeff800e0487&type=3#Bar');
 }
 
 .unity-list-view__item:hover {
-    background-color: var(--light-teal);
+    background-color: rgba(48, 116, 115, 0.3);
 }
 
 .unity-list-view__item:checked {
-    background-image: url('project://database/Assets/App/UI/Graphics/Bar.png?fileID=2800000&guid=d9338fc80689da245b66eeff800e0487&type=3#Bar');
+    border-width: 1px;
+    border-color: var(--light-teal);
+    background-color: rgba(48, 116, 115, 0.1);
+    
 }
 
+.unity-base-slider__dragger {
+    border-radius: 20px;
+    background-color: var(--darkest-brown);
+    height: 16px;
+    width: 16px;
+    margin-top: -8px;
+}
+
+.unity-scroller .unity-base-slider__dragger {
+    background-color: var(--light-brown);
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.unity-scroller .unity-base-slider__tracker {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.unity-scroller__low-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+.unity-scroller__high-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+.unity-scroller__slider {
+    background-color: transparent;
+}
+
+.unity-collection-view__item
+{    
+    width: 99%;
+
+
+}
 .button-menu {
-    background-color: rgba(88, 88, 88, 0);
+    background-color: transparent;
     -unity-text-outline-color: rgba(255, 255, 255, 0);
     background-image: url('project://database/Assets/App/UI/Graphics/ButtonEdged.png?fileID=2800000&guid=3c0f9cdcd86981c4ba4095fabbbf566e&type=3#ButtonEdged');
     -unity-background-scale-mode: stretch-to-fill;

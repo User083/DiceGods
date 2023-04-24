@@ -85,7 +85,7 @@ public class CharacterDisplay
         else
         {
 
-            populater.PopulateAttributes(parentSystem, elementSlot, Attributes);
+            populater.PopulateAttributes(parentSystem, elementSlot, Attributes, editable);
             Attributes.SetEnabled(true);
         }
 

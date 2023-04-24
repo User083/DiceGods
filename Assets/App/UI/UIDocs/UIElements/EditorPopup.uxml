@@ -3,7 +3,7 @@
     <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: center;">
         <ui:VisualElement name="ep-panel-main" style="width: 60%; height: 60%; flex-wrap: wrap; align-items: stretch; justify-content: space-between; background-image: none; background-color: rgb(8, 48, 49);">
             <ui:VisualElement name="ep-panel-editor" style="height: 85%; width: 100%; justify-content: center;" />
-            <ui:VisualElement style="height: 15%; flex-direction: row; align-items: center; justify-content: center; width: 100%;">
+            <ui:VisualElement style="height: 14%; flex-direction: row; align-items: center; justify-content: center; width: 100%;">
                 <ui:Button tabindex="-1" text="Cancel" display-tooltip-when-elided="true" name="ep-button-cancel" class="text-default" />
                 <ui:Button tabindex="-1" text="Create" display-tooltip-when-elided="true" name="ep-button-create" class="text-default" />
             </ui:VisualElement>

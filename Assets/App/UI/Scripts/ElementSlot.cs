@@ -72,7 +72,7 @@ public class ElementSlot
         }
     }
 
-    public void SetAttributeData(Attribute att)
+    public void SetAttributeData(Attribute att, bool editable)
     {
         title.text = att._name;
         name.label = "Name:";
@@ -83,6 +83,7 @@ public class ElementSlot
         name.value = att._name;
         description.value = att._description;
         defaultValue.value = att.base_value;
+        defaultValue.isReadOnly= editable;
         maxValue.value = att.max_value;
         type = "attribute";
         

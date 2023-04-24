@@ -111,7 +111,7 @@ public class SystemDisplay
         classButton.RemoveFromHierarchy();
         statsButton.RemoveFromHierarchy();
 
-        populater.PopulateAttributes(parentSystem, elementSlot, attFoldout);
+        populater.PopulateAttributes(parentSystem, elementSlot, attFoldout, editable);
         populater.PopulateRaces(parentSystem, elementSlot, racesFoldout);
         populater.PopulateClasses(parentSystem, elementSlot, classFoldout);
 

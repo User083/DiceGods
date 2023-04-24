@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class DataPopulater 
 {
 
-    public void PopulateAttributes(SystemData newSystem, VisualTreeAsset elementSlot, Foldout foldout)
+    public void PopulateAttributes(SystemData newSystem, VisualTreeAsset elementSlot, Foldout foldout, bool editable)
     {
         int attI = 0;
         List<Attribute> attributes = new List<Attribute>();
@@ -18,7 +18,7 @@ public class DataPopulater
             var newEntryLogic = new ElementSlot();
             newSlotEntry.userData = newEntryLogic;
             newEntryLogic.SetVisualElement(newSlotEntry);
-            newEntryLogic.SetAttributeData(attribute);
+            newEntryLogic.SetAttributeData(attribute, editable);
 
             foldout.Insert(attI, newSlotEntry);
 
@@ -87,16 +87,16 @@ public class DataPopulater
 
             newEntryLogic.SetVisualElement(newSlotEntry);
 
-            return newSlotEntry;
+             return newSlotEntry;
         };
 
 
         list.bindItem = (item, index) =>
         {
-            (item.userData as ElementSlot).SetAttributeData(allAttributes[index]);
+            (item.userData as ElementSlot).SetAttributeData(allAttributes[index], true);
         };
 
-        list.fixedItemHeight = 270;
+        list.fixedItemHeight = 250;
         list.itemsSource = allAttributes;
 
         return list;
