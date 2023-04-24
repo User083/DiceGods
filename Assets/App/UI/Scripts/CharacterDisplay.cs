@@ -1,7 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Serialization;
+using UnityEditor;
+using UnityEditorInternal.VR;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -21,14 +26,17 @@ public class CharacterDisplay
     public DropdownField Race;
     public DropdownField Class;
     public Foldout Attributes;
+    public ListView AttList = new ListView();
     public IntegerField LevelDisplay;
     public GroupBox levelBox;
     public Label levelLabel;
+    public VisualElement contentContainer;
 
     [Header("Data")]
     private Dictionary<string, string> RaceDictionary = new Dictionary<string, string>();
     private Dictionary<string, string> ClassDictionary = new Dictionary<string, string>();
-
+    public List<Attribute> attCreationList = new List<Attribute>(); 
+    public Attribute selectedAtt;
 
     public CharacterDisplay(VisualElement root, VisualTreeAsset attributeElementSlot)
     {
@@ -45,12 +53,15 @@ public class CharacterDisplay
         LevelDisplay = root.Q<IntegerField>("cd-intfield-level");
         levelBox = root.Q<GroupBox>("cd-levelbox");
         levelLabel = root.Q<Label>("cd-label-level");
+        contentContainer = root.Q<VisualElement>("cd-content-container");
         Level.RegisterCallback<ChangeEvent<int>>((e) => { levelLabel.text=e.newValue.ToString(); });
+        
     }
 
     
     public void DisplayCharacter(Character currentChar)
     {
+        
         Name.value = currentChar._name;
         Description.value = currentChar._description;
         if (Value!= null)
@@ -66,7 +77,16 @@ public class CharacterDisplay
             LevelDisplay.value = currentChar._level;
         }
 
+        if(Attributes != null)
+        {
+            Attributes.Clear();
+            populater.PopulateCharacterAttributes(elementSlot, Attributes, currentChar);
+        }
+
     }
+
+
+
     public void SetDisplayData(SystemData parentSystem, bool editable)
     {
         if(parentSystem == null)
@@ -81,12 +101,33 @@ public class CharacterDisplay
         if(!parentSystem.useAttributes)
         {
             Attributes.RemoveFromHierarchy();
+            AttList.RemoveFromHierarchy();
         }
         else
         {
-
-            populater.PopulateAttributes(parentSystem, elementSlot, Attributes, editable);
-            Attributes.SetEnabled(true);
+   
+            if(editable)
+            {
+                populater.EnumerateAttributes(parentSystem);
+                AttList = populater.PopulateAttributeList(elementSlot, true);
+                if (contentContainer.Contains(AttList))
+                {
+                    contentContainer.Remove(AttList);
+                }
+                contentContainer.Add(AttList);
+                AttList.onSelectionChange += AttChange;
+                Attributes.RemoveFromHierarchy();
+            }
+            else
+            {
+                if (contentContainer.Contains(AttList))
+                {
+                    contentContainer.Remove(AttList);
+                }
+                AttList.RemoveFromHierarchy();
+                Attributes.SetEnabled(true);
+            }
+            
         }
 
         if(!parentSystem.useWeight)
@@ -186,5 +227,60 @@ public class CharacterDisplay
         Weight.value = 0;
         Value.value = 0;
         Level.value = 0;
+
+        foreach (var item in populater.AttributeSlots)
+        {
+
+          item.Value.defaultValueSlider.value = 10;
+
+
+        }
     }
+
+    public int GetAttValue(VisualElement slot)
+    {
+        int attVal = 0;
+        var SlotLogic = new ElementSlot();
+        slot.userData = SlotLogic;
+       SlotLogic.SetVisualElement(slot);
+        SlotLogic.TestAtt();
+        attVal = SlotLogic.attValue;
+        return attVal;
+
+    }
+
+    public List<Attribute> UpdateAttValues()
+    {
+        Dictionary<Attribute, ElementSlot> Slots = new Dictionary<Attribute, ElementSlot>();
+        Slots = populater.AttributeSlots;
+        foreach(var item in Slots )
+        {
+            if(item.Key.base_value != item.Value.attValue)
+            {
+                item.Key.base_value = item.Value.attValue;
+            }
+
+        }
+
+        return Slots.Keys.ToList();
+    }
+
+   
+
+    public void AttChange(IEnumerable<object> selectedItems)
+    {
+        var currentAtt = AttList.selectedItem as Attribute;
+
+        if (currentAtt == null)
+        {
+            selectedAtt = null;
+            return;
+        }
+
+        selectedAtt = currentAtt;
+    
+
+
+    }
+
 }

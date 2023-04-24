@@ -204,6 +204,14 @@ public class ContentCreator_Manager : MonoBehaviour
                 }
             }
 
+            if(parentSystem.useAttributes)
+            {
+                character.UpdateAttValues();
+                currentCharacter._attributes = character.UpdateAttValues();
+               
+            }
+
+
             if(parentSystem.useClasses)
             {
                 foreach (var charClass in parentSystem.characterClasses)

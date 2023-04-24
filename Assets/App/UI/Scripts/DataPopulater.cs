@@ -18,8 +18,37 @@ public class DataPopulater
             var newEntryLogic = new ElementSlot();
             newSlotEntry.userData = newEntryLogic;
             newEntryLogic.SetVisualElement(newSlotEntry);
-            newEntryLogic.SetAttributeData(attribute, editable);
 
+            if(editable)
+            {
+                newEntryLogic.SetAttributeDataChar(attribute);
+            }
+            else
+            {
+                newEntryLogic.SetAttributeData(attribute);
+            }
+            
+
+            foldout.Insert(attI, newSlotEntry);
+
+            attI++;
+        };
+
+    }
+
+    public void PopulateCharacterAttributes(VisualTreeAsset elementSlot, Foldout foldout, Character character)
+    {
+        int attI = 0;
+        List<Attribute> attributes = new List<Attribute>();
+        attributes = character._attributes;
+
+        foreach (var attribute in attributes)
+        {
+            var newSlotEntry = elementSlot.Instantiate();
+            var newEntryLogic = new ElementSlot();
+            newSlotEntry.userData = newEntryLogic;
+            newEntryLogic.SetVisualElement(newSlotEntry);
+            newEntryLogic.SetAttributeData(attribute);
             foldout.Insert(attI, newSlotEntry);
 
             attI++;
@@ -73,9 +102,13 @@ public class DataPopulater
         allAttributes.AddRange(activeSystem.attributes);
 
     }
-    public ListView PopulateAttributeList(VisualTreeAsset elementSlot)
+
+    public List<ElementSlot> elementSlots = new List<ElementSlot>();
+    public Dictionary<Attribute, ElementSlot> AttributeSlots = new Dictionary<Attribute, ElementSlot>();
+    public ListView PopulateAttributeList(VisualTreeAsset elementSlot, bool charDisplay)
     {
         ListView list = new ListView();
+        
 
         list.makeItem = () =>
         {
@@ -87,16 +120,34 @@ public class DataPopulater
 
             newEntryLogic.SetVisualElement(newSlotEntry);
 
+            
+
              return newSlotEntry;
         };
 
 
         list.bindItem = (item, index) =>
         {
-            (item.userData as ElementSlot).SetAttributeData(allAttributes[index], true);
+            if(charDisplay)
+            {
+                (item.userData as ElementSlot).SetAttributeDataChar(allAttributes[index]);
+                AttributeSlots.Add(allAttributes[index], item.userData as ElementSlot);
+            }
+            else
+            {
+                (item.userData as ElementSlot).SetAttributeData(allAttributes[index]);
+            }
+            
         };
 
-        list.fixedItemHeight = 250;
+        if(charDisplay)
+        {
+            list.fixedItemHeight = 200;
+        }
+        else
+        {
+            list.fixedItemHeight = 250;
+        }
         list.itemsSource = allAttributes;
 
         return list;

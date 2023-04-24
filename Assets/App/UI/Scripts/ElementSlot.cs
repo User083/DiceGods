@@ -15,9 +15,10 @@ public class ElementSlot
     public Label defaultValueLabel;
     public SliderInt defaultValueSlider;
     public GroupBox boxValue;
-    public string slotID;
     public string type;
     public int index;
+    public int attValue;
+    public string slotID;
     public void SetVisualElement(VisualElement visualElement)
     {
         root = visualElement;
@@ -72,21 +73,42 @@ public class ElementSlot
         }
     }
 
-    public void SetAttributeData(Attribute att, bool editable)
+    public void SetAttributeData(Attribute att)
     {
         title.text = att._name;
         name.label = "Name:";
         description.label = "Description:";
-        defaultValue.label = "Default Value:";
+        defaultValue.label = "Value:";
         maxValue.label = "Max Value:";
         boxValue.RemoveFromHierarchy();
         name.value = att._name;
         description.value = att._description;
-        defaultValue.value = att.base_value;
-        defaultValue.isReadOnly= editable;
+        defaultValue.value = att.base_value;       
         maxValue.value = att.max_value;
         type = "attribute";
-        
+        slotID = att._ID;
+
+    }
+
+    public void SetAttributeDataChar(Attribute att)
+    {
+        title.text = att._name;
+        name.label = "Name:";
+        description.label = "Description:";
+        name.value = att._name;
+        description.value = att._description;
+        defaultValueSlider.label = "Value:";
+        defaultValueSlider.highValue = att.max_value;
+        defaultValueSlider.RegisterCallback<ChangeEvent<int>>((e) => { defaultValueLabel.text = e.newValue.ToString(); attValue = e.newValue; });
+        type = "attribute";
+        defaultValue.RemoveFromHierarchy();
+        maxValue.RemoveFromHierarchy();
+        slotID = att._ID;
+    }
+
+    public void TestAtt()
+    {
+        defaultValueSlider.RegisterCallback<ChangeEvent<int>>((e) => { defaultValueLabel.text = e.newValue.ToString(); attValue = e.newValue; });
     }
 
     public void SetCharClassData(CharacterClass charClass)

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.UIElements;
 using static UnityEditor.Progress;
 
@@ -111,7 +110,7 @@ public class SystemDisplay
         classButton.RemoveFromHierarchy();
         statsButton.RemoveFromHierarchy();
 
-        populater.PopulateAttributes(parentSystem, elementSlot, attFoldout, editable);
+        populater.PopulateAttributes(parentSystem, elementSlot, attFoldout, false);
         populater.PopulateRaces(parentSystem, elementSlot, racesFoldout);
         populater.PopulateClasses(parentSystem, elementSlot, classFoldout);
 
@@ -133,7 +132,7 @@ public class SystemDisplay
 
         //Populate system defaults for editing
         populater.EnumerateAttributes(parentSystem);
-        attList = populater.PopulateAttributeList(elementSlot);
+        attList = populater.PopulateAttributeList(elementSlot, false);
         populater.EnumerateRaces(parentSystem);
         raceList = populater.PopulateRaceList(elementSlot);
         populater.EnumerateClasses(parentSystem);
@@ -151,7 +150,7 @@ public class SystemDisplay
         weightToggle.value = false;
 
         populater.EnumerateAttributes(blankSystem);
-        attList = populater.PopulateAttributeList(elementSlot);
+        attList = populater.PopulateAttributeList(elementSlot, false);
         populater.EnumerateRaces(blankSystem);
         raceList =populater.PopulateRaceList(elementSlot);
         populater.EnumerateClasses(blankSystem);
