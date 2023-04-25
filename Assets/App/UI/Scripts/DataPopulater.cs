@@ -27,8 +27,8 @@ public class DataPopulater
             {
                 newEntryLogic.SetAttributeData(attribute);
             }
-            
 
+            newSlotEntry.style.minHeight = 200;
             foldout.Insert(attI, newSlotEntry);
 
             attI++;
@@ -49,6 +49,7 @@ public class DataPopulater
             newSlotEntry.userData = newEntryLogic;
             newEntryLogic.SetVisualElement(newSlotEntry);
             newEntryLogic.SetAttributeData(attribute);
+            newSlotEntry.style.minHeight = 200;
             foldout.Insert(attI, newSlotEntry);
 
             attI++;
@@ -70,7 +71,7 @@ public class DataPopulater
             newSlotEntry.userData = newEntryLogic;
             newEntryLogic.SetVisualElement(newSlotEntry);
             newEntryLogic.SetRaceData(race);
-
+            newSlotEntry.style.minHeight = 150;
             foldout.Insert(raceI, newSlotEntry);
             raceI++;
         };
@@ -89,7 +90,7 @@ public class DataPopulater
             newSlotEntry.userData = newEntryLogic;
             newEntryLogic.SetVisualElement(newSlotEntry);
             newEntryLogic.SetCharClassData(charClass);
-
+            newSlotEntry.style.minHeight = 150;
             foldout.Insert(classI, newSlotEntry);
             classI++;
         };

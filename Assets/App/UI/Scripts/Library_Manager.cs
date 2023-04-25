@@ -184,7 +184,7 @@ public class Library_Manager : MonoBehaviour
         currentSystemData = DataPersistenceManager.instance.activeSave.parentSystem;
         character.SetDisplayData(currentSystemData, false);
         item.SetDisplayData(currentSystemData, false);
-        system.SetDisplayData(currentSystemData, false);
+        system.SetDisplayData(currentSystemData);
         system.PopulateSystemData(currentSystemData);
         if(!currentSystemData.useAttributes)
         {

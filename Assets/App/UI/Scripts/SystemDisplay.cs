@@ -86,10 +86,11 @@ public class SystemDisplay
         racesToggle.value = currentSystemData.useRaces;
         classesToggle.value = currentSystemData.useClasses;
         attributesToggle.value = currentSystemData.useAttributes;
+        coreStatsToggle.value = currentSystemData.useCoreStats;
         systemNameField.value = currentSystemData.systemName;
     }
 
-    public void SetDisplayData(SystemData parentSystem, bool editable)
+    public void SetDisplayData(SystemData parentSystem)
     {
         
         if (parentSystem == null)
@@ -97,22 +98,33 @@ public class SystemDisplay
             Debug.LogError("No parent system found - characters can't exist outside a system. Have you loaded a save?");
         }
 
-            systemNameField.isReadOnly= true;
-            levelsToggle.SetEnabled(editable);
-            classesToggle.SetEnabled(editable);
-            racesToggle.SetEnabled(editable);
-            coreStatsToggle.SetEnabled(editable);
-            attributesToggle.SetEnabled(editable);
-            charsHaveValueToggle.SetEnabled(editable);
-            weightToggle.SetEnabled(editable);
         attButton.RemoveFromHierarchy();
         raceButton.RemoveFromHierarchy();
         classButton.RemoveFromHierarchy();
         statsButton.RemoveFromHierarchy();
 
-        populater.PopulateAttributes(parentSystem, elementSlot, attFoldout, false);
-        populater.PopulateRaces(parentSystem, elementSlot, racesFoldout);
-        populater.PopulateClasses(parentSystem, elementSlot, classFoldout);
+        if (parentSystem.useAttributes)
+        {
+            populater.PopulateAttributes(parentSystem, elementSlot, attFoldout, false);
+        }
+
+        if(parentSystem.useRaces)
+        {
+            populater.PopulateRaces(parentSystem, elementSlot, racesFoldout);
+        }
+
+        if (parentSystem.useClasses)
+        {
+            populater.PopulateClasses(parentSystem, elementSlot, classFoldout);
+        }
+        systemNameField.isReadOnly= true;
+        levelsToggle.SetEnabled(false);
+        classesToggle.SetEnabled(false);
+        racesToggle.SetEnabled(false);
+        attributesToggle.SetEnabled(false);
+        charsHaveValueToggle.SetEnabled(false);
+        weightToggle.SetEnabled(false);
+        coreStatsToggle.SetEnabled(false);
 
     }
 

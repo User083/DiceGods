@@ -165,8 +165,16 @@
     background-color: rgba(48, 116, 115, 0.3);
 }
 
+.unity-list-view__item
+{
+    border-width: 1px;
+    border-color: transparent;
+    min-height: 40px;
+   
+}
 .unity-list-view__item:checked {
     border-width: 1px;
+  
     border-color: var(--light-teal);
     background-color: rgba(48, 116, 115, 0.1);
 }
@@ -214,6 +222,8 @@
 .unity-collection-view__item {
     width: 99%;
 }
+
+
 
 .button-menu {
     background-color: transparent;
