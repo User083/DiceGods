@@ -5,7 +5,7 @@
             <ui:ScrollView style="height: 100%; background-image: none; width: auto;">
                 <ui:VisualElement name="cd-content-container" style="width: 99%;">
                     <ui:TextField picking-mode="Ignore" label="Name:" password="false" name="cd-textfield-charactername" class="text-field-text" style="width: auto;" />
-                    <ui:TextField picking-mode="Ignore" label="Description:" password="false" name="cd-textfield-characterdesc" class="text-field-text" />
+                    <ui:TextField picking-mode="Ignore" label="Description:" password="false" name="cd-textfield-characterdesc" multiline="true" class="text-field-text" />
                     <ui:FloatField label="Value:" value="0" name="cd-floatfield-value" class="text-field-text" />
                     <ui:FloatField label="Weight:" value="0" name="cd-floatfield-weight" class="text-field-text" />
                     <ui:GroupBox name="cd-levelbox" style="flex-direction: row; align-items: center; justify-content: space-between; min-width: auto; min-height: auto;">
@@ -16,7 +16,7 @@
                     <ui:DropdownField label="Race:" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="cd-dropdown-race" class="text-field-text" />
                     <ui:DropdownField label="Class:" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="cd-dropdown-class" class="text-field-text" />
                     <ui:Foldout text="Attributes:" name="cd-foldout-att" value="false" class="text-field-text" />
-                    <ui:ListView focusable="true" name="cd-listview-attributes" fixed-item-height="200" horizontal-scrolling="false" />
+                    <ui:Label tabindex="-1" text="Attributes:" display-tooltip-when-elided="true" name="cd-label-attributes" class="text-default" style="align-items: flex-start; -unity-text-align: middle-left;" />
                 </ui:VisualElement>
             </ui:ScrollView>
         </ui:VisualElement>

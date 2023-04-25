@@ -9,22 +9,27 @@
 }
 
 .default-button {
-    justify-content: space-between;
-    width: 150px;
-    height: 50px;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 15px;
-    background-color: rgb(82, 65, 61);
-    border-left-color: rgb(35, 28, 26);
-    border-right-color: rgb(35, 28, 26);
-    border-top-color: rgb(35, 28, 26);
-    border-bottom-color: rgb(35, 28, 26);
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    background-image: url('project://database/Assets/App/UI/Graphics/ButtonNormal.png?fileID=2800000&guid=7e2e1afa9c28376489d6647a2f948ef8&type=3#ButtonNormal');
+    background-color: rgba(56, 56, 56, 0);
+    -unity-background-scale-mode: scale-to-fit;
+    align-items: center;
+    justify-content: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    -unity-text-align: upper-center;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: auto;
+    max-width: 150px;
+    min-width: 100px;
 }
 
 .text-title {
@@ -69,42 +74,64 @@
 }
 
 .unity-toggle__checkmark {
-    background-color: var(--light-brown);
+    background-color: var(--lightest-brown);
+    border-radius: 5px;
     padding: 0;
     margin: 0;
+}
+
+.unity-toggle__checkmark:checked {
+    border-color: var(--lightest-brown);
+}
+
+.unity-toggle {
+    justify-content: space-between;
+}
+
+.unity-toggle__label:focus {
+    color: var(--lightest-brown);
 }
 
 .unity-toggle__checkmark:hover {
     border-color: var(--light-teal);
 }
 
-.unity-base-text-field__input--single-line {
-    background-image: url('project://database/Assets/App/UI/Graphics/Bar.png?fileID=2800000&guid=d9338fc80689da245b66eeff800e0487&type=3#Bar');
+.unity-base-text-field__input {
+    background-color: var(--lightest-brown);
     padding: 0;
     margin: 0;
-    -unity-background-scale-mode: stretch-to-fill;
+    border-radius: 3px;
     color: var(--darkest-brown);
     justify-content: center;
     -unity-font-definition: none;
     -unity-font: url('project://database/Assets/App/UI/Fonts/AppleGaramond.ttf?fileID=12800000&guid=59d826c17169d9b44924c828b7644e07&type=3#AppleGaramond');
     font-size: 15px;
+    height: 25px;
+    align-items: flex-start;
 }
 
-.unity-base-text-field__input--single-line:focus {
+.unity-base-text-field:focus > .unity.base-test-field__input {
     border-color: var(--lightest-brown);
+    color: red;
+}
 
+.unity-base-field:focus > .unity-base-field__label {
+    color: var(--lightest-brown);
+}
+
+.unity-label:focus {
+    color: var(--lightest-brown);
 }
 
 .unity-base-text-field__label:focus {
-    
     color: var(--lightest-brown);
 }
 
-.unity-toggle__label:focus{
+.unity-toggle__label:focus {
     color: var(--lightest-brown);
 }
 
-.unity-base-slider__label:focus{
+.unity-base-slider__label:focus {
     color: var(--lightest-brown);
 }
 
@@ -112,7 +139,23 @@
     color: var(--light-teal);
 }
 
+.unity-base-popup-field__input{
+    border-radius: 3px;
+    background-color: var(--lightest-brown);
+    min-width: 30px;
+    color: var(--darkest-brown);
+}
 
+.unity-base-dropdown__item
+{
+    background-color: var(--lightest-brown);
+}
+
+.unity-base-dropdown__item:checked
+{
+  
+    background-color: rgba(48, 116, 115, 0.1);
+}
 
 .bar {
     background-image: url('project://database/Assets/App/UI/Graphics/Bar.png?fileID=2800000&guid=d9338fc80689da245b66eeff800e0487&type=3#Bar');
@@ -126,9 +169,12 @@
     border-width: 1px;
     border-color: var(--light-teal);
     background-color: rgba(48, 116, 115, 0.1);
-    
 }
 
+.unity-base-dropdown__container-inner
+{
+    background-color: var(--lightest-brown);
+}
 .unity-base-slider__dragger {
     border-radius: 20px;
     background-color: var(--darkest-brown);
@@ -165,12 +211,10 @@
     background-color: transparent;
 }
 
-.unity-collection-view__item
-{    
+.unity-collection-view__item {
     width: 99%;
-
-
 }
+
 .button-menu {
     background-color: transparent;
     -unity-text-outline-color: rgba(255, 255, 255, 0);
