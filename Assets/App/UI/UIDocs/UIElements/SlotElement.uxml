@@ -7,7 +7,7 @@
                     <ui:Label text="Attribute" display-tooltip-when-elided="true" name="se-label-title" class="text-title" style="font-size: 20px;" />
                 </ui:GroupBox>
                 <ui:TextField picking-mode="Ignore" label="Name:" text="Strength" name="se-textfield-name" readonly="true" class="text-field-text" />
-                <ui:TextField picking-mode="Ignore" label="Description:" value="filler text" text="Measure of a character&apos;s raw physical ability." name="se-textfield-description" password="false" readonly="true" class="text-field-text" />
+                <ui:TextField picking-mode="Ignore" label="Description:" value="filler text" text="Measure of a character&apos;s raw physical ability." name="se-textfield-description" password="false" readonly="true" multiline="true" class="text-field-text" />
                 <ui:GroupBox name="se-box-value" style="justify-content: space-between; flex-direction: row; width: 100%; align-items: center; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
                     <ui:SliderInt picking-mode="Ignore" label="Default:" value="10" high-value="20" name="se-slider-value" class="text-field-text" style="width: 90%; flex-shrink: 1; flex-grow: 1; margin-left: 3px; margin-right: 3px; margin-top: 0; margin-bottom: 0;" />
                     <ui:Label tabindex="-1" text="10" display-tooltip-when-elided="true" name="se-label-value" class="text-default" style="width: 8%; -unity-text-align: upper-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />

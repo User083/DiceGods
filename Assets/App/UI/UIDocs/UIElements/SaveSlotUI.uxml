@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/App/UI/Styles/StyleDefault.uss?fileID=7433441132597879392&amp;guid=0e7e59b06c57cd34985291de7452f975&amp;type=3#StyleDefault" />
-    <ui:VisualElement name="VisualElement" style="height: 5%; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; align-items: center; justify-content: space-around; flex-grow: 1; background-image: none; -unity-background-scale-mode: scale-and-crop;">
-        <ui:Label text="Save Slot" display-tooltip-when-elided="true" name="ss-label-name" class="text-title" style="font-size: 30px; -unity-text-align: middle-center; -unity-font-style: bold; color: rgb(255, 255, 255); background-color: rgba(255, 255, 255, 0); -unity-text-outline-width: 1px; white-space: normal;" />
+    <ui:VisualElement name="VisualElement" style="height: auto; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; align-items: center; justify-content: space-around; flex-grow: 1; background-image: none; -unity-background-scale-mode: scale-and-crop; min-height: 30px; max-height: 50px;">
+        <ui:Label text="Save Slot" display-tooltip-when-elided="true" name="ss-label-name" class="text-default" style="font-size: 20px; -unity-font-style: bold;" />
     </ui:VisualElement>
 </ui:UXML>

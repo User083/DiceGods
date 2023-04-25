@@ -31,6 +31,7 @@ public class CharacterDisplay
     public GroupBox levelBox;
     public Label levelLabel;
     public VisualElement contentContainer;
+    public Label attLabel;
 
     [Header("Data")]
     private Dictionary<string, string> RaceDictionary = new Dictionary<string, string>();
@@ -53,6 +54,7 @@ public class CharacterDisplay
         LevelDisplay = root.Q<IntegerField>("cd-intfield-level");
         levelBox = root.Q<GroupBox>("cd-levelbox");
         levelLabel = root.Q<Label>("cd-label-level");
+        attLabel = root.Q<Label>("cd-label-attributes");
         contentContainer = root.Q<VisualElement>("cd-content-container");
         Level.RegisterCallback<ChangeEvent<int>>((e) => { levelLabel.text=e.newValue.ToString(); });
         
@@ -102,6 +104,7 @@ public class CharacterDisplay
         {
             Attributes.RemoveFromHierarchy();
             AttList.RemoveFromHierarchy();
+            attLabel.RemoveFromHierarchy();
         }
         else
         {
@@ -125,6 +128,7 @@ public class CharacterDisplay
                     contentContainer.Remove(AttList);
                 }
                 AttList.RemoveFromHierarchy();
+                attLabel.RemoveFromHierarchy();
                 Attributes.SetEnabled(true);
             }
             

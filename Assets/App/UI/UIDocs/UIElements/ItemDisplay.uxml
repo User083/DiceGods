@@ -4,7 +4,7 @@
         <ui:VisualElement style="height: 90%;">
             <ui:ScrollView style="height: 100%; background-image: none;">
                 <ui:TextField picking-mode="Ignore" label="Name:" password="false" name="id-textfield-name" class="text-field-text" />
-                <ui:TextField picking-mode="Ignore" label="Description:" password="false" name="id-textfield-description" class="text-field-text" />
+                <ui:TextField picking-mode="Ignore" label="Description:" password="false" name="id-textfield-description" multiline="true" class="text-field-text" />
                 <ui:FloatField label="Value:" value="0" name="id-floatfield-value" class="text-field-text" />
                 <ui:FloatField label="Weight:" value="0" name="id-floatfield-weight" class="text-field-text" />
                 <ui:SliderInt picking-mode="Ignore" label="Level:" value="0" high-value="20" name="id-slider-level" class="text-field-text" />
