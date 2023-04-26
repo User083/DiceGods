@@ -9,7 +9,6 @@ public class ListEditor
     public ListView activeList;
     public Button removeButton;
     public Button newButton;
-    public Button saveButton;
     public Button cancelButton;
     public Button createButton;
     public VisualElement root;
@@ -21,10 +20,8 @@ public class ListEditor
         this.root = root;
         removeButton = root.Q<Button>("ed-button-remove");
         newButton = root.Q<Button>("ed-button-new");
-        saveButton = root.Q<Button>("ed-button-save");
         listPanel = root.Q<VisualElement>("ed-panel-list");
         removeButton.SetEnabled(false);
-        saveButton.SetEnabled(false);
         this.editorRoot = editorRoot;
         cancelButton = editorRoot.Q<Button>("ep-button-cancel");
         createButton = editorRoot.Q<Button>("ep-button-create");
@@ -41,10 +38,10 @@ public class ListEditor
         listPanel.Remove(activeList);
     }
 
-    public void SetButtonStatus(bool remove, bool add, bool save)
+    public void SetButtonStatus(bool remove, bool add)
     {
         removeButton.SetEnabled(remove);
         newButton.SetEnabled(add);
-        saveButton.SetEnabled(save);
+
     }
 }

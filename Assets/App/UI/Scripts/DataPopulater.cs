@@ -57,6 +57,24 @@ public class DataPopulater
 
     }
 
+    public void PopulateStats(SystemData newSystem, VisualTreeAsset elementSlot, Foldout foldout)
+    {
+        int statI = 0;
+        List<Stat> stats = new List<Stat>();
+        stats = newSystem.coreStats;
+
+        foreach (var stat in stats)
+        {
+            var newSlotEntry = elementSlot.Instantiate();
+            var newEntryLogic = new ElementSlot();
+            newSlotEntry.userData = newEntryLogic;
+            newEntryLogic.SetVisualElement(newSlotEntry);
+            newEntryLogic.SetStatData(stat);
+            newSlotEntry.style.minHeight = 150;
+            foldout.Insert(statI, newSlotEntry);
+            statI++;
+        };
+    }
 
     public void PopulateRaces(SystemData newSystem, VisualTreeAsset elementSlot, Foldout foldout)
     {
@@ -104,7 +122,7 @@ public class DataPopulater
 
     }
 
-    public List<ElementSlot> elementSlots = new List<ElementSlot>();
+    
     public Dictionary<Attribute, ElementSlot> AttributeSlots = new Dictionary<Attribute, ElementSlot>();
     public ListView PopulateAttributeList(VisualTreeAsset elementSlot, bool charDisplay)
     {
@@ -155,12 +173,15 @@ public class DataPopulater
     }
 
     List<Race> allRaces;
+    public Dictionary<Race, ElementSlot> RaceSlots = new Dictionary<Race, ElementSlot>();
     public void EnumerateRaces(SystemData activeSystem)
     {
         allRaces = new List<Race>();
         allRaces.AddRange(activeSystem.races);
 
     }
+
+
     public ListView PopulateRaceList(VisualTreeAsset elementSlot)
     {
         ListView list = new ListView();
@@ -182,6 +203,7 @@ public class DataPopulater
         list.bindItem = (item, index) =>
         {
             (item.userData as ElementSlot).SetRaceData(allRaces[index]);
+            RaceSlots.Add(allRaces[index], item.userData as ElementSlot);
         };
 
         list.fixedItemHeight = 200;
@@ -191,6 +213,7 @@ public class DataPopulater
     }
 
     List<CharacterClass> allClasses;
+    public Dictionary<CharacterClass, ElementSlot> ClassSlots = new Dictionary<CharacterClass, ElementSlot>();
     public void EnumerateClasses(SystemData activeSystem)
     {
         allClasses = new List<CharacterClass>();
@@ -218,6 +241,7 @@ public class DataPopulater
         list.bindItem = (item, index) =>
         {
             (item.userData as ElementSlot).SetCharClassData(allClasses[index]);
+            ClassSlots.Add(allClasses[index], item.userData as ElementSlot);
         };
 
         list.fixedItemHeight = 200;
@@ -226,20 +250,51 @@ public class DataPopulater
         return list;
     }
 
+    List<Stat> allStats;
+    public Dictionary<Stat, ElementSlot> StatSlots = new Dictionary<Stat, ElementSlot>();
+    public void EnumerateStats(SystemData activeSystem)
+    {
+        allStats = new List<Stat>();
+        allStats.AddRange(activeSystem.coreStats);
+
+    }
+    public ListView PopulateStatList(VisualTreeAsset elementSlot)
+    {
+        ListView list = new ListView();
+
+        list.makeItem = () =>
+        {
+            var newSlotEntry = elementSlot.Instantiate();
+
+            var newEntryLogic = new ElementSlot();
+
+            newSlotEntry.userData = newEntryLogic;
+
+            newEntryLogic.SetVisualElement(newSlotEntry);
+
+            return newSlotEntry;
+        };
+
+
+        list.bindItem = (item, index) =>
+        {
+            (item.userData as ElementSlot).SetStatData(allStats[index]);
+            StatSlots.Add(allStats[index], item.userData as ElementSlot);
+        };
+
+        list.fixedItemHeight = 200;
+        list.itemsSource = allStats;
+
+        return list;
+    }
+
     List<Character> allCharacters;
+    public Dictionary<Character, ElementSlot> CharacterSlots = new Dictionary<Character, ElementSlot>();
 
     public void EnumerateCharacters(SaveData activeSave)
     {
          allCharacters = new List<Character>();
         allCharacters.AddRange(activeSave.characterList);
-
-    }
-
-    List<Item> allItems;
-    public void EnumerateItems(SaveData activeSave)
-    {
-        allItems = new List<Item>();
-        allItems.AddRange(activeSave.itemList);
 
     }
 
@@ -264,12 +319,22 @@ public class DataPopulater
         list.bindItem = (item, index) =>
         {
             (item.userData as SingleSlot).SetCharData(allCharacters[index]);
+            CharacterSlots.Add(allCharacters[index], item.userData as ElementSlot);
         };
 
         list.fixedItemHeight = 45;
         list.itemsSource = allCharacters;
 
         return list;
+    }
+
+    List<Item> allItems;
+    public Dictionary<Item, ElementSlot> ItemSlots = new Dictionary<Item, ElementSlot>();
+    public void EnumerateItems(SaveData activeSave)
+    {
+        allItems = new List<Item>();
+        allItems.AddRange(activeSave.itemList);
+
     }
 
     public ListView PopulateItems(VisualTreeAsset singleSlot)
@@ -293,6 +358,7 @@ public class DataPopulater
         list.bindItem = (item, index) =>
         {
             (item.userData as SingleSlot).SetItemData(allItems[index]);
+            ItemSlots.Add(allItems[index], item.userData as ElementSlot);
         };
 
         list.fixedItemHeight = 45;
@@ -338,6 +404,18 @@ public class DataPopulater
                     if (att._ID == ID)
                     {
                         system.attributes.Remove(att);
+                    }
+                }
+                foldout.Remove(slot);
+
+                break;
+            case "stat":
+
+                foreach (var stat in system.coreStats)
+                {
+                    if (stat._ID == ID)
+                    {
+                        system.coreStats.Remove(stat);
                     }
                 }
                 foldout.Remove(slot);

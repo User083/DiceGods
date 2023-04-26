@@ -1,11 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/App/UI/Styles/StyleDefault.uss?fileID=7433441132597879392&amp;guid=0e7e59b06c57cd34985291de7452f975&amp;type=3#StyleDefault" />
-    <ui:VisualElement name="ed-root" style="flex-wrap: wrap; flex-grow: 1; flex-direction: column;">
+    <ui:VisualElement name="ed-root" style="flex-wrap: wrap; flex-grow: 1; flex-direction: column; width: auto; align-items: center; max-width: none; min-width: auto; left: auto; max-height: none; height: auto;">
         <ui:VisualElement name="ed-panel-list" style="height: 90%; width: 100%;" />
         <ui:VisualElement name="ed-panel-buttons" style="flex-direction: row; height: 10%; align-items: center; justify-content: center;">
-            <ui:Button tabindex="-1" text="Remove" display-tooltip-when-elided="true" name="ed-button-remove" class="text-default" />
-            <ui:Button tabindex="-1" text="New" display-tooltip-when-elided="true" name="ed-button-new" class="text-default" />
-            <ui:Button tabindex="-1" text="Save" display-tooltip-when-elided="true" name="ed-button-save" class="text-default" />
+            <ui:Button tabindex="-1" text="Remove" display-tooltip-when-elided="true" name="ed-button-remove" class="text-default default-button" />
+            <ui:Button tabindex="-1" text="New" display-tooltip-when-elided="true" name="ed-button-new" class="text-default default-button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

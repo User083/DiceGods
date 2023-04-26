@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditor.Progress;
+
 
 public class SystemDisplay 
 {
@@ -19,7 +19,12 @@ public class SystemDisplay
     public VisualElement activeEditorSlot;
     public ElementSlot activeEditorSlotLogic;
     public NewSystem_Manager systemManager;
-    
+
+    //[Header ("Dictionaries")]
+    //public Dictionary<CharacterClass, ElementSlot> ClassSlots = new Dictionary<CharacterClass, ElementSlot>();
+    //public Dictionary<Race, ElementSlot> RaceSlots = new Dictionary<Race, ElementSlot>();
+    //public Dictionary<Attribute, ElementSlot> AttributeSlots = new Dictionary<Attribute, ElementSlot>();
+    //public Dictionary<Stat, ElementSlot> StatSlots = new Dictionary<Stat, ElementSlot>();
 
     [Header("Core System Details UI Elements")]
     public TextField saveNameField;
@@ -80,6 +85,8 @@ public class SystemDisplay
         
     }
 
+
+
     public void PopulateSystemData(SystemData currentSystemData)
     {
         levelsToggle.value = currentSystemData.useLevels;
@@ -117,6 +124,11 @@ public class SystemDisplay
         {
             populater.PopulateClasses(parentSystem, elementSlot, classFoldout);
         }
+
+        if (parentSystem.useCoreStats)
+        {
+            populater.PopulateStats(parentSystem, elementSlot, statsFoldout);
+        }
         systemNameField.isReadOnly= true;
         levelsToggle.SetEnabled(false);
         classesToggle.SetEnabled(false);
@@ -145,10 +157,16 @@ public class SystemDisplay
         //Populate system defaults for editing
         populater.EnumerateAttributes(parentSystem);
         attList = populater.PopulateAttributeList(elementSlot, false);
+        //AttributeSlots = populater.AttributeSlots;
         populater.EnumerateRaces(parentSystem);
         raceList = populater.PopulateRaceList(elementSlot);
+        //RaceSlots = populater.RaceSlots;
         populater.EnumerateClasses(parentSystem);
         classList = populater.PopulateClassList(elementSlot);
+        //ClassSlots = populater.ClassSlots;
+        populater.EnumerateStats(parentSystem);
+        statList = populater.PopulateStatList(elementSlot);
+        //StatSlots = populater.StatSlots;
     }
 
     public void ResetFields()
@@ -163,10 +181,16 @@ public class SystemDisplay
 
         populater.EnumerateAttributes(blankSystem);
         attList = populater.PopulateAttributeList(elementSlot, false);
+        //AttributeSlots = populater.AttributeSlots;
         populater.EnumerateRaces(blankSystem);
         raceList =populater.PopulateRaceList(elementSlot);
+        //RaceSlots = populater.RaceSlots;
         populater.EnumerateClasses(blankSystem);
         classList = populater.PopulateClassList(elementSlot);
+        //ClassSlots = populater.ClassSlots;
+        populater.EnumerateStats(blankSystem);
+        statList = populater.PopulateStatList(elementSlot);
+        //StatSlots = populater.StatSlots;
     }
 
     //Handle list selection changes
@@ -182,7 +206,23 @@ public class SystemDisplay
         }
 
         selectedAtt = currentAtt;
-        editor.SetButtonStatus(true, true, true);
+        editor.SetButtonStatus(true, true);
+
+    }
+
+    public void OnStatChange(IEnumerable<object> selectedItems)
+    {
+        var currentStat = attList.selectedItem as Stat;
+
+        if (currentStat == null)
+        {
+            selectedStat = null;
+
+            return;
+        }
+
+        selectedStat = currentStat;
+        editor.SetButtonStatus(true, true);
 
     }
 
@@ -198,7 +238,7 @@ public class SystemDisplay
         }
 
         selectedRace = currentRace;
-        editor.SetButtonStatus(true, true, true);
+        editor.SetButtonStatus(true, true);
 
     }
 
@@ -214,7 +254,7 @@ public class SystemDisplay
         }
 
         selectedClass = currentClass;
-        editor.SetButtonStatus(true, true, true);
+        editor.SetButtonStatus(true, true);
 
     }
 
@@ -225,6 +265,7 @@ public class SystemDisplay
         this.systemManager = systemManager;
         editorListRoot = editorList.Instantiate();
         editorListRoot.style.flexGrow = 1;
+        editorListRoot.style.width = Length.Percent(59);
         editorPopupUI = editorPopup;
         editorPopupRoot = editorPopup.rootVisualElement;
         editor = new ListEditor(editorListRoot, editorPopupRoot);
@@ -233,6 +274,7 @@ public class SystemDisplay
         editor.newButton.clickable.clicked += () => AddNew(editor.activeList);
         editor.cancelButton.clickable.clicked += () => CancelEdit();
         editor.createButton.clickable.clicked += () => AddToList(editor.activeList);
+        //editor.editButton.clickable.clicked += () => EditItem(editor.activeList);
 
     }
 
@@ -303,6 +345,7 @@ public class SystemDisplay
             panel.Remove(editorListRoot);
         }
         panel.Add(editorListRoot);
+        statList.onSelectionChange += OnStatChange;
     }
 
     //Remove selected item from list
@@ -311,7 +354,8 @@ public class SystemDisplay
         if(editor.activeList == attList)
         {
             attList.itemsSource.Remove(selectedAtt);
-            selectedAtt= null;
+            //AttributeSlots.Remove(selectedAtt);
+            selectedAtt = null;
             attList.RefreshItems();
             return;
         }
@@ -319,6 +363,7 @@ public class SystemDisplay
         if(editor.activeList == raceList)
         {
             raceList.itemsSource.Remove(selectedRace);
+            //RaceSlots.Remove(selectedRace);
             selectedRace = null;
             raceList.RefreshItems();
             return;
@@ -327,6 +372,7 @@ public class SystemDisplay
         if (editor.activeList == classList)
         {
             classList.itemsSource.Remove(selectedClass);
+            //ClassSlots.Remove(selectedClass);
             selectedClass = null;
             classList.RefreshItems();
             return;
@@ -335,6 +381,7 @@ public class SystemDisplay
         if (editor.activeList == statList)
         {
             statList.itemsSource.Remove(selectedStat);
+            //StatSlots.Remove(selectedStat);
             selectedStat = null;
             statList.RefreshItems();
             return;
@@ -347,9 +394,10 @@ public class SystemDisplay
         attList.ClearSelection();
         raceList.ClearSelection();
         classList.ClearSelection();
+        statList.ClearSelection();
        
 
-        editor.SetButtonStatus(false, true, false);
+        editor.SetButtonStatus(false, true);
     }
 
     //Open the individual slot editor and set up slot logic
@@ -376,6 +424,10 @@ public class SystemDisplay
         {
             activeEditorSlotLogic.SetDisplay("class");
         }
+        if (list == statList)
+        {
+            activeEditorSlotLogic.SetDisplay("stat");
+        }
 
         editorPanel.Add(activeEditorSlot);
 
@@ -394,6 +446,7 @@ public class SystemDisplay
         if (list == attList)
         {
             Attribute temp = new Attribute(systemManager.newSystem, activeEditorSlotLogic.name.value, activeEditorSlotLogic.description.value, activeEditorSlotLogic.defaultValueSlider.value);
+            //AttributeSlots.Add(temp, activeEditorSlotLogic);
             list.itemsSource.Add(temp);
             list.RefreshItems();
         }
@@ -401,6 +454,7 @@ public class SystemDisplay
         if (list == raceList)
         {
             Race temp = new Race(systemManager.newSystem, activeEditorSlotLogic.name.value, activeEditorSlotLogic.description.value);
+            //RaceSlots.Add(temp, activeEditorSlotLogic);
             list.itemsSource.Add(temp);
             list.RefreshItems();
         }
@@ -408,6 +462,15 @@ public class SystemDisplay
         if (list == classList)
         {
             CharacterClass temp = new CharacterClass(systemManager.newSystem, activeEditorSlotLogic.name.value, activeEditorSlotLogic.description.value);
+            //ClassSlots.Add(temp, activeEditorSlotLogic);
+            list.itemsSource.Add(temp);
+            list.RefreshItems();
+        }
+
+        if (list == statList)
+        {
+            Stat temp = new Stat(systemManager.newSystem, activeEditorSlotLogic.name.value, activeEditorSlotLogic.description.value, activeEditorSlotLogic.maxValue.value);
+            //StatSlots.Add(temp, activeEditorSlotLogic);
             list.itemsSource.Add(temp);
             list.RefreshItems();
         }
@@ -415,4 +478,29 @@ public class SystemDisplay
 
         CancelEdit();
     }
+
+    //private void EditItem(ListView list)
+    //{
+    //    if (list == attList)
+    //    {
+    //        AttributeSlots[selectedAtt].MakeEditble();
+    //    }
+
+    //    if (list == raceList)
+    //    {
+    //        RaceSlots[selectedRace].MakeEditble();
+    //    }
+
+    //    if (list == classList)
+    //    {
+    //        ClassSlots[selectedClass].MakeEditble();
+    //    }
+
+    //    if (list == statList)
+    //    {
+    //        StatSlots[selectedStat].MakeEditble();
+    //    }
+    //}
+
+    
 }

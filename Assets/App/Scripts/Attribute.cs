@@ -21,8 +21,19 @@ public class Attribute
         _parentSystemID = parentSystem.systemID; 
         _name = name;
         _description = desc;
-        _ID = "Default" + name;
+        _ID = DataPersistenceManager.instance.generateUniqueID(name);
         max_value = 20;
         base_value= defVal;
+    }
+
+    public Attribute(SystemData parentSystem)
+    {
+        _parentSystemID = parentSystem.systemID;
+        _name = "Attribute";
+        _description = "Default attribute";
+        _ID = "DefaultAttribute" + parentSystem.systemID;
+        max_value = 20;
+        base_value = 10;
+
     }
 }

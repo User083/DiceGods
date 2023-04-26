@@ -43,6 +43,7 @@ public class SystemData
         attributes = temp.InitAttributes(this);
         characterClasses = temp.InitClasses(this);
         races = temp.InitRaces(this);
+        coreStats = temp.InitStats(this);
     }
 
     public void SetID()

@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ElementSlot 
+public class ElementSlot
 {
     public VisualElement root;
     public Label title;
@@ -34,7 +34,7 @@ public class ElementSlot
 
     public void SetDisplay(string type)
     {
-        switch(type)
+        switch (type)
         {
             case "attribute":
                 title.text = "New Attribute";
@@ -70,6 +70,17 @@ public class ElementSlot
                 maxValue.RemoveFromHierarchy();
                 boxValue.RemoveFromHierarchy();
                 break;
+            case "stat":
+                title.text = "New Stat";
+                name.label = "Name:";
+                maxValue.label = "Max Value:";
+                description.label = "Description:";
+                name.value = "Stat Name";
+                description.value = "Describe what this stat is or does";
+                defaultValue.RemoveFromHierarchy();
+                maxValue.value = 100;
+                boxValue.RemoveFromHierarchy();
+                break;
         }
     }
 
@@ -83,7 +94,7 @@ public class ElementSlot
         boxValue.RemoveFromHierarchy();
         name.value = att._name;
         description.value = att._description;
-        defaultValue.value = att.base_value;       
+        defaultValue.value = att.base_value;
         maxValue.value = att.max_value;
         type = "attribute";
         slotID = att._ID;
@@ -109,6 +120,21 @@ public class ElementSlot
     public void TestAtt()
     {
         defaultValueSlider.RegisterCallback<ChangeEvent<int>>((e) => { defaultValueLabel.text = e.newValue.ToString(); attValue = e.newValue; });
+    }
+
+    public void SetStatData(Stat stat)
+    {
+        title.text = stat._name;
+        name.label = "Name:";
+        description.label = "Description:";
+        boxValue.RemoveFromHierarchy();
+        defaultValue.RemoveFromHierarchy();
+        maxValue.label = "Max Value:";
+        maxValue.value = Mathf.RoundToInt(stat._maxVal);
+        name.value = stat._name;
+        description.value = stat._description;
+        slotID = stat._ID;
+        type = "stat";
     }
 
     public void SetCharClassData(CharacterClass charClass)
@@ -151,4 +177,17 @@ public class ElementSlot
         return type;
     }
     
+    public void MakeEditble()
+    {
+        name.isReadOnly = false;
+        description.isReadOnly = false;
+        maxValue.isReadOnly = false;
+    }
+
+    public void MakeUneditable()
+    {
+        name.isReadOnly = true;
+        description.isReadOnly = true;
+        maxValue.isReadOnly = true;
+    }
 }

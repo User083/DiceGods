@@ -22,6 +22,12 @@ public class DefaultSystemData
     public Race human;
     public Race elf;
     public Race dwarf;
+
+    [Header("Default Stats")]
+    public Stat health;
+    public Stat stamina;
+    public Stat mana;
+    public Stat defence;
     public List<Attribute> InitAttributes(SystemData parentSystem)
     {
         List<Attribute> attributes = new List<Attribute>();
@@ -65,6 +71,22 @@ public class DefaultSystemData
         races.Add(dwarf);
 
         return races;
+    }
+
+    public List<Stat> InitStats(SystemData parentSystem)
+    {
+        List<Stat> stats = new List<Stat>();
+
+        health = new Stat(parentSystem, "Health", "A measure of vitality", 100);
+        stats.Add(health);
+        stamina = new Stat(parentSystem, "Stamina", "A measure of physical endurance", 200);
+        stats.Add(stamina);
+        mana = new Stat(parentSystem, "Mana", "A measure of magical endurance", 150);
+        stats.Add(mana);
+        defence = new Stat(parentSystem, "Defence", "A measure of damage resistance", 50);
+        stats.Add(defence);
+
+        return stats;
     }
 
 }

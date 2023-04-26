@@ -6,7 +6,7 @@
         </ui:VisualElement>
         <ui:VisualElement style="height: 80%; flex-direction: row; justify-content: space-around;">
             <ui:VisualElement style="width: 5%;" />
-            <ui:VisualElement name="ns-panel-main" style="width: 90%; flex-direction: row; justify-content: center; flex-grow: 1; height: 99%;" />
+            <ui:VisualElement name="ns-panel-main" style="width: 90%; flex-direction: row; justify-content: space-between; flex-grow: 1; height: 99%; flex-wrap: wrap;" />
             <ui:VisualElement style="width: 5%;" />
         </ui:VisualElement>
         <ui:VisualElement style="flex-direction: row; align-items: center; justify-content: center; height: 10%;">

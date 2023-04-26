@@ -47,6 +47,7 @@ public class NewSystem_Manager : MonoBehaviour
         mainPanel = root.Q<VisualElement>("ns-panel-main");
         systemDisplay = systemDisplayUI.Instantiate();
         systemDisplay.style.flexGrow = 1;
+        systemDisplay.style.width = Length.Percent(40);
         
         system = new SystemDisplay(systemDisplay, elementSlotUI);
         
@@ -54,7 +55,7 @@ public class NewSystem_Manager : MonoBehaviour
         {
             Debug.Log("No root element found");
         }
-
+        
         //Popup
         confirmButton = popupRoot.Q<Button>("popup-button-confirm");
         saveNameField = popupRoot.Q<TextField>("popup-textfield-optional");
@@ -183,8 +184,8 @@ public class NewSystem_Manager : MonoBehaviour
     public void LaunchSystemCreator()
     {
         PopulateData();
-        mainPanel.hierarchy.Add(systemDisplay);
-
+        mainPanel.Add(systemDisplay);
+        
     }
 
   

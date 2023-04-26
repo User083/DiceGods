@@ -95,8 +95,6 @@ public class Library_Manager : MonoBehaviour
         tabButtonItems.clickable.clicked += () => itemsTab();
         characterListView.onSelectionChange += OnCharSelected;
         itemListView.onSelectionChange += OnItemSelected;
-
-
     }
 
     private void Start()
