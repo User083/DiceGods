@@ -214,6 +214,7 @@ public class CharacterDisplay
             if(editable)
             {
                 Class.SetEnabled(editable);
+                classDisplay.RemoveFromHierarchy();
                 foreach (var charClass in parentSystem.characterClasses)
                 {
                     ClassDictionary.Add(charClass._ID, charClass._name);
@@ -247,6 +248,7 @@ public class CharacterDisplay
             if(editable)
             {
                 Race.SetEnabled(editable);
+                raceDisplay.RemoveFromHierarchy();
                 foreach (var race in parentSystem.races)
                 {
                     RaceDictionary.Add(race._ID, race._name);
