@@ -235,7 +235,7 @@ public class DataPopulater
             
         };
 
-        list.fixedItemHeight = 200;
+        list.fixedItemHeight = 150;
         list.itemsSource = allRaces;
 
         return list;
@@ -277,7 +277,7 @@ public class DataPopulater
             
         };
 
-        list.fixedItemHeight = 200;
+        list.fixedItemHeight = 150;
         list.itemsSource = allClasses;
 
         return list;
