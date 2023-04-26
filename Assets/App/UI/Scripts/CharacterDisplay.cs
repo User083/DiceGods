@@ -32,6 +32,9 @@ public class CharacterDisplay
     public Label levelLabel;
     public VisualElement contentContainer;
     public Label attLabel;
+    public Foldout statFoldout;
+    public TextField raceDisplay;
+    public TextField classDisplay;
 
     [Header("Data")]
     private Dictionary<string, string> RaceDictionary = new Dictionary<string, string>();
@@ -51,10 +54,13 @@ public class CharacterDisplay
         Attributes = root.Q<Foldout>("cd-foldout-att");
         Class = root.Q<DropdownField>("cd-dropdown-class");
         Race = root.Q<DropdownField>("cd-dropdown-race");
+        raceDisplay = root.Q<TextField>("cd-textfield-race");
+        classDisplay = root.Q<TextField>("cd-textfield-class");
         LevelDisplay = root.Q<IntegerField>("cd-intfield-level");
         levelBox = root.Q<GroupBox>("cd-levelbox");
         levelLabel = root.Q<Label>("cd-label-level");
         attLabel = root.Q<Label>("cd-label-attributes");
+        statFoldout = root.Q<Foldout>("cd-foldout-stats");
         contentContainer = root.Q<VisualElement>("cd-content-container");
         Level.RegisterCallback<ChangeEvent<int>>((e) => { levelLabel.text=e.newValue.ToString(); });
         
@@ -85,6 +91,21 @@ public class CharacterDisplay
             populater.PopulateCharacterAttributes(elementSlot, Attributes, currentChar);
         }
 
+        if(statFoldout != null)
+        {
+            statFoldout.Clear();
+            populater.PopulateCharacterStats(elementSlot, statFoldout, currentChar);
+        }
+
+        if(raceDisplay != null)
+        {
+            raceDisplay.value = currentChar._race._name;
+        }
+
+        if(classDisplay != null)
+        {
+            classDisplay.value = currentChar._class._name;
+        }
     }
 
 
@@ -134,6 +155,16 @@ public class CharacterDisplay
             
         }
 
+        if(!parentSystem.useCoreStats)
+        {
+            statFoldout.RemoveFromHierarchy();
+        }
+        else
+        {
+            populater.PopulateStats(parentSystem, elementSlot, statFoldout);
+            statFoldout.SetEnabled(true);
+        }
+
         if(!parentSystem.useWeight)
         {
             Weight.RemoveFromHierarchy();
@@ -176,47 +207,66 @@ public class CharacterDisplay
         if(!parentSystem.useClasses)
         {
             Class.RemoveFromHierarchy();
+            classDisplay.RemoveFromHierarchy();
         }
         else
         {
-            Class.SetEnabled(editable);
-            foreach (var charClass in parentSystem.characterClasses)
+            if(editable)
             {
-                ClassDictionary.Add(charClass._ID, charClass._name);
+                Class.SetEnabled(editable);
+                foreach (var charClass in parentSystem.characterClasses)
+                {
+                    ClassDictionary.Add(charClass._ID, charClass._name);
+                }
+
+                if (ClassDictionary.Count > 0)
+                {
+                    Class.choices.Clear();
+                    foreach (KeyValuePair<string, string> item in ClassDictionary)
+                    {
+                        Class.choices.Add(item.Value);
+                    }
+                    Class.value = Class.choices[0];
+                }
+            }
+            else
+            {
+                Class.RemoveFromHierarchy();
+                classDisplay.isReadOnly = true;
             }
 
-            if (ClassDictionary.Count > 0)
-            {
-                Class.choices.Clear();
-                foreach (KeyValuePair<string, string> item in ClassDictionary)
-                {
-                    Class.choices.Add(item.Value);
-                }
-                Class.value = Class.choices[0];
-            }
         }
 
         if(!parentSystem.useRaces)
         {
             Race.RemoveFromHierarchy();
+            raceDisplay.RemoveFromHierarchy();
         }
         else
         {
-            Race.SetEnabled(editable);
-            foreach(var race in parentSystem.races)
+            if(editable)
             {
-                RaceDictionary.Add(race._ID, race._name);
-            }
-
-            if(RaceDictionary.Count > 0)
-            {
-                Race.choices.Clear();
-                foreach(KeyValuePair<string, string> item in RaceDictionary)
+                Race.SetEnabled(editable);
+                foreach (var race in parentSystem.races)
                 {
-                    Race.choices.Add(item.Value);
-
+                    RaceDictionary.Add(race._ID, race._name);
                 }
-                Race.value = Race.choices[0];
+
+                if (RaceDictionary.Count > 0)
+                {
+                    Race.choices.Clear();
+                    foreach (KeyValuePair<string, string> item in RaceDictionary)
+                    {
+                        Race.choices.Add(item.Value);
+
+                    }
+                    Race.value = Race.choices[0];
+                }
+            }
+            else
+            {
+                Race.RemoveFromHierarchy();
+                raceDisplay.isReadOnly = true;
             }
         }
 

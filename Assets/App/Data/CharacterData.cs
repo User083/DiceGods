@@ -16,14 +16,9 @@ public class CharacterData
     public Race _race;
     public CharacterClass _class;
     public List<Attribute> _attributes;
+    public List<Stat> _coreStats;
     protected float _curHealth;
     public float _maxHealth;
     protected float _minHealth;
-
-    //For the purposes of saving, it may be wise to implement functionality that saves only IDs of
-    //classes set up in the system, rather than saving instances of each class
-
-
-
 
 }

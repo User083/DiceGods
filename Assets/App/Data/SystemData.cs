@@ -19,7 +19,9 @@ public class SystemData
     public bool useRaces;
     public List<Race> races;
     public Dictionary <string, Race> racesByID;
-  
+    public Dictionary<string, Stat> statByID;
+    public Dictionary<string, Attribute> attByID;
+
 
     [Header("Attributes & Skills")]
     public bool useCoreStats;
@@ -33,6 +35,8 @@ public class SystemData
         this.systemName = systemName;
         classesByID = new Dictionary<string, CharacterClass>();
         racesByID= new Dictionary<string, Race>();
+        statByID = new Dictionary<string, Stat>();
+        attByID = new Dictionary<string, Attribute>();
         setDefaultValues();
         SetupDictionaries();
     }
@@ -62,6 +66,14 @@ public class SystemData
         {
             racesByID.Add(race._ID, race);
         }
+        foreach (var stat in coreStats)
+        {
+            statByID.Add(stat._ID, stat);
+        }
+        foreach (var att in attributes)
+        {
+            attByID.Add(att._ID, att);
+        }
     }
 
     public void UpdateIDs()
@@ -79,6 +91,11 @@ public class SystemData
         foreach (var race in races)
         {
             race._parentSystemID = systemID;
+        }
+
+        foreach (var stat in coreStats)
+        {
+            stat._parentSystemID = systemID;
         }
 
     }

@@ -212,7 +212,7 @@ public class ContentCreator_Manager : MonoBehaviour
             }
 
 
-            if(parentSystem.useClasses)
+            if (parentSystem.useClasses)
             {
                 foreach (var charClass in parentSystem.characterClasses)
                 {

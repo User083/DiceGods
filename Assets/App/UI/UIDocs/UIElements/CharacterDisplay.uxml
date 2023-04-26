@@ -13,10 +13,13 @@
                         <ui:Label tabindex="-1" text="0" display-tooltip-when-elided="true" name="cd-label-level" class="text-field-text" style="width: 10%; align-items: center; -unity-text-align: upper-center;" />
                     </ui:GroupBox>
                     <ui:IntegerField label="Level:" value="0" name="cd-intfield-level" readonly="true" class="text-field-text" style="min-width: auto; min-height: auto;" />
+                    <ui:TextField picking-mode="Ignore" label="Race:" password="false" name="cd-textfield-race" multiline="true" class="text-field-text" />
                     <ui:DropdownField label="Race:" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="cd-dropdown-race" class="text-field-text" />
+                    <ui:TextField picking-mode="Ignore" label="Class:" password="false" name="cd-textfield-class" multiline="true" class="text-field-text" />
                     <ui:DropdownField label="Class:" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="cd-dropdown-class" class="text-field-text" />
                     <ui:Foldout text="Attributes:" name="cd-foldout-att" value="false" class="text-field-text" />
-                    <ui:Label tabindex="-1" text="Attributes:" display-tooltip-when-elided="true" name="cd-label-attributes" class="text-default" style="align-items: flex-start; -unity-text-align: middle-left;" />
+                    <ui:Foldout text="Stats:" name="cd-foldout-stats" value="false" class="text-field-text" />
+                    <ui:Label tabindex="-1" text="Attributes:" display-tooltip-when-elided="true" name="cd-label-attributes" class="text-default" style="align-items: flex-start; -unity-text-align: middle-left; font-size: 22px;" />
                 </ui:VisualElement>
             </ui:ScrollView>
         </ui:VisualElement>

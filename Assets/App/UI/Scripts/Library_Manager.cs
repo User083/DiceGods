@@ -184,20 +184,5 @@ public class Library_Manager : MonoBehaviour
         item.SetDisplayData(currentSystemData, false);
         system.SetDisplayData(currentSystemData);
         system.PopulateSystemData(currentSystemData);
-        if(!currentSystemData.useAttributes)
-        {
-            systemDisplay.Q<Foldout>("ns-foldout-att").SetEnabled(false);
-        }
-
-        if (!currentSystemData.useRaces)
-        {
-            systemDisplay.Q<Foldout>("ns-foldout-races").SetEnabled(false);
-        }
-
-        if (!currentSystemData.useClasses)
-        {
-            systemDisplay.Q<Foldout>("ns-foldout-classes").SetEnabled(false);
-        }
-
     }
 }

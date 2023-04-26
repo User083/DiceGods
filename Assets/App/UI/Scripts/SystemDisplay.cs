@@ -20,12 +20,6 @@ public class SystemDisplay
     public ElementSlot activeEditorSlotLogic;
     public NewSystem_Manager systemManager;
 
-    //[Header ("Dictionaries")]
-    //public Dictionary<CharacterClass, ElementSlot> ClassSlots = new Dictionary<CharacterClass, ElementSlot>();
-    //public Dictionary<Race, ElementSlot> RaceSlots = new Dictionary<Race, ElementSlot>();
-    //public Dictionary<Attribute, ElementSlot> AttributeSlots = new Dictionary<Attribute, ElementSlot>();
-    //public Dictionary<Stat, ElementSlot> StatSlots = new Dictionary<Stat, ElementSlot>();
-
     [Header("Core System Details UI Elements")]
     public TextField saveNameField;
     public TextField systemNameField;
@@ -109,27 +103,7 @@ public class SystemDisplay
         raceButton.RemoveFromHierarchy();
         classButton.RemoveFromHierarchy();
         statsButton.RemoveFromHierarchy();
-
-        if (parentSystem.useAttributes)
-        {
-            populater.PopulateAttributes(parentSystem, elementSlot, attFoldout, false);
-        }
-
-        if(parentSystem.useRaces)
-        {
-            populater.PopulateRaces(parentSystem, elementSlot, racesFoldout);
-        }
-
-        if (parentSystem.useClasses)
-        {
-            populater.PopulateClasses(parentSystem, elementSlot, classFoldout);
-        }
-
-        if (parentSystem.useCoreStats)
-        {
-            populater.PopulateStats(parentSystem, elementSlot, statsFoldout);
-        }
-        systemNameField.isReadOnly= true;
+        systemNameField.isReadOnly = true;
         levelsToggle.SetEnabled(false);
         classesToggle.SetEnabled(false);
         racesToggle.SetEnabled(false);
@@ -137,6 +111,44 @@ public class SystemDisplay
         charsHaveValueToggle.SetEnabled(false);
         weightToggle.SetEnabled(false);
         coreStatsToggle.SetEnabled(false);
+
+        if (parentSystem.useAttributes)
+        {
+            populater.PopulateAttributes(parentSystem, elementSlot, attFoldout, false);
+
+        }
+        else
+        {
+            attFoldout.RemoveFromHierarchy();
+        }
+
+        if(parentSystem.useRaces)
+        {
+            populater.PopulateRaces(parentSystem, elementSlot, racesFoldout);
+        }
+        else
+        {
+            racesFoldout.RemoveFromHierarchy();
+        }
+
+        if (parentSystem.useClasses)
+        {
+            populater.PopulateClasses(parentSystem, elementSlot, classFoldout);
+        }
+        else
+        {
+            classFoldout.RemoveFromHierarchy();
+        }
+
+        if (parentSystem.useCoreStats)
+        {
+            populater.PopulateStats(parentSystem, elementSlot, statsFoldout);
+        }
+        else
+        {
+            statsFoldout.RemoveFromHierarchy();
+        }
+
 
     }
 
@@ -157,16 +169,16 @@ public class SystemDisplay
         //Populate system defaults for editing
         populater.EnumerateAttributes(parentSystem);
         attList = populater.PopulateAttributeList(elementSlot, false);
-        //AttributeSlots = populater.AttributeSlots;
+
         populater.EnumerateRaces(parentSystem);
         raceList = populater.PopulateRaceList(elementSlot);
-        //RaceSlots = populater.RaceSlots;
+
         populater.EnumerateClasses(parentSystem);
         classList = populater.PopulateClassList(elementSlot);
-        //ClassSlots = populater.ClassSlots;
+
         populater.EnumerateStats(parentSystem);
         statList = populater.PopulateStatList(elementSlot);
-        //StatSlots = populater.StatSlots;
+
     }
 
     public void ResetFields()
@@ -181,16 +193,16 @@ public class SystemDisplay
 
         populater.EnumerateAttributes(blankSystem);
         attList = populater.PopulateAttributeList(elementSlot, false);
-        //AttributeSlots = populater.AttributeSlots;
+
         populater.EnumerateRaces(blankSystem);
         raceList =populater.PopulateRaceList(elementSlot);
-        //RaceSlots = populater.RaceSlots;
+
         populater.EnumerateClasses(blankSystem);
         classList = populater.PopulateClassList(elementSlot);
-        //ClassSlots = populater.ClassSlots;
+
         populater.EnumerateStats(blankSystem);
         statList = populater.PopulateStatList(elementSlot);
-        //StatSlots = populater.StatSlots;
+
     }
 
     //Handle list selection changes
@@ -212,7 +224,7 @@ public class SystemDisplay
 
     public void OnStatChange(IEnumerable<object> selectedItems)
     {
-        var currentStat = attList.selectedItem as Stat;
+        var currentStat = statList.selectedItem as Stat;
 
         if (currentStat == null)
         {
@@ -274,7 +286,7 @@ public class SystemDisplay
         editor.newButton.clickable.clicked += () => AddNew(editor.activeList);
         editor.cancelButton.clickable.clicked += () => CancelEdit();
         editor.createButton.clickable.clicked += () => AddToList(editor.activeList);
-        //editor.editButton.clickable.clicked += () => EditItem(editor.activeList);
+
 
     }
 

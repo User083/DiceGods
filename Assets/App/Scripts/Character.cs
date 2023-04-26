@@ -25,11 +25,13 @@ public class Character : CharacterData
         _class = new CharacterClass(parentSystem);
         //Character defaults to system's attributes
         _attributes = parentSystem.attributes;
+        _coreStats = parentSystem.coreStats;
         //Default health setup
         _minHealth = 0;
         _maxHealth = 100;
         _curHealth = _maxHealth;
     }
+
 
     private void SetupHealth()
     {

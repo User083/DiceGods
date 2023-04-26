@@ -172,6 +172,7 @@ public class NewSystem_Manager : MonoBehaviour
         newSystem.attributes = (List<Attribute>)system.attList.itemsSource;
         newSystem.races = (List<Race>)system.raceList.itemsSource;
         newSystem.characterClasses = (List<CharacterClass>)system.classList.itemsSource;
+        newSystem.coreStats = (List<Stat>)system.statList.itemsSource;
 
     }
 
