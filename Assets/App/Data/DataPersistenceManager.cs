@@ -28,9 +28,10 @@ public class DataPersistenceManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(this.gameObject);
-        saveDirectoryPath = "K:\\Projects\\SaveTest";
+        saveDirectoryPath = Application.persistentDataPath;
         LoadAllSaves();
         dataPersistenceObjects = FindAllDataPersistenceObjects();
+       
     }
   
     //Rare safety check for duplicate IDs still needs implementing

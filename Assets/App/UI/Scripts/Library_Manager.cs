@@ -49,14 +49,20 @@ public class Library_Manager : MonoBehaviour
         currentSystemData = new SystemData("Default");
         systemDisplay = systemDisplayUI.Instantiate();
         characterDisplay = charDisplayDoc.Instantiate();
+        characterDisplay.style.maxWidth = Length.Percent(60);
+        characterDisplay.style.minWidth = Length.Percent(40);
         itemDisplay = itemDisplayDoc.Instantiate();
+        itemDisplay.style.maxWidth = Length.Percent(60);
+        itemDisplay.style.minWidth = Length.Percent(40);
         dataPopulater.EnumerateCharacters(activeSave);
         dataPopulater.EnumerateItems(activeSave);
         characterListView = dataPopulater.PopulateCharacters(singleSlotUI);
+        characterListView.style.flexGrow = 1;
         itemListView = dataPopulater.PopulateItems(singleSlotUI);
+        itemListView.style.flexGrow = 1;
         systemDisplay.style.flexGrow = 1;
-        characterDisplay.style.flexGrow = 1;
-        itemDisplay.style.flexGrow = 1;
+       
+        
     }
     private void OnEnable()
     {

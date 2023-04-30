@@ -284,13 +284,17 @@ public class CharacterDisplay
         Value.value = 0;
         Level.value = 0;
 
-        foreach (var item in populater.AttributeSlots)
+        if(DataPersistenceManager.instance.activeSave.parentSystem.useAttributes)
         {
+            foreach (var item in populater.AttributeSlots)
+            {
 
-          item.Value.defaultValueSlider.value = 10;
+                item.Value.defaultValueSlider.value = 10;
 
 
+            }
         }
+
     }
 
     public int GetAttValue(VisualElement slot)
