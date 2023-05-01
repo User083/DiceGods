@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/App/UI/Styles/StyleDefault.uss?fileID=7433441132597879392&amp;guid=0e7e59b06c57cd34985291de7452f975&amp;type=3#StyleDefault" />
     <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: center;">
-        <ui:VisualElement name="ep-panel-main" style="width: 60%; height: 60%; flex-wrap: wrap; align-items: stretch; justify-content: space-between; background-image: none; background-color: rgb(8, 48, 49);">
+        <ui:VisualElement name="ep-panel-main" style="width: 60%; height: 60%; flex-wrap: wrap; align-items: stretch; justify-content: space-between; background-image: url(&apos;project://database/Assets/App/UI/Graphics/BackdropTest.png?fileID=2800000&amp;guid=0758f148a3f86f647b95e58992bb3db1&amp;type=3#BackdropTest&apos;); background-color: rgb(8, 48, 49); -unity-background-scale-mode: scale-and-crop;">
             <ui:VisualElement name="ep-panel-editor" style="height: 85%; width: 100%; justify-content: center;" />
             <ui:VisualElement style="height: 14%; flex-direction: row; align-items: center; justify-content: center; width: 100%;">
                 <ui:Button tabindex="-1" text="Cancel" display-tooltip-when-elided="true" name="ep-button-cancel" class="text-default default-button" />
