@@ -1,13 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Serialization;
-using UnityEditor;
-using UnityEditorInternal.VR;
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class CharacterDisplay 
